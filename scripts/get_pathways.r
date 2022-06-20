@@ -11,41 +11,26 @@ library('GSA')
 all_data = list()
 
 # load the data
-# TODO: clean up the data files for upload
 print('loading the data..')
-e = readRDS('../../submission_code_09012021/data/Summary.DE.celltype.rds')
-expressed = metadata(e)$expressed.genes
-av_expression = readRDS('../../submission_code_09012021/data/Averages.by.celltype.by.individual.rds')
-summary = as.data.frame(read_excel('../../submission_code_09012021/data/Overview_PFC_projids_data_384.xlsx'))
-summary = summary[!duplicated(summary[,'projid...2']),]
-rownames(summary) = summary[['projid...2']]
+expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
+av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
+summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
 
 # load all the pathway terms
 print('loading the pathway terms...')
-bp = GSA.read.gmt('../data/GO_Biological_Process_2018.txt')
-bp_g = bp$genesets
-names(bp_g) = bp$geneset.names
+bp = read.geneset('../data/pathway_databases/GO_Biological_Process_2018.txt')
+cy = read.geneset('../data/pathway_databases/HumanCyc_2016.txt')
+ke = read.geneset('../data/pathway_databases/KEGG_2019_Human.txt')
+re = read.geneset('../data/pathway_databases/Reactome_2016.txt')
 
-cyc = GSA.read.gmt('../data/HumanCyc_2016.txt')
-cyc_g = cyc$genesets
-names(cyc_g) = cyc$geneset.names
-
-kegg = GSA.read.gmt('../data/KEGG_2019_Human.txt')
-kegg_g = kegg$genesets
-names(kegg_g) = kegg$geneset.names
-
-reactome = GSA.read.gmt('../data/Reactome_2016.txt')
-reactome_g = reactome$genesets
-names(reactome_g) = reactome$geneset.names
-
-all_paths = c(cyc_g, reactome_g, kegg_g, bp_g)
+all_paths = c(bp, cy, ke, re)
 
 # filter out the lowly expressed genes (10%, for each celltype)
 print('filtering pathways by expression...')
-low_removed_bp = filter_lowly_exp_genes(expressed, bp_g)
-low_removed_reactome = filter_lowly_exp_genes(expressed, reactome_g)
-low_removed_kegg = filter_lowly_exp_genes(expressed, kegg_g)
-low_removed_humancyc = filter_lowly_exp_genes(expressed, cyc_g)
+low_removed_bp = filter_lowly_exp_genes(expressed, bp)
+low_removed_reactome = filter_lowly_exp_genes(expressed, re)
+low_removed_kegg = filter_lowly_exp_genes(expressed, ke)
+low_removed_humancyc = filter_lowly_exp_genes(expressed, cy)
 low_removed_all_terms = filter_lowly_exp_genes(expressed, all_paths)
 
 # add the filtered pathways to the dataset to be saved
@@ -54,10 +39,10 @@ all_data[['pathways']][['low_removed_kegg']] = low_removed_kegg
 all_data[['pathways']][['low_removed_humancyc']] = low_removed_humancyc
 all_data[['pathways']][['low_removed_bp']] = low_removed_bp
 
-all_data[['pathways']][['all_reactome']] = reactome_g
-all_data[['pathways']][['all_kegg']] = kegg_g
-all_data[['pathways']][['all_humancyc']] = cyc_g
-all_data[['pathways']][['all_bp']] = bp_g
+all_data[['pathways']][['all_reactome']] = re
+all_data[['pathways']][['all_kegg']] = ke
+all_data[['pathways']][['all_humancyc']] = cy
+all_data[['pathways']][['all_bp']] = bp
 all_data[['pathways']][['all']] = all_paths
 
 # get apoe-associated genesets
@@ -80,4 +65,5 @@ all_data[['pathways']][['all_lipid_associated']] = lipid_paths
 all_data[['pathways']][['low_removed_lipid_associated']] = low_removed_lipid_paths
 
 # save all the data
-saveRDS(all_data, '../data_outputs/pathways.rds')
+saveRDS(all_data, '../data/other_analyses_outputs/pathways.rds')
+print('done.')
