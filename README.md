@@ -67,7 +67,8 @@ data
     └───pseudo_bulk_degs_all.rds
     └───ipsc_deg_results.rds
 └───iPSC_data
-    └───ipsc_bulk_rnaseq_count_files.rds
+    └───ipsc_bulk_rnaseq_count_files
+        └───...
     └───ipsc_metadata.rds
     └───ipsc_bulk_rnaseq_fpkm.rds
 └───pathway_databases
@@ -76,8 +77,10 @@ data
     └───KEGG_2019_Human.txt
     └───Reactome_2016.txt
 └───lipidomics_datasets
-    └───cc_lipidomics_values.rds
-    └───pfc_lipidomics_values.rds
+    └───cc_lipidomics
+        └───...
+    └───pfc_lipidomics
+        └───...
 └───other_analyses_outputs
     └───processed_pathways.rds
     └───processed_pathway_fits.rds
@@ -99,7 +102,7 @@ data
 | wilcoxon_degs_all.rds                      | run ../scripts/get_wilcox_degs.r                                    |
 | wilcoxon_degs_AD.rds                       | run ../scripts/get_wilcox_degs.r                                    |
 | wilcoxon_degs_noAD.rds                     | run ../scripts/get_wilcox_degs.r                                    |
-| pseudo_bulk_degs_all.rds                   | run ../scripts/get_pseudo_bulk_degs.r                               |
+| pseudo_bulk_degs_all.rds                   | run ../scripts/get_pseudobulk_degs.r                               |
 | ipsc_deg_results.rds                       | run ../scripts/processing_ipsc_rnaseq_data.r                        |
 | ipsc_bulk_rnaseq_count_files.rds           | provided by MIT biomicro center core facility                       |
 | ipsc_metadata.rds                          | NA                                                                  |
@@ -118,7 +121,7 @@ data
 
 3. Now follow these steps to recapitulate the analysis:
 
-3.1 Reproduce Figure 1 analysis
+Figure 1
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_pathways.r
@@ -126,32 +129,49 @@ Rscript ../scripts/pathway_analyses.r
 Rscript ../scripts/get_figure_1_plots.r
 ```
 
-3.2 Reproduce Figure 2 analysis
+Figure 2
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_pathways.r
-Rscript ../scripts/pathway_analyses.r
 Rscript ../scripts/dissecting_cholesterol_er_dysregulation.r
-Rscript ../scripts/lipidomics_analysis.r
+Rscript ../scripts/lipidomic_analysis_cc.r
 Rscript ../scripts/get_figure_2_plots.r  
 ```
+3.2 Reproduce Figure 3 analysis
+```bash
+conda activate apoe_env
+Rscript ../scripts/get_figure_3_plots.r
 
-3.3 Reproduce Extended Data Figure 1
+```
+
+Extended Data Figure 1
 ```bash
 conda activate apoe_env
 Rscript ../scripts/plots_for_extended_data_figure_1.r
-#TODO: get Jose's code and add it here
 ```
 
-3.4 Reproduce Extended Data Figure 2
+Extended Data Figure 2
 ```bash
 conda activate apoe_env
-Rscript ../scripts/gsva_supplementary_figure.r #TODO: finish this
+Rscript ../scripts/fgsea_analysis.r
 Rscript ../scripts/pseudo_bulk.r
-Rscript ../scripts/permutation_analysis.r #TODO finish this
+Rscript ../scripts/permutation_analysis_label_perms.r
+Rscript ../scripts/pathway_activity_overview.r #TODO: add Jose's code to this
 ```
 
-3.5 Reproduce Extended Data Figure 3
+Extended Data Figure 3
+```bash
+conda activate apoe_env
+Rscript ../scripts/e4_effects_stratification_by_AD.r
+Rscript ../scripts/validation_of_cholesterol.r
+```
+
+Extended Data Figure 4
+```bash
+conda activate apoe_env
+Rscript ../scripts/lipidomic_analysis_pfc.r
+```
+
+Extended Data Figure 6
 ```bash
 conda activate edgeR
 Rscript ../scripts/processing_ipsc_rnaseq_data.r
@@ -161,9 +181,16 @@ Rscript ../scripts/comparison_of_ipsc_and_brain.r
 Rscript ../scripts/APOE_expression_oligodendrocytes.r
 Rscript ../scripts/apoe_expression_ipsc.r
 ```
-3.6 Reproduce Extended Data Figure 4
+
+Extended Data Figure 8
 ```bash
 conda activate apoe_env
-Rscript ../scripts/e4_effects_stratification_by_AD.r
-Rscript ../scripts/validation_of_cholesterol.r
+Rscript ../scripts/get_postmortem_er_stress_pathways.r
+Rscript ../scripts/ipsc_pathway_perturbations.r
+```
+
+Extended Data Figure 9
+```bash
+conda activate apoe_env
+Rscript ../scripts/get_wilcox_myelin_plots.r
 ```
