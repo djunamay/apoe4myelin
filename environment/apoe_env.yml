@@ -1,0 +1,15 @@
+name: apoe_env
+channels:
+  - conda-forge
+  - r
+  - bioconda
+dependencies:
+  - bioconductor-complexheatmap
+  - bioconductor-gsva=1.42.0
+  - r-readxl
+  - bioconductor-limma
+  - parallel
+  - r-tidyr
+  - r-stringr
+  - r-circlize
+  - r-gsa
