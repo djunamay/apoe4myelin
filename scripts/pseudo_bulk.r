@@ -4,7 +4,7 @@ library(ComplexHeatmap)
 library(GSVA)
 
 # load the data
-data = readRDS('../data/pathways.rds')
+data = readRDS('../data/other_analyses_outputs/pathways.rds')
 low_removed_bp = data$pathways$low_removed_bp
 apoe_gsets_low_removed = data$pathways$apoe_gsets_low_removed
 apoe_gsets = data[['pathways']][['apoe_gsets_all']]
@@ -31,36 +31,23 @@ library(ggplot2)
 
 # load the data
 print('loading the data..')
-e = readRDS('../../submission_code_09012021/data/Summary.DE.celltype.rds')
-expressed = metadata(e)$expressed.genes
-av_expression = readRDS('../../submission_code_09012021/data/Averages.by.celltype.by.individual.rds')
+expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
+av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
+summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
+summary$APOE4 = ifelse(summary$apoe_genotype == '33','e3','e4')
+rownames(summary) = summary[,'projid...2']
 
-summary = as.data.frame(read_excel('../../submission_code_09012021/data/Overview_PFC_projids_data_384.xlsx'))
-summary = summary[!duplicated(summary[,'projid...2']),]
-rownames(summary) = summary[['projid...2']]
-
+print('running')
 # load the data from figure 1
-f1_data = readRDS('../data/data_figure_1.rds')
-f2_data = readRDS('../data/figure_2_data.rds')
+cholest = readRDS('../data/other_analyses_outputs/cholesterol_analysis.rds')
+er_stress = readRDS('../data/other_analyses_outputs/er_stress_results.rds')
 
 geno = summary[colnames(df), 'apoe_genotype']
 
-oli.lipid.fits = f1_data$res$lipid_associated$fits$Oli
-lipid.paths.oli = f1_data$pathways$lipid_associated$Oli
-paths = rownames(oli.lipid.fits[oli.lipid.fits$P.Value<0.05,])
-biosynth_genes = unique(unname(unlist(lipid.paths.oli[paths])))
-
-###### save the heatmap
-
 # save plot for each of the signature
-genes = c('DHCR24', 'LPIN2', 'IRS2', 'NR1H2', 'LBR', 'LPIN1')
-genes1 = c('PCYT1B', 'SEC23A', 'PRKN', 'SCP2', 'LPCAT3')
-genes2 = c('HSP90B1', 'CALR', 'HSPA5', 'MBTPS1', 'ATF6')
 o = list()
-o[['sig1']] = genes
-o[['sig2']] = genes1
-o[['sig3']] = genes2
-o[['sig4']] = biosynth_genes
+o[['sig1']] = cholest$union_cholest_biosynth$genes
+o[['sig2']] = names(er_stress$ER$ATF6_pathway_degs)
 
 for(i in names(o)){
   df = av_expression$Oli[c(o[[i]]),]
@@ -69,14 +56,15 @@ for(i in names(o)){
   anns = ifelse(summary[colnames(df), 'apoe_genotype']==33, 'E3', 'E4')
   anns2 = ifelse(summary[colnames(df), 'niareagansc']%in%c(1,2), 'AD', 'nonAD')
 
-  column_ha = HeatmapAnnotation(geno = anns)
-  column_ha2 = HeatmapAnnotation(geno = anns2)
+  column_ha = HeatmapAnnotation(APOE_genotype = anns)
+  column_ha2 = HeatmapAnnotation(NIAreagansc = anns2)
 
   ha = rowAnnotation(e3 = anno_density(df[,anns=='E3'], xlim = c(-2,4)))
-  ha2 = rowAnnotation(e4 = anno_density(df[,anns=='E4'], xlim = c(-2,4)),
-  gp = gpar(fill = "yellow"))
+  ha2 = rowAnnotation(e4 = anno_density(df[,anns=='E4'], xlim = c(-2,4)))
 
   #pdf(paste0('../plots/pseudobulk_signature_',i,'.pdf'), width=7, height = 3)
   print(Heatmap(df, bottom_annotation = c(column_ha,column_ha2), left_annotation = c(ha, ha2)))
   #dev.off()
 }
+
+print('done.')
