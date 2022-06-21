@@ -13,7 +13,7 @@ library('ggplot2')
 library('ggpubr')
 
 print('loading data..')
-data = readRDS('../data/cholesterol_analysis.rds')
+data = readRDS('../data/other_analyses_outputs/cholesterol_analysis.rds')
 cholest_genes_dist = data[['union_cholest_biosynth']]$density_plot_input
 x = data$deg_level_analysis$degs
 
@@ -25,7 +25,9 @@ xlim(-1.5,1.5)
 dev.off()
 
 # save cor.test info to text file
-cor.test(cholest_genes_dist$biosynth, ifelse(cholest_genes_dist$apoe_geno == 33, 0, ifelse(cholest_genes_dist$apoe_geno == 34, 1, 2)))
+
+temp = cor.test(cholest_genes_dist$biosynth, ifelse(cholest_genes_dist$apoe_geno == 33, 0, ifelse(cholest_genes_dist$apoe_geno == 34, 1, 2)))
+write.csv(as.data.frame(do.call('rbind',(temp))), '../data/supplementary_tables/cholesterol_correlation_results.csv')
 
 print('drawing the deg barplot')
 # plotting the degs
@@ -33,16 +35,4 @@ pdf('../plots/cholesterol_degs.pdf', width = 3, height = 4)
 barplot(x[order(x)], horiz = T, las = 1)
 dev.off()
 
-# plot the ATF6 pathways
-df = data$ER_stress$ATF6_activity
-pdf('../plots/unfolded_protein_response.pdf', width = 2, height = 3)
-p <- ggplot(df, aes(x=APOE, y=value)) +
-  geom_boxplot()
-p + geom_jitter(shape=16, position=position_jitter(0.2)) + stat_compare_means(method = "wilcox.test")
-dev.off()
-x = data$ER_stress$ATF6_pathway_degs
-pdf('../plots/unfolded_genes.pdf', width = 3.5, height = 4)
-barplot(x[order(x)], horiz = T, las = 1)
-dev.off()
-
-print('done')
+print('done.')

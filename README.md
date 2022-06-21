@@ -31,10 +31,10 @@ Follow these instructions to reproduce analyses and plots, as shown in the paper
 git clone https://github.mit.edu/djuna/APOE_myelin_2022.git
 ```
 
-##### 2. Download the conda environment by running:
+##### 2. Create the conda environment by running:
 
 ```bash
-git clone https://github.mit.edu/djuna/APOE_myelin_2022.git
+conda env create -f ../environment/apoe_env.yml
 ```
 
 ##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
@@ -140,13 +140,12 @@ Rscript ../scripts/get_figure_2_plots.r
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_figure_3_plots.r
-
 ```
 
 Extended Data Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/plots_for_extended_data_figure_1.r
+Rscript ../scripts/plots_for_extended_data_figure_1.r #TODO: get this from Jose
 ```
 
 Extended Data Figure 2
@@ -186,6 +185,7 @@ Extended Data Figure 8
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_postmortem_er_stress_pathways.r
+Rscript ../scripts/er_postmortem_plots.r
 Rscript ../scripts/ipsc_pathway_perturbations.r
 ```
 

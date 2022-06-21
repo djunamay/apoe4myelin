@@ -38,7 +38,7 @@ draw(h1%v%h2)
 dev.off()
 
 # draw heatmap for APOE-associated pathways
-print('drawing heatmaps - APOE')
+print('drawing heatmaps - APOE')g
 temp = as.data.frame((abs(mat2)>1.3) * sign(mat2))
 temp_order = rownames(temp[order((temp$Ex),(temp$In), (temp$Ast), (temp$Mic), (temp$Oli), (temp$Opc), decreasing = T),])
 
