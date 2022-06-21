@@ -294,3 +294,11 @@ get_pathway_fits = function(order, av_expression, pathways, top_20, summary){
     all_data[['scores_filtered']] = mat
     return(all_data)
 }
+
+boxplot_w_stats = function(df, x, y, group_color = x, group_fill = x, alpha=.5, palette, xlab='', ylab='', width=.5, stats_method = 'wilcox', comparisons){
+    plot <- ggpubr::ggboxplot(df, x = x, y = y,
+          color = group_color, fill = group_fill, alpha = alpha, palette = palette,
+          xlab = xlab, ylab = ylab, width = width)+ ggpubr::stat_compare_means(method = stats_method, comparisons = comparisons) + ggplot2::geom_point(alpha = .3) + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust=1))
+    return(plot)
+
+}
