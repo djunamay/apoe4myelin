@@ -18,7 +18,7 @@ set.seed(5)
 
 # load the data
 print('loading data')
-data = readRDS('../data/pathways.rds')
+data = readRDS('../data/other_analyses_outputs/pathways.rds')
 low_removed_bp = data$pathways$low_removed_bp
 apoe_gsets_low_removed = data$pathways$apoe_gsets_low_removed
 apoe_gsets = data[['pathways']][['apoe_gsets_all']]
@@ -29,25 +29,12 @@ all_data = list()
 
 # load the data
 print('loading the data..')
-e = readRDS('../../submission_code_09012021/data/Summary.DE.celltype.rds')
-expressed = metadata(e)$expressed.genes
-av_expression = readRDS('../../submission_code_09012021/data/Averages.by.celltype.by.individual.rds')
-
-summary = as.data.frame(read_excel('../../submission_code_09012021/data/Overview_PFC_projids_data_384.xlsx'))
-summary = summary[!duplicated(summary[,'projid...2']),]
-rownames(summary) = summary[['projid...2']]
-
-# load the data from figure 1
-pathways = readRDS('../data_outputs/pathways.rds')
-#f2_data = readRDS('../data/figure_2_data.rds')
-
-# original lipid-associated pathway figure
-#lipid_keys = c('sterol','athero','cholest','LDL','HDL','lipoprotein','triglyceride','TAG','DAG','lipid','steroid','fatty acid', 'ceramide')
-#lipid_paths = get_gset_names_by_category(lipid_keys, names(all_paths))
-#paths = all_paths[lipid_paths]
-#low_removed_lipid_paths = filter_lowly_exp_genes(expressed, paths)
-low_removed_lipid_paths = pathways$pathways$low_removed_lipid_associated
-######### when we stratify by AD, do we still see cholesterol dysregulation at the APOE4 level?
+expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
+av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
+summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
+summary$APOE4 = ifelse(summary$apoe_genotype == '33','e3','e4')
+rownames(summary) = summary[,'projid...2']
+low_removed_lipid_paths = data$pathways$low_removed_lipid_associated
 
 # run GSVA on lipid pathways pathways
 print('running GSVA...')
@@ -56,42 +43,29 @@ out_lipid_terms = lapply(order, function(x) t(gsva(as.matrix(av_expression[[x]])
 names(out_lipid_terms) = order
 all_data[['res']][['lipid_associated']][['gsva_out']] = out_lipid_terms
 
-# get linear model fits
-print('getting linear model fits...')
-summary$APOE4 = ifelse(summary$apoe_genotype == '33','e3','e4')
-
 # stratify by AD status
-summary1 = summary[summary$niareagansc%in%c(3,4),]
+summary1 = summary[summary$niareagansc%in%c(3,4)& summary$apoe_genotype!=44,]
 out_lipid_terms2 = lapply(names(out_lipid_terms), function(x) out_lipid_terms[[x]][rownames(out_lipid_terms[[x]])%in%as.character(rownames(summary1)),])
 names(out_lipid_terms2) = names(out_lipid_terms)
-
 fits = get_fits(out_lipid_terms2, summary1)
-all_data[['res']][['lipid_associated']][['nia34']] = fits$Oli
+all_data[['res']][['lipid_associated']][['APOE34_effect_nia34']] = fits$Oli
 
 summary2 = summary[summary$niareagansc%in%c(1,2) & summary$apoe_genotype!=44,]
 out_lipid_terms2 = lapply(names(out_lipid_terms), function(x) out_lipid_terms[[x]][rownames(out_lipid_terms[[x]])%in%as.character(rownames(summary2)),])
 names(out_lipid_terms2) = names(out_lipid_terms)
-
 fits = get_fits(out_lipid_terms2, summary2)
-all_data[['res']][['lipid_associated']][['nia12']] = fits$Oli
+all_data[['res']][['lipid_associated']][['APOE34_effect_nia12']] = fits$Oli
 
-# no stratification
-out_lipid_terms3 = lapply(names(out_lipid_terms), function(x) out_lipid_terms[[x]][rownames(out_lipid_terms[[x]])%in%as.character(rownames(summary)),])
-names(out_lipid_terms3) = names(out_lipid_terms)
-
-fits = get_fits(out_lipid_terms3, summary)
-all_data[['res']][['lipid_associated']][['no_strat']] = fits$Oli
-
-# show the APOE4 effects on 34 background as barplot
-df = all_data[['res']][['lipid_associated']][['nia34']]
+# show the APOE4 effects on nonAD background as barplot
+df = all_data[['res']][['lipid_associated']][['APOE34_effect_nia34']]
 df = df[df$P.Value<0.05,]
 x = (df$logFC)
 names(x) = rownames(df)
-pdf('../plots/APOE4_lipid_effects_no_path.pdf', width = 3, height = 4)
+pdf('../plots/APOE34_lipid_effects_no_path.pdf', width = 3, height = 4)
 barplot(x[order(x)], horiz = T, las = 1)
 dev.off()
 
-######### show boxplots for the cholesterol pathway of interest
+# show boxplots for the cholesterol pathway of interest
 print('getting bar plots')
 df = as.data.frame(out_lipid_terms$Oli[,'cholesterol biosynthesis III (via desmosterol) Homo sapiens PWY66-4'])
 colnames(df) = c('pathway')
@@ -104,25 +78,22 @@ df$both = paste0(df$APOE, '_', df$AD)
 df$both = factor(df$both, levels = c('E3_non AD', 'E3_AD', 'E4_non AD', 'E4_AD'))
 
 x = list()
-x[['p_unstratified']] <- ggplot(df, aes(x=factor(APOE), y=pathway)) +
-  geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()#+ stat_compare_means('wilcox.test')
-
-x[['p_AD']] <- ggplot(df[df$AD=='AD' & df$apoe_genotype!=44,], aes(x=factor(APOE), y=pathway)) +
+x[['p_APOE34_effect_AD']] <- ggplot(df[df$AD=='AD' & df$apoe_genotype!=44,], aes(x=factor(APOE), y=pathway)) +
   geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()
 
-x[['p_noAD']] <- ggplot(df[df$AD=='non AD',], aes(x=factor(APOE), y=pathway)) +
+x[['p_APOE34_effect_noAD']] <- ggplot(df[df$AD=='non AD'& df$apoe_genotype!=44,], aes(x=factor(APOE), y=pathway)) +
   geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()
 
-                          x[['p_AD_effect_unstratified']] <- ggplot(df, aes(x=factor(AD), y=pathway)) +
+x[['p_AD_effect_unstratified']] <- ggplot(df, aes(x=factor(AD), y=pathway)) +
   geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()
 
-x[['p_AD_effect_APOE4']] <- ggplot(df[df$apoe_genotype==34,], aes(x=factor(AD), y=pathway)) +
+x[['p_AD_effect_APOE34']] <- ggplot(df[df$apoe_genotype==34,], aes(x=factor(AD), y=pathway)) +
   geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()#+ stat_compare_means('wilcox.test')
 
-x[['p_AD_effect_APOE3']] <- ggplot(df[df$APOE=='E3',], aes(x=factor(AD), y=pathway)) +
+x[['p_AD_effect_APOE33']] <- ggplot(df[df$APOE=='E3',], aes(x=factor(AD), y=pathway)) +
   geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()#+ stat_compare_means('wilcox.test')
 
-x[['p_both_APOE_effect']] <- ggplot(df[df$apoe_genotype!=44,], aes(x=factor(both), y=pathway)) +
+x[['p_AD_and_APOE34_effects']] <- ggplot(df[df$apoe_genotype!=44,], aes(x=factor(both), y=pathway)) +
   geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()#+ stat_compare_means('wilcox.test')
 
 for(i in names(x)){
@@ -131,8 +102,7 @@ for(i in names(x)){
     dev.off()
 }
 
-
-#########  get linear model fits for AD (AD effects on the background of APOE4 or E3)
+# get linear model fits for AD (AD effects on the background of APOE4 or E3)
 print('getting linear model fits...')
 summary$APOE4 = ifelse(summary$apoe_genotype == '33','e3','e4')
 df = out_lipid_terms$Oli
@@ -160,7 +130,7 @@ mod = model.matrix(~AD + age_death + msex + pmi, data=summary3)
 fit <- lmFit(t(df[as.character(rownames(summary3)),]), design=mod)
 fit <- eBayes(fit)
 allgenesets <- topTable(fit, coef='AD', number=Inf, confint = T) %>% .[order(.$P.Value, decreasing = F),]
-all_data[['res']][['lipid_associated']][['APOE3_stratified_AD_effect']] = allgenesets
+all_data[['res']][['lipid_associated']][['APOE33_stratified_AD_effect']] = allgenesets
 
 # stratify by APOE status
 summary4 = summary1[summary1$apoe_genotype==34,]
@@ -184,6 +154,6 @@ for(i in names){
 }
 
 # save the table with logFC values and p-value
-write.csv(do.call('rbind', out),'../table_outputs/stratified_stats.csv')
-saveRDS(all_data, '../data_outputs/e4_effects_stratification_output.rds')
+write.csv(do.call('rbind', out),'../data/supplementary_tables/stratified_stats.csv')
+saveRDS(all_data, '../data/other_analyses_outputs/tratified_anaylsis.rds')
 print('done')
