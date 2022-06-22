@@ -167,16 +167,14 @@ Rscript ../scripts/validation_of_cholesterol.r
 Extended Data Figure 4
 ```bash
 conda activate apoe_env
-Rscript ../scripts/lipidomic_analysis_pfc.r
+Rscript ../scripts/lipidomic_analysis_pfc.r #TODO: review this --> check on workstation
 ```
 
 Extended Data Figure 6
 ```bash
-conda activate edgeR
-Rscript ../scripts/processing_ipsc_rnaseq_data.r
 conda activate apoe_env
-Rscript ../scripts/ipsc_rnaseq_analysis.r
-Rscript ../scripts/comparison_of_ipsc_and_brain.r
+Rscript ../scripts/processing_ipsc_rnaseq_data.r
+Rscript ../scripts/comparison_of_ipsc_and_brain.r #TODO: review this
 Rscript ../scripts/APOE_expression_oligodendrocytes.r
 Rscript ../scripts/apoe_expression_ipsc.r
 ```
@@ -192,5 +190,7 @@ Rscript ../scripts/ipsc_pathway_perturbations.r
 Extended Data Figure 9
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_wilcox_myelin_plots.r
+Rscript ../scripts/get_wilcox_myelin_plots.r #TODO: add this
 ```
+
+#TODO: write get_wilcox_degs.r , get_nebula_degs.r , get_pseudobulk_degs.r 
