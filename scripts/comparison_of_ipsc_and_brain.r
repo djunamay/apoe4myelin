@@ -3,13 +3,16 @@
 library(tidyr)
 library(tibble)
 library(ggplot2)
-
+library(reshape2)
+library(ggpubr)
+library(GSVA)
+library(ComplexHeatmap)
 # load all the data
-human <- readRDS('../../submission_code_09012021/data/Averages.by.celltype.by.individual.rds')
-ast <- as.data.frame(read.csv('../../submission_code_09012021/data/FPKM_table_AST.txt', sep = '\t')) %>% column_to_rownames(., 'gene')
-mic <- as.data.frame(read.csv('../../submission_code_09012021/data/FPKM_table_MIC.txt', sep = '\t')) %>% column_to_rownames(., 'gene')
-oligodendroglia <- as.data.frame(read.csv('../../submission_code_09012021/data/FPKM_table_OPC.txt', sep = '\t')) %>% column_to_rownames(., 'gene')
-neuron <- as.data.frame(read.csv('../../submission_code_09012021/data/DEG_CTRL_E3_NEU_CTRL_E4_NEU_FPKM.txt', sep = '\t'))
+human <- readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
+ast <- as.data.frame(read.csv('../data/iPSC_data/FPKM_table_AST.txt', sep = '\t')) %>% column_to_rownames(., 'gene')
+mic <- as.data.frame(read.csv('../data/iPSC_data/FPKM_table_MIC.txt', sep = '\t')) %>% column_to_rownames(., 'gene')
+oligodendroglia <- as.data.frame(read.csv('../data/iPSC_data/FPKM_table_OPC.txt', sep = '\t')) %>% column_to_rownames(., 'gene')
+neuron <- as.data.frame(read.csv('../data/iPSC_data/DEG_CTRL_E3_NEU_CTRL_E4_NEU_FPKM.txt', sep = '\t'))
 
 # get mean expression profiles for human data
 human = human[c('Ast', 'Mic', 'Opc', 'Oli', 'Ex', 'In')]
@@ -55,7 +58,7 @@ for (i in 1:length(colnames(merged_scaled))){
 model = unlist(lapply(all.names, function(x) strsplit(x,'_')[[1]][2]))
 names = unlist(lapply(all.names, function(x) strsplit(x,'_')[[1]][1]))
 names[names=='Neu'] = 'Ex'
-col = readRDS('../../submission_code_09012021/data/Cell_group_colors.rds')
+col = readRDS('../data/single_cell_data/Cell_group_colors.rds')
 
 # do PC decomp
 PCA <- prcomp(t(merged_scaled))
@@ -69,12 +72,7 @@ pdf('../plots/pca_ipsc.pdf', width = 5, height = 4)
 p + theme_bw()  + theme(panel.background = element_rect(colour = "black", size=1), panel.grid.minor = element_blank(), panel.grid.major = element_blank())
 dev.off()
 
-p <- ggplot(d, aes(x=PC1, y=PC2, shape = model)) +
-  geom_point(size=3, alpha = 1, aes(color = names),size=10) +
-  geom_point(colour = "white",alpha = .5, size = 1.5) + scale_colour_manual(values = (col[names]))+ theme_bw()  + theme(panel.background = element_rect(colour = "black", size=1), panel.grid.minor = element_blank(), panel.grid.major = element_blank())
-
-print('summary PCs:')
-print(summary(PCA)$importance[2,c('PC1','PC2')])
+write.csv(as.data.frame(summary(PCA)$importance[2,c('PC1','PC2')]), '../data/supplementary_tables/ipsc_post_mortem_pca_var_explained.csv')
 
 ###### Distances in Full gene space ########
 # compute distances in gene space
@@ -91,7 +89,6 @@ new_dist = distance[!h_index,h_index]
 i_cell_index = unlist(lapply(rownames(new_dist), function(x) strsplit(x,'_')[[1]][1]))
 h_cell_index = unlist(lapply(colnames(new_dist), function(x) strsplit(x,'_')[[1]][1]))
 
-library(reshape2)
 # for each ipsc celltype, get the corresponding distances to the human celltypes
 vals = list()
 for(i in unique(i_cell_index)){
@@ -126,30 +123,16 @@ f$Var1 = factor(f$Var1, levels = names(order))
 
 # sorted by means
 pdf('../plots/distplot.pdf', width = 3, height = 4)
-boxplot((value) ~ Var1,f, col = col[levels(f$X1)], ylab = 'd(Oli ipsc, X) in gene space', xlab = 'x', las = 2)
+ggplot(f, aes(x=Var1, y=value)) +
+  geom_boxplot() + theme_classic() + stat_compare_means(method = 'wilcox.test', comparisons = list(c('Opc', 'Oli'), c('Opc', 'In'), c('Opc', 'Ex'), c('Opc', 'Mic'), c('Opc', 'Ast')))
 dev.off()
 
-# get corresponding wilcox p-values
-wilcox.test(vals$Oli$Opc, vals$Oli$Oli, conf.int = T)
-
-wilcox.test(vals$Oli$Opc, vals$Oli$In, conf.int = T)
-
-wilcox.test(vals$Oli$Opc, vals$Oli$Ast, conf.int = T)
-
-wilcox.test(vals$Oli$Opc, vals$Oli$Ex, conf.int = T)
-
-wilcox.test(vals$Oli$Opc, vals$Oli$Mic, conf.int = T)
-
-
 ######## cholesterol and myelination boxplot_w_stats
-pathways = readRDS('../data_outputs/pathways.rds')
+pathways = readRDS('../data/other_analyses_outputs/pathways.rds')
 
 # look at the cholesterol biosynthesis signature
-f1_data = readRDS('../data_outputs/pathway_scores.rds')
-oli.lipid.fits = f1_data$res$lipid_associated$fits$Oli
-lipid.paths.oli = pathways$pathways$low_removed_lipid_associated$Oli
-paths = rownames(oli.lipid.fits[oli.lipid.fits$P.Value<0.05,])
-biosynth_genes = unique(unname(unlist(lipid.paths.oli[paths])))
+data = readRDS('../data/other_analyses_outputs/cholesterol_analysis.rds')
+biosynth_genes = data[['union_cholest_biosynth']]$genes
 myelination_genes = c('MYRF', 'MOG', 'PLP1', 'PLLP', 'MAG', 'OPALIN')
 
 paths = list()
@@ -157,7 +140,6 @@ paths$cholest = biosynth_genes
 paths$myelination = myelination_genes
 
 # combine all the individual-level - celltype level gene expression profiles
-library(GSVA)
 merged_scaled = merge(i_scaled,h_scaled, by = 0, how = 'inner')
 rownames(merged_scaled) = merged_scaled$Row.names
 merged_scaled$Row.names = NULL
@@ -180,21 +162,17 @@ col1 = c("#F39B7FFF" ,"#F39B7FFF" , "#8491B4FF", "#E64B35FF" , "#E64B35FF" , "#3
 names(col1) = levels(d$grp)
 
 pdf('../plots/boxplot_cholest.pdf', width = 3,  height = 4)
-boxplot(cholest ~ grp, d, col = col1[levels(d$grp)], ylab = 'gene set activity score', las = 2, main = 'cholesterol biosynthesis')
+ggplot(d, aes(x=grp, y=cholest)) +
+  geom_boxplot() + theme_classic() + stat_compare_means(method = 'wilcox.test', comparisons = list(c('Oli_iPSC','Ast_iPSC'), c('Oli_iPSC', 'Mic_iPSC'), c('Oli_iPSC', 'Ex_iPSC')))
 dev.off()
 
 pdf('../plots/boxplot_myelin.pdf', width = 3,  height = 4)
-boxplot(myelination ~ grp, d, col = col1[levels(d$grp)], ylab = 'gene set activity score', las = 2, main = 'myelination')
+ggplot(d, aes(x=grp, y=myelination)) +
+  geom_boxplot() + theme_classic() + stat_compare_means(method = 'wilcox.test', comparisons = list(c('Oli_iPSC','Ast_iPSC'), c('Oli_iPSC', 'Mic_iPSC'), c('Oli_iPSC', 'Ex_iPSC')))
 dev.off()
 
-wilcox.test(d[d$grp=='Oli_iPSC','cholest'], d[d$grp=='Opc_human','cholest'])
-wilcox.test(d[d$grp=='Oli_iPSC','cholest'], d[d$grp=='Oli_human','cholest'])
-
-wilcox.test(d[d$grp=='Oli_iPSC','myelination'], d[d$grp=='Opc_human','myelination'])
-wilcox.test(d[d$grp=='Oli_iPSC','myelination'], d[d$grp=='Oli_human','myelination'])
-
 ############ heatmaps
-library(ComplexHeatmap)
+
 #show cholest biosynthesis and myelination activity heatmaps on average values}
 # get mean expression profiles for both systems data
 human = human[c('Ast', 'Mic', 'Opc', 'Oli', 'Ex', 'In')]
@@ -241,3 +219,5 @@ h2 = Heatmap(df[paths$myelination,], border = T, rect_gp = gpar(col = 'black', l
 pdf('../plots/myelin_expression.pdf', width = 5, height = 3.8)
 h2
 dev.off()
+
+print('done.')
