@@ -155,6 +155,7 @@ Rscript ../scripts/fgsea_analysis.r
 Rscript ../scripts/pseudo_bulk.r
 Rscript ../scripts/permutation_analysis_label_perms.r
 Rscript ../scripts/pathway_activity_overview.r #TODO: add Jose's code to this
+Rscript ../scripts/cholesterol_pathways_activity #TODO: finish editing this
 ```
 
 Extended Data Figure 3
@@ -174,7 +175,7 @@ Extended Data Figure 6
 ```bash
 conda activate apoe_env
 Rscript ../scripts/processing_ipsc_rnaseq_data.r
-Rscript ../scripts/comparison_of_ipsc_and_brain.r #TODO: review this
+Rscript ../scripts/comparison_of_ipsc_and_brain.r #TODO: clean this up a bit more
 Rscript ../scripts/APOE_expression_oligodendrocytes.r
 Rscript ../scripts/apoe_expression_ipsc.r
 ```
@@ -193,4 +194,5 @@ conda activate apoe_env
 Rscript ../scripts/get_wilcox_myelin_plots.r #TODO: add this
 ```
 
-#TODO: write get_wilcox_degs.r , get_nebula_degs.r , get_pseudobulk_degs.r 
+#TODO: write get_wilcox_degs.r , get_nebula_degs.r , get_pseudobulk_degs.r
+#TODO: edit / add to the readme data files
