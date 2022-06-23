@@ -302,3 +302,10 @@ boxplot_w_stats = function(df, x, y, group_color = x, group_fill = x, alpha=.5, 
     return(plot)
 
 }
+
+# subset genesets by category
+get_gset_by_category = function(cat, gsets){
+  gset = unlist(lapply(names(gsets), function(x) unlist(sum(sapply(cat, grepl, x))>0)))
+  gset = (gsets[gset])
+  return(gset)
+} 

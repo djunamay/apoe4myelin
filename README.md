@@ -155,7 +155,7 @@ Rscript ../scripts/fgsea_analysis.r
 Rscript ../scripts/pseudo_bulk.r
 Rscript ../scripts/permutation_analysis_label_perms.r
 Rscript ../scripts/pathway_activity_overview.r #TODO: add Jose's code to this
-Rscript ../scripts/cholesterol_pathways_activity #TODO: finish editing this
+Rscript ../scripts/cholesterol_pathways_activity
 ```
 
 Extended Data Figure 3
@@ -191,8 +191,15 @@ Rscript ../scripts/ipsc_pathway_perturbations.r
 Extended Data Figure 9
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_wilcox_myelin_plots.r #TODO: add this
+Rscript ../scripts/get_wilcox_myelin_plots.r
 ```
 
-#TODO: write get_wilcox_degs.r , get_nebula_degs.r , get_pseudobulk_degs.r
+#TODO: write  get_nebula_degs.r
+# look at correlations between pseudo bulk and wilcox and nebula
+# add Jose's code and data
+# then update methods
+# then update supplementary tables
+# compare figures to output plots (update some)
+# check all the figure calls and supplementary table calls
+# add goodness of fit plots
 #TODO: edit / add to the readme data files

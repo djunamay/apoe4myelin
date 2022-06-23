@@ -70,3 +70,20 @@ normalize_counts = function(counts.df){
   normalized = cpm(dge)
   return(normalized)
 }
+
+Wilcox.differential <- function(QInexp, QIngroup) {
+ o <- presto::wilcoxauc(QInexp, QIngroup)
+ o <- o[o$group==1,]
+ o <- o[order(o$auc, decreasing = T),]
+ rownames(o) <- o$feature
+ o$class.power <- (abs(o$auc-0.5)) * 2
+ return(o)
+}
+
+RunDiffExprAnalysisLimma_pseudobulk <- function(logcounts, var, predict) {
+    mod1 = model.matrix(~APOE4 + amyloid + nft + age_death + msex + pmi, data=predict)
+    fit <- lmFit(logcounts, design=mod1)
+    fit <- eBayes(fit)
+    res <- topTable(fit, coef=var, n=Inf, sort.by="none")
+    return(list("res"=res))
+}
