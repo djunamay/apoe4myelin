@@ -28,13 +28,3 @@ for(i in names(av_expression)){
 pseudo_bulk = do.call('rbind', all_out)
 
 write.csv(pseudo_bulk, '../data/other_analyses_outputs/pseudo_bulk_degs_single_cell_all_celltypes.csv')
-
-# compare the pseudo bulk to the wilcox degs
-oli_wilcox = readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results.rds')
-
-merged = merge(all_out$Oli, oli_wilcox, by = 0)
-
-pdf('../plots/comparison_wilcox_pseudobulk_degs_oli.pdf', width = 5, height = 5)
-ggplot(merged, aes(x=logFC.x, y=auc)) +
-geom_hex(bins = 100)+  geom_smooth(method=lm) + theme_classic() + geom_vline(xintercept = 0) + geom_hline(yintercept = 0.5)  + scale_fill_viridis_c()
-dev.off()
