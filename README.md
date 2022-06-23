@@ -196,11 +196,14 @@ Rscript ../scripts/get_wilcox_myelin_plots.r
 
 #TODO: write  get_nebula_degs.r
 # look at correlations between pseudo bulk and wilcox and nebula xxx
-# add Jose's code and data
-# then update methods
-# then update supplementary tables
+# add Jose's code and data xxx
+# test: s = -log10(p-value)*sign(𝝱0). is B the same as logFC?
+# then update methods xxx
+# then update supplementary tables xxx
+# reference extended figure 2a,b and supplementary table s14
 # compare figures to output plots (update some)
 # check all the figure calls and supplementary table calls
 # add goodness of fit plots
 # update the lipidomics (see email from Chihyu and the code on workstation)
+# continue editing the rebuttal --> see the comments I made
 #TODO: edit / add to the readme data files

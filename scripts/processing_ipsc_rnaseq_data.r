@@ -1,8 +1,5 @@
 ########## extended script 1 in APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes ##########
 #############################################################################################################
-
-## Conda Env Name: edgeR
-
 ## iPSC APOE4 vs APOE3 data downloaded from the biomicro servers: 191210Tsa/
 # /net/bmc-pub10/data1/bmc/public/Tsai/191210Tsa
 # TODO: get var info to compute DEGs
