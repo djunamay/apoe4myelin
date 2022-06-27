@@ -98,3 +98,5 @@ names(x) = rownames(allgenesets_cholesterol[allgenesets_cholesterol$P.Value<0.05
 pdf('../plots/cholest_paths_ips.pdf', width = 3, height = 3)
 print(barplot(x[order(x)], las = 1, horiz = T))
 dev.off()
+
+# show some key genes of interest

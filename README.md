@@ -206,4 +206,8 @@ Rscript ../scripts/get_wilcox_myelin_plots.r
 # add goodness of fit plots
 # update the lipidomics (see email from Chihyu and the code on workstation)
 # continue editing the rebuttal --> see the comments I made
+
+# Tomorrow first thing:
+# ChE lipidomic --> redo code + figure + add the new methods and data she sent (make sure the results still hold true)
+# add the validation dataset new analysis --> to figure and to rebuttal 
 #TODO: edit / add to the readme data files

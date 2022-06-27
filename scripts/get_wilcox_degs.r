@@ -14,5 +14,5 @@ oli_nonad = oli[,oli$niareagansc%in%c(3,4) & oli$apoe_genotype!=44]
 out_nonad = Wilcox.differential(logcounts(oli_nonad), ifelse(oli_nonad$apoe_genotype==33, 0, 1))
 
 saveRDS(out_all, '../data/differentially_expressed_genes_data/oli_wilcox_results.rds')
-saveRDS(oli_ad, '../data/differentially_expressed_genes_data/oli_wilcox_results_AD.rds')
-saveRDS(oli_nonad, '../data/differentially_expressed_genes_data/oli_wilcox_results_noAD.rds')
+saveRDS(out_ad, '../data/differentially_expressed_genes_data/oli_wilcox_results_AD.rds')
+saveRDS(out_nonad, '../data/differentially_expressed_genes_data/oli_wilcox_results_noAD.rds')
