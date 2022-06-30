@@ -1,5 +1,6 @@
-########## script 3 in APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes ##########
-#############################################################################################################
+########## get plots for Figure 1 ##########
+############################################
+
 source('../functions/plotting.r')
 source('../functions/pathway_analyses.r')
 
@@ -33,7 +34,7 @@ shared_2 = mat[unname(rowSums(abs(mat)>1.3)>1),]
 h1 = get_go_hmap(unique, names,path_names_go, 'shortened name')
 h2 = get_go_hmap(shared_2, names,path_names_go, 'shortened name')
 
-pdf('../plots/hmap_go_f1.pdf', height = 8, width = 5.5)
+pdf('../plots/Figure_1/hmap_go_f1.pdf', height = 8, width = 5.5)
 draw(h1%v%h2)
 dev.off()
 
@@ -77,8 +78,7 @@ cell_fun = function(j, i, x, y, width, height, fill) {
 options(repr.plot.width = 4.7, repr.plot.height = 5, repr.plot.res = 150)
 rownames(df) = path_names_lipid[rownames(df), 'shortened name']
 
-pdf('../plots/lipid_paths.pdf', width = 4.7, height = 4.7)
+pdf('../plots/Figure_1/lipid_paths.pdf', width = 4.7, height = 4.7)
 Heatmap(as.matrix(df), width = 2.5,colorRamp2(c(-2,0,2), c('blue','white','red')),cluster_rows = F, cluster_columns = F, border = T, cell_fun = cell_fun) #row_split = names)
 dev.off()
-
 print('done')

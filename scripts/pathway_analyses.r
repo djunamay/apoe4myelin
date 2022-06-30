@@ -1,5 +1,5 @@
-########## script 2 in APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes ##########
-#############################################################################################################
+########## run pathway analyses (GSVA) ##########
+#################################################
 
 ##### required libraries ####
 source('../functions/pathway_analyses.r')

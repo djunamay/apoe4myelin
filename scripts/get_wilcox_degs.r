@@ -1,3 +1,6 @@
+########## compute wilcoxon degs ##########
+###########################################
+
 source('../functions/bulk_degs.r')
 
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')

@@ -1,3 +1,6 @@
+########## ER stress related to extended data figure 8 #############
+##########################################################################
+
 source('../functions/plotting.r')
 source('../functions/pathway_analyses.r')
 
@@ -21,7 +24,7 @@ p + geom_jitter(shape=16, position=position_jitter(0.2)) + stat_compare_means(me
 dev.off()
 
 x = data$ER_stress$ATF6_pathway_degs
-pdf('../plots/unfolded_genes.pdf', width = 3.5, height = 4)
+pdf('../plots/Extended_8/unfolded_genes.pdf', width = 3.5, height = 4)
 barplot(x[order(x)], horiz = T, las = 1)
 dev.off()
 

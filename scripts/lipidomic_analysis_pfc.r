@@ -1,4 +1,11 @@
+########## lipidomic analysis for extended data figure 4 #############
+##########################################################################
+source('../functions/pathway_analyses.r')
+
+# required packages
 library(readxl)
+library(ggplot2)
+library(ggpubr)
 
 # load the che data
 data = as.data.frame(read_excel('../data/lipidomics_dataset/pfc_lipidomics/ChE summary_cyc_05312022_all samples.xlsx'))
@@ -26,6 +33,11 @@ nia = read.csv('../data/lipidomics_dataset/pfc_lipidomics/metadata_PFC_all_indiv
 full_meta = merge(full_meta, nia, by = 'projid')
 rownames(full_meta) = full_meta$projid
 data_subset$niareagansc = full_meta[rownames(data_subset), 'niareagansc']
+data_subset$pmi = full_meta[rownames(data_subset), 'pmi.x']
+data_subset$nft = full_meta[rownames(data_subset), 'nft']
+data_subset$amyloid = full_meta[rownames(data_subset), 'amyloid']
+data_subset$age_death = full_meta[rownames(data_subset), 'age_death.x']
+data_subset$age_death = ifelse(data_subset$age_death=='90+', 90, as.numeric(data_subset$age_death))
 data_subset$AD = ifelse(data_subset$niareagansc%in%c(1,2), 'AD', 'noAD')
 data_subset = data_subset[data_subset$apoe_genotype%in%c(33,34,44),]
 
@@ -72,11 +84,49 @@ colnames(stats_AD) = c('lower_90_CI', 'upper_90_CI', 'sample_estimates(median_di
 stats_AD$grp = 'AD'
 
 df = rbind(stats, stats_noAD, stats_AD)
-write.csv(df, '../data/other_analyses_outputs/cc_lipidomics_data.csv')
+df$species = c('ChE(18:1)_1','ChE(18:2)_1','ChE(20:4)_1','ChE(18:1)_1','ChE(18:2)_1','ChE(20:4)_1','ChE(18:1)_1','ChE(18:2)_1','ChE(20:4)_1')
+write.csv(df, '../data/other_analyses_outputs/pfc_lipidomics_data.csv')
 
 # also save the metadata --> add age etc to it
-write.csv(df, '../data/other_analyses_outputs/cc_lipidomics_data.csv')
+data_subset$individualID = full_meta[as.character(data_subset$X), 'individualID']
+biospecimen = biospecimen[biospecimen$tissue=='dorsolateral prefrontal cortex',]
+
+rownames(biospecimen) = biospecimen$individualID
+data_subset$biospecimen_id = biospecimen[as.character(data_subset$individualID), 'specimenID']
+write.csv(data_subset, '../data/other_analyses_outputs/pfc_lipidomics_data_metadata.csv')
 
 # make metadata distribution plots
+data_subset$APOE = ifelse(data_subset$apoe_genotype==33, 'APOE3/3', 'APOE3/4 & APOE4/4')
+
+data_subset$grp = paste0(data_subset$AD, '_', data_subset$APOE)
+data_subset$grp = factor(data_subset$grp, levels = c('noAD_APOE3/3','AD_APOE3/3','noAD_APOE3/4 & APOE4/4','AD_APOE3/4 & APOE4/4'))
+cols = c('grey', 'pink', 'black', 'red')
+names(cols) =c('noAD_APOE3/3','AD_APOE3/3','noAD_APOE3/4 & APOE4/4','AD_APOE3/4 & APOE4/4')
+
+pdf('../plots/Extended_4/pmi_pfc_lipid_cohort.pdf', width = )
+boxplot_w_stats(df = data_subset, x = 'grp', y = 'pmi', palette = cols, comparisons = list(c('noAD_APOE3/3', 'noAD_APOE3/4 & APOE4/4'),c('AD_APOE3/3', 'AD_APOE3/4 & APOE4/4')), xlab = '', ylab = 'pmi', width = .5, alpha = .5)
+dev.off()
+
+pdf('../plots/Extended_4/nft_pfc_lipid_cohort.pdf', width = )
+boxplot_w_stats(df = data_subset, x = 'grp', y = 'nft', palette = cols, comparisons = list(c('noAD_APOE3/3', 'noAD_APOE3/4 & APOE4/4'),c('AD_APOE3/3', 'AD_APOE3/4 & APOE4/4')), xlab = '', ylab = 'pmi', width = .5, alpha = .5)
+dev.off()
+
+pdf('../plots/Extended_4/amyloid_pfc_lipid_cohort.pdf', width = )
+boxplot_w_stats(df = data_subset, x = 'grp', y = 'amyloid', palette = cols, comparisons = list(c('noAD_APOE3/3', 'noAD_APOE3/4 & APOE4/4'),c('AD_APOE3/3', 'AD_APOE3/4 & APOE4/4')), xlab = '', ylab = 'pmi', width = .5, alpha = .5)
+dev.off()
+
+# add the non-90+ ages
+# add the stacked bar plot
 
 # show the plots
+pdf('../plots/Extended_4/che_18_1.pdf', width = 10, height = 5)
+ggplot(data_subset, aes(x=as.character(APOE), y=data_subset[,'ChE.18.1._1'], col = APOE)) +
+stat_compare_means(comparisons = list(as.character(c('APOE3/3', 'APOE3/4 & APOE4/4'))),method = "wilcox.test") + geom_violin() +  geom_boxplot(width = .1) + geom_jitter(size = .5) + theme_classic() + facet_grid(~ AD)
+dev.off()
+
+pdf('../plots/che_18_1_boxplot.pdf', width = 4, height = 7)
+ggplot(data_subset, aes(x=as.character(APOE), y=data_subset[,'ChE.18.1._1'], col = APOE)) +
+stat_compare_means(comparisons = list(as.character(c('APOE3/3', 'APOE3/4 & APOE4/4'))),method = "wilcox.test") +  geom_boxplot(width = 1) + theme_classic() + facet_grid(~ AD)
+dev.off()
+
+print('done.')

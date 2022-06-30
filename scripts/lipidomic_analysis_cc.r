@@ -1,9 +1,12 @@
+########## analysis of lipidomic data from human corpus callosum ##########
+###########################################################################
+
+# required packages
 library(reshape2)
 library(ggpubr)
-
-# comparison of APOE3 vs APOE4
 library(matrixStats)
-# import the human and the ipsc lipidomics data
+
+# import the human post-mortem lipidomics data
 hdata = read.csv('../data/lipidomics_dataset/cc_lipidomics/Lipidomics_RawData.csv')
 hdata2 = read.csv('../data/lipidomics_dataset/cc_lipidomics/Lipidomics_RawData_2.csv')
 
@@ -52,7 +55,7 @@ fff$value = as.numeric(fff$value)
 fff$name = as.character(names[fff$name,'name'])
 fff = fff[!fff$name=='18:1-d7 Cholesteryl ester',]
 fff$name = factor(fff$name, levels = c('20:4 Cholesteryl ester', '18:2 Cholesteryl ester', '22:6 Cholesteryl ester', '18:1 Cholesteryl ester'))
-pdf('../plots/human_lipidomics.pdf', width = 4, height = 4)
+pdf('../plots/Figure_2/human_lipidomics_cc.pdf', width = 4, height = 4)
 ggplot(fff, aes(x=grp, y=value, col = grp)) +
       geom_boxplot() + geom_jitter() + facet_grid(. ~ name)+ stat_compare_means(method = "wilcox.test") + theme_classic()
 dev.off()
@@ -73,5 +76,5 @@ rownames(stats) = rownames(t)
 stats$names = names[rownames(stats), 'name']
 
 all_data = cbind(t, stats)
-write.csv(all_data, '../data/supplementary_tables/cc_lipidomics_data.csv')
+write.csv(all_data, '../data/other_analyses_outputs/cc_lipidomics_data.csv')
 print('done.')

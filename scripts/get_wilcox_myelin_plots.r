@@ -1,3 +1,5 @@
+########## myelin plots related to extended data figure 8 #############
+##########################################################################
 
 # show the degs for myelin genes with and without AD
 ad = readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results_AD.rds')
@@ -19,7 +21,7 @@ gg = gg[gg$padj<0.05,]
 ggg = gg$logFC
 names(ggg) = rownames(gg)
 
-pdf('../plots/wilcox_noad_myelin.pdf', width = 3, height = 3.5)
+pdf('../plots/Extended_9/wilcox_noad_myelin.pdf', width = 3, height = 3.5)
 barplot(ggg[order(ggg, decreasing = T)], las = 2, horiz = T, main = 'no AD')
 dev.off()
 

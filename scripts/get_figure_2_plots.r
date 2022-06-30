@@ -1,5 +1,5 @@
-########## script 5 in APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes ##########
-#############################################################################################################
+########## plots for Figure 2 ##########
+########################################
 
 source('../functions/plotting.r')
 source('../functions/pathway_analyses.r')
@@ -19,7 +19,7 @@ x = data$deg_level_analysis$degs
 
 print('drawing the density plot')
 # draw the density plot
-pdf('../plots/cholest_biosynth_activity.pdf', width = 5 , height = 2.5)
+pdf('../plots/Figure_2/cholest_biosynth_activity.pdf', width = 5 , height = 2.5)
 ggplot(cholest_genes_dist, aes(x = biosynth)) + geom_density(aes(fill = factor(apoe_geno), alpha = .5))+ facet_wrap( ~ apoe_geno, nrow = 3) + geom_boxplot(width = .4) + geom_point(aes(x = biosynth,y=0, col = (AD))) + theme_classic() +
 xlim(-1.5,1.5)
 dev.off()
@@ -31,7 +31,7 @@ write.csv(as.data.frame(do.call('rbind',(temp))), '../data/supplementary_tables/
 
 print('drawing the deg barplot')
 # plotting the degs
-pdf('../plots/cholesterol_degs.pdf', width = 3, height = 4)
+pdf('../plots/Figure_2/cholesterol_degs.pdf', width = 3, height = 4)
 barplot(x[order(x)], horiz = T, las = 1)
 dev.off()
 

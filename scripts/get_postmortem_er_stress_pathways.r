@@ -1,3 +1,5 @@
+########## ER stress related to extended data figure 8 #############
+##########################################################################
 
 source('../functions/pathway_analyses.r')
 

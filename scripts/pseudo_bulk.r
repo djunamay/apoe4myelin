@@ -1,5 +1,9 @@
-# load functions
+########## pseudo-bulk visualization for extended data figure 2 ##########
+##########################################################################
+
 source('../functions/pathway_analyses.r')
+
+#required packages
 library(ComplexHeatmap)
 library(GSVA)
 
@@ -13,8 +17,6 @@ all_paths = data$pathways$all
 # output data
 all_data = list()
 
-set.seed(5)
-
 # load libraries
 print('loading libraries..')
 library("readxl")
@@ -23,11 +25,11 @@ library('GSVA')
 library('limma')
 library('parallel')
 library('tidyr')
-library(stringr)
-library(GSA)
-library(ComplexHeatmap)
-library(circlize)
-library(ggplot2)
+library('stringr')
+library('GSA')
+library('ComplexHeatmap')
+library('circlize')
+library('ggplot2')
 
 # load the data
 print('loading the data..')
@@ -62,9 +64,9 @@ for(i in names(o)){
   ha = rowAnnotation(e3 = anno_density(df[,anns=='E3'], xlim = c(-2,4)))
   ha2 = rowAnnotation(e4 = anno_density(df[,anns=='E4'], xlim = c(-2,4)))
 
-  #pdf(paste0('../plots/pseudobulk_signature_',i,'.pdf'), width=7, height = 3)
+  pdf(paste0('../plots/Extended_2/pseudobulk_signature_',i,'.pdf'), width=7, height = 3)
   print(Heatmap(df, bottom_annotation = c(column_ha,column_ha2), left_annotation = c(ha, ha2)))
-  #dev.off()
+  dev.off()
 }
 
 print('done.')

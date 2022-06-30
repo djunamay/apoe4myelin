@@ -1,5 +1,8 @@
-library(nebula)
+########## plots for Figure 2 ##########
+########################################
 
+# required packages
+library(nebula)
 
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
 

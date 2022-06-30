@@ -1,6 +1,10 @@
+########## effects stratification for extended data figure 3 #############
+##########################################################################
 # load functions
 source('../functions/pathway_analyses.r')
 print('loading libraries..')
+
+# required packages
 library("readxl")
 library('SingleCellExperiment')
 library('GSVA')
@@ -13,8 +17,6 @@ library(ComplexHeatmap)
 library(circlize)
 library(ggplot2)
 library(ggpubr)
-
-set.seed(5)
 
 # load the data
 print('loading data')
@@ -61,7 +63,7 @@ df = all_data[['res']][['lipid_associated']][['APOE34_effect_nia34']]
 df = df[df$P.Value<0.05,]
 x = (df$logFC)
 names(x) = rownames(df)
-pdf('../plots/APOE34_lipid_effects_no_path.pdf', width = 3, height = 4)
+pdf('../plots/Extended_3/APOE34_lipid_effects_no_path.pdf', width = 3, height = 4)
 barplot(x[order(x)], horiz = T, las = 1)
 dev.off()
 
@@ -97,7 +99,7 @@ x[['p_AD_and_APOE34_effects']] <- ggplot(df[df$apoe_genotype!=44,], aes(x=factor
   geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()#+ stat_compare_means('wilcox.test')
 
 for(i in names(x)){
-    pdf(paste0('../plots/',i,'.pdf'), width = 2, height = 2)
+    pdf(paste0('../plots/Extended_3/',i,'.pdf'), width = 2, height = 2)
     print(x[[i]])
     dev.off()
 }
@@ -154,6 +156,6 @@ for(i in names){
 }
 
 # save the table with logFC values and p-value
-write.csv(do.call('rbind', out),'../data/supplementary_tables/stratified_stats.csv')
-saveRDS(all_data, '../data/other_analyses_outputs/tratified_anaylsis.rds')
+write.csv(do.call('rbind', out),'../data/other_analyses_outputs/stratified_stats.csv')
+saveRDS(all_data, '../data/other_analyses_outputs/stratified_anaylsis.rds')
 print('done')

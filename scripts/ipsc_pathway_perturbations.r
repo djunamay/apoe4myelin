@@ -1,6 +1,7 @@
-########## extended script 2 in APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes ##########
-#############################################################################################################
+########## iPSC analysis related to extended data figure 8 #############
+##########################################################################
 
+# required packages
 library(GSVA)
 library(limma)
 library(tidyr)
@@ -34,7 +35,7 @@ for(i in names(out)){
 for(f in names(l)){
     x = l[[f]]$score
     names(x) = rownames(l[[f]])
-    pdf(paste0('../plots/', f,'.pdf'), width = 3, height = 5)
+    pdf(paste0('../plots/Extended_8/', f,'.pdf'), width = 3, height = 5)
     print(barplot(x[order(x)], las = 1, horiz = T))
     dev.off()
 }
@@ -85,13 +86,13 @@ allgenesets_upr = topTable(fit, coef='APOE', number=Inf, confint = T) %>% .[orde
 # show the pathways as barplots
 x = allgenesets_upr[allgenesets_upr$P.Value<0.05,'logFC']
 names(x) = rownames(allgenesets_upr[allgenesets_upr$P.Value<0.05,])
-pdf('../plots/upr_paths_ips.pdf', width = 3, height = 3)
+pdf('../plots/Extended_8/upr_paths_ips.pdf', width = 3, height = 3)
 print(barplot(x[order(x)], las = 1, horiz = T))
 dev.off()
 
 x = allgenesets_cholesterol[allgenesets_cholesterol$P.Value<0.05,'logFC']
 names(x) = rownames(allgenesets_cholesterol[allgenesets_cholesterol$P.Value<0.05,])
-pdf('../plots/cholest_paths_ips.pdf', width = 3, height = 3)
+pdf('../plots/Extended_8/cholest_paths_ips.pdf', width = 3, height = 3)
 print(barplot(x[order(x)], las = 1, horiz = T))
 dev.off()
 
@@ -102,7 +103,7 @@ df = na.omit(norm_counts[c('SOAT1', 'SOAT2', 'CYP46A1'),])
 df$gene = rownames(df)
 x = melt(df)
 x$variable = ifelse(startsWith(as.character(x$variable), 'APOE3'), 'APOE3', 'APOE4')
-pdf('../plots/SOAT1_CYP_boxplots_ipsc.pdf', width = 3, height = 4)
+pdf('../plots/Extended_8/SOAT1_CYP_boxplots_ipsc.pdf', width = 3, height = 4)
 ggplot(x, aes(x=variable, y=value, col = variable)) +
       geom_boxplot(width = .5) + geom_jitter() + facet_wrap(. ~ gene,  scales="free_y", nrow = 2) + theme_classic()
 dev.off()

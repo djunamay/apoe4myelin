@@ -1,6 +1,5 @@
-########## script 1 in APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes ##########
-#############################################################################################################
-#TODO: remove the genes that are empty from all the genesets
+########## get pathway databases for use in analysis ##########
+###############################################################
 
 ##### required libraries ####
 source('../functions/pathway_analyses.r')
