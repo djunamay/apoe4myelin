@@ -1,5 +1,10 @@
 ########## plots for extended data figure 1 ##########
 ######################################################
+source('../functions/qc_and_annotation_aux_functions.r')
+sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
+Mapping = readRDS('../data/single_cell_data/Mapping.rds')
+Metadata = readRDS('../data/single_cell_data/Metadata.APOE.project.rds')
+All.colors = readRDS('../data/single_cell_data/Cell_group_colors.rds')
 
 #actionet 2D
 pdf("../plots/Extended_1/2D_cells_celltypes_noLabs.pdf")
@@ -53,9 +58,9 @@ for(i in colnames(x)) {
 dev.off()
 
 #marker enrichment
-Summary.data.celltype <- readRDS("Summary.data.celltype.rds")
-RefCellTypeMarkers <- readRDS("RefCellTypeMarkers.adultBrain.rds")
-PanglaoDB <- readRDS("PanglaoDB.by.organ.by.celltype.rds")
+Summary.data.celltype <- readRDS("../data/single_cell_data/Summary.data.celltype.rds")
+RefCellTypeMarkers <- readRDS("../data/single_cell_data/RefCellTypeMarkers.adultBrain.rds")
+PanglaoDB <- readRDS("../data/single_cell_data/PanglaoDB.by.organ.by.celltype.rds")
 
 # PsychENCODE enrichment
 S <- Aggregate.pairwise.FC.colPairwise(Summary.data.celltype@assays[["E"]])

@@ -46,78 +46,108 @@ conda env create -f ../environment/apoe_env.yml
 3. Now run:
 ```bash
 conda activate apoe_env
-Rscript ../scripts/run_qc_and_annotation.r #this script peforms QC, celltype annotation, and generates the data in data/single_cell_data as shown below
+Rscript ../scripts/qc_and_annotation.r #TODO: check/edit this
 ```
 
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
-1. download the [data](https://www.dropbox.com/sh/gqx3rfkubby20gj/AABRRdGsWNKzJqNoJqRmOBkta?dl=0) directory into a local directory named /data. This directory contains the following data:
+1. follow instructions [here](https://github.com/lhe17/nebula) to download the nebula package
+2. follow instructions [here](https://github.com/immunogenomics/presto) to download the immunogenomics/presto package
+3. download the [data](https://www.dropbox.com/sh/gqx3rfkubby20gj/AABRRdGsWNKzJqNoJqRmOBkta?dl=0) directory into a local directory named /data. This directory contains the following data:
 
 ```
 data
 └───single_cell_data
+    └───Cell_group_colors.rds
+    └───ensembl.GRCh38p12.genes.complete.annot.rds
     └───single_cell_experiment_object.rds
     └───expressed_genes_per_celltype.rds
     └───individual_level_averages_per_celltype.rds
+    └───Mapping
     └───metadata_by_individual.rds
+    └───metadata_PFC_all_individuals_092520.tsv
+    └───Metadata.APOE.project.rds
+    └───RefCellTypeMarkers.adultBrain.rds
+    └───Summary.data.celltype.rds
 └───differentially_expressed_genes_data
-    └───nebula_degs_all.rds
+    └───nebula_oli_degs.rds
     └───wilcoxon_degs_all.rds
     └───wilcoxon_degs_AD.rds
     └───wilcoxon_degs_noAD.rds
-    └───pseudo_bulk_degs_all.rds
-    └───ipsc_deg_results.rds
+    └───pseudo_bulk_degs_single_cell_all_celltypes.csv
 └───iPSC_data
     └───ipsc_bulk_rnaseq_count_files
         └───...
-    └───ipsc_metadata.rds
-    └───ipsc_bulk_rnaseq_fpkm.rds
+    └───OPC_DEG_statistics.txt
+    └───FPKM_table_AST.txt
+    └───FPKM_table_MIC.txt
+    └───FPKM_table_OPC.txt
+    └───FPKM_table_NEU.txt # modify this name
 └───pathway_databases
     └───GO_Biological_Process_2018.txt
     └───HumanCyc_2016.txt
     └───KEGG_2019_Human.txt
     └───Reactome_2016.txt
-└───lipidomics_datasets
+└───lipidomics_dataset
     └───cc_lipidomics
-        └───...
+        └───Lipidomics_RawData_2.csv
+        └───Lipidomics_RawData.csv
     └───pfc_lipidomics
-        └───...
+        └───ChE_summary_cyc_05342022_all_samples.csv
+        └───metadata_PFC_all_individuals_092520.tsv
+        └───ROSMAP_clinical.csv
+        └───ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv
 └───other_analyses_outputs
-    └───processed_pathways.rds
-    └───processed_pathway_fits.rds
-    └───cholesterol_and_er_gene_level_results.rds
-    └───lipidomics_pfc_wilcoxon_results.rds
-    └───lipidomics_cc_wilcoxon_results.rds
+    └───pathways.rds
+    └───pathway_scores.rds    
 └───supplementary_tables
     └───...
 ```
 2. here is some info regarding the origins of each piece of data:
 
-| Data File                                       | Origin                                                              |
-|--------------------------------------------|---------------------------------------------------------------------|
-| single_cell_experiment_object.rds          | run ../scripts/run_qc_and_annotation.r                              |
-| expressed_genes_per_celltype.rds           | run ../scripts/run_qc_and_annotation.r                              |
-| individual_level_averages_per_celltype.rds | run ../scripts/run_qc_and_annotation.r                              |
-| metadata_by_individual.rds                 | provided by ROSMAP                                                  |
-| nebula_degs_all.rds                        | run ../scripts/get_nebula_degs.r                                    |
-| wilcoxon_degs_all.rds                      | run ../scripts/get_wilcox_degs.r                                    |
-| wilcoxon_degs_AD.rds                       | run ../scripts/get_wilcox_degs.r                                    |
-| wilcoxon_degs_noAD.rds                     | run ../scripts/get_wilcox_degs.r                                    |
-| pseudo_bulk_degs_all.rds                   | run ../scripts/get_pseudobulk_degs.r                               |
-| ipsc_deg_results.rds                       | run ../scripts/processing_ipsc_rnaseq_data.r                        |
-| ipsc_bulk_rnaseq_count_files.rds           | provided by MIT biomicro center core facility                       |
-| ipsc_metadata.rds                          | NA                                                                  |
-| ipsc_bulk_rnaseq_fpkm.rds                  | run ../scripts/processing_ipsc_rnaseq_data.r                        |
-| GO_Biological_Process_2018.txt             | from mayaan lab  [here](https://maayanlab.cloud/Enrichr/#libraries) |
-| HumanCyc_2016.txt                          | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
-| KEGG_2019_Human.txt                        | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
-| Reactome_2016.txt                          | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
-| cc_lipidomics_values.rds                   | provided by _                                                       |
-| pfc_lipidomics_values.rds                  | provided by Emory University                                        |
-| processed_pathways.rds                     | run ../scripts/get_pathways.r                                       |
-| processed_pathway_fits.rds                 | run ../scripts/pathway_analyses.r                                   |
-| cholesterol_and_er_gene_level_results.rds  | run ../scripts/dissecting_cholesterol_er_dysregulation.r            |
-| lipidomics_pfc_wilcoxon_results.rds        | run ../scripts/lipidomic_analysis_pfc.r                             |
-| lipidomics_cc_wilcoxon_results.rds         | run ../scripts/lipidomic_analysis_cc.r                              |
+| Data File                                                      | Origin                                                              
+|----------------------------------------------------------------|---------------------------------------------------------------------|
+| single_cell_experiment_object.rds                              | run ../scripts/run_qc_and_annotation.r                              |
+| expressed_genes_per_celltype.rds                               | run ../scripts/run_qc_and_annotation.r                              |
+| individual_level_averages_per_celltype.rds                     | run ../scripts/run_qc_and_annotation.r                              |
+| metadata_by_individual.rds                                     | provided by ROSMAP                                                  |
+| metadata_PFC_all_individuals_092520.tsv                        | provided by ROSMAP                                                  |
+| Metadata.APOE.project.rds                                      | provided by ROSMAP                                                  |
+| RefCellTypeMarkers.adultBrain.rds                              | provided by ROSMAP                                                  |
+| Summary.data.celltype.rds                                      | provided by ROSMAP                                                  |
+| nebula_oli_degs.rds                                            | run ../scripts/get_nebula_degs.r                                    |
+| wilcoxon_degs_all.rds                                          | run ../scripts/get_wilcox_degs.r                                    |
+| wilcoxon_degs_AD.rds                                           | run ../scripts/get_wilcox_degs.r                                    |
+| wilcoxon_degs_noAD.rds                                         | run ../scripts/get_wilcox_degs.r                                    |
+| pseudo_bulk_degs_single_cell_all_celltypes                     | run ../scripts/get_pseudobulk_degs.r                                |
+| FPKM_tables_.txt                                               | provided by MIT biomicro center core facility                       |
+| ipsc_bulk_rnaseq_count_files/                                  | provided by MIT biomicro center core facility                       |
+| ipsc_metadata.rds                                              | NA                                                                  |
+| GO_Biological_Process_2018.txt                                 | from mayaan lab  [here](https://maayanlab.cloud/Enrichr/#libraries) |
+| HumanCyc_2016.txt                                              | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
+| KEGG_2019_Human.txt                                            | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
+| Reactome_2016.txt                                              | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
+| cc_lipidomics_values.rds                                       | provided by _                                                       |
+| pfc_lipidomics_values/ChE_summary_cyc_05342022_all_samples.csv | provided by Emory University                                        |
+| pfc_lipidomics_values/ROSMAP_clinical.csv                      | on synapse [here](https://www.synapse.org/#!Synapse:syn21682218)    |
+| pfc_lipidomics_values/ROSMAP_Lipidomics_Emory_.._metadata.csv  | on Synapse [here](https://www.synapse.org/#!Synapse:syn26452615)    |
+| processed_pathways.rds                                         | run ../scripts/get_pathways.r                                       |
+| processed_pathway_fits.rds                                     | run ../scripts/pathway_analyses.r                                   |
+| cholesterol_and_er_gene_level_results.rds                      | run ../scripts/dissecting_cholesterol_er_dysregulation.r            |
+| lipidomics_pfc_wilcoxon_results.rds                            | run ../scripts/lipidomic_analysis_pfc.r                             |
+| lipidomics_cc_wilcoxon_results.rds                             | run ../scripts/lipidomic_analysis_cc.r                              |
+| pathways.rds                                                   | run ../scripts/get_pathways.r                                       |
+| pathway_scores.rds                                             | run ../scripts/pathway_analyses.r                                   |  
+| cholesterol_analysis.rds                                       | run ../scripts/dissecting_cholesterol_dysregulation.r               |
+| cc_lipidomics_data.rds                                         | run ../scripts/lipidomic_analysis_cc.r                              |
+| stratified_stats.csv                                           | run ../scripts/e4_effects_stratification_by_AD.r                    |
+| stratified_anaylsis.rds                                        | run ../scripts/e4_effects_stratification_by_AD.r                    |
+| pfc_lipidomics_data.rds                                        | run ../scripts/lipidomic_analysis_pfc.r                             |
+| pfc_lipidomics_data_metadata.csv                               | run ../scripts/lipidomic_analysis_pfc.r                             |
+| ipsc_post_mortem_pca_var_explained.csv                         | run ../scripts/comparison_of_ipsc_and_brain.r                       |
+| scaled_expression_ipsc_post_mortem.csv                         | run ../scripts/comparison_of_ipsc_and_brain.r                       |
+| APOE_expression_post_mortem_oligos.csv                         | run ../scripts/APOE_expression_oligodendrocytes.r                   |
+| APOE_expression_post_mortem_oligos.csv                         | run ../scripts/APOE_expression_oligodendrocytes.r                   |
+| er_stress_results.readRDS                                      | run ../scripts/get_postmortem_er_stress_pathways.r                  |
 
 3. Now follow these steps to recapitulate the analysis:
 
@@ -125,6 +155,7 @@ Figure 1
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_pathways.r
+Rscript ../scripts/get_nebula_degs.r
 Rscript ../scripts/pathway_analyses.r
 Rscript ../scripts/get_figure_1_plots.r
 ```
@@ -132,50 +163,47 @@ Rscript ../scripts/get_figure_1_plots.r
 Figure 2
 ```bash
 conda activate apoe_env
-Rscript ../scripts/dissecting_cholesterol_er_dysregulation.r
+Rscript ../scripts/dissecting_cholesterol_dysregulation.r
 Rscript ../scripts/lipidomic_analysis_cc.r
 Rscript ../scripts/get_figure_2_plots.r  
 ```
-3.2 Reproduce Figure 3 analysis
+Figure 3
 ```bash
 conda activate apoe_env
+Rscript ../scripts/get_wilcox_degs.r
 Rscript ../scripts/get_figure_3_plots.r
 ```
 
 Extended Data Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/plots_for_extended_data_figure_1.r #TODO: get this from Jose
+Rscript ../scripts/plots_for_extended_data_figure_1.r #TODO: check / edit this
 ```
 
 Extended Data Figure 2
 ```bash
 conda activate apoe_env
-Rscript ../scripts/fgsea_analysis.r
+Rscript ../scripts/fgsea_analysis.r # edit which input data using
 Rscript ../scripts/pseudo_bulk.r
-Rscript ../scripts/permutation_analysis_label_perms.r
-Rscript ../scripts/pathway_activity_overview.r #TODO: add Jose's code to this
-Rscript ../scripts/cholesterol_pathways_activity
+Rscript ../scripts/plots_for_extended_data_figure2.r #TODO: check / edit this
 ```
 
 Extended Data Figure 3
 ```bash
 conda activate apoe_env
 Rscript ../scripts/e4_effects_stratification_by_AD.r
-Rscript ../scripts/validation_of_cholesterol.r
 ```
 
 Extended Data Figure 4
 ```bash
 conda activate apoe_env
-Rscript ../scripts/lipidomic_analysis_pfc.r #TODO: review this --> check on workstation
+Rscript ../scripts/lipidomic_analysis_pfc.r #TODO: add a few lines of code, include another table with all the lipidomics species and describe as chihyu did
 ```
 
 Extended Data Figure 6
 ```bash
 conda activate apoe_env
-Rscript ../scripts/processing_ipsc_rnaseq_data.r
-Rscript ../scripts/comparison_of_ipsc_and_brain.r #TODO: clean this up a bit more
+Rscript ../scripts/comparison_of_ipsc_and_brain.r
 Rscript ../scripts/APOE_expression_oligodendrocytes.r
 Rscript ../scripts/apoe_expression_ipsc.r
 ```
@@ -194,20 +222,17 @@ conda activate apoe_env
 Rscript ../scripts/get_wilcox_myelin_plots.r
 ```
 
-#TODO: write  get_nebula_degs.r
-# look at correlations between pseudo bulk and wilcox and nebula xxx
-# add Jose's code and data xxx
-# test: s = -log10(p-value)*sign(𝝱0). is B the same as logFC?
-# then update methods xxx
-# then update supplementary tables xxx
-# reference extended figure 2a,b and supplementary table s14
-# compare figures to output plots (update some)
-# check all the figure calls and supplementary table calls
-# add goodness of fit plots
-# update the lipidomics (see email from Chihyu and the code on workstation)
-# continue editing the rebuttal --> see the comments I made
+# tonight:
+# run everyhting -- > make plots + supplementary tables
+# check supp tables
+# check GSVA / seed
+# double-check / compare them to the MS
+# re-read MS and check figure calls
 
-# Tomorrow first thing:
-# ChE lipidomic --> redo code + figure + add the new methods and data she sent (make sure the results still hold true)
-# add the validation dataset new analysis --> to figure and to rebuttal 
-#TODO: edit / add to the readme data files
+### can do this later
+# add goodness of fit code in the end?
+# finish/edit supplementary_tables code
+# add a run_all bash script
+# re-run everyhting and check against figures
+# upload the data files
+# push the plot folders without plots

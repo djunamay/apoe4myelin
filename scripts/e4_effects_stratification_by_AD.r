@@ -63,7 +63,7 @@ df = all_data[['res']][['lipid_associated']][['APOE34_effect_nia34']]
 df = df[df$P.Value<0.05,]
 x = (df$logFC)
 names(x) = rownames(df)
-pdf('../plots/Extended_3/APOE34_lipid_effects_no_path.pdf', width = 3, height = 4)
+pdf('../plots/Extended_3/APOE34_lipid_effects_no_path.pdf', width = 3, height = 6)
 barplot(x[order(x)], horiz = T, las = 1)
 dev.off()
 

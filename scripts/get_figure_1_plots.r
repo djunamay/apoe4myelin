@@ -39,7 +39,7 @@ draw(h1%v%h2)
 dev.off()
 
 # draw heatmap for APOE-associated pathways
-print('drawing heatmaps - APOE')g
+print('drawing heatmaps - APOE')
 temp = as.data.frame((abs(mat2)>1.3) * sign(mat2))
 temp_order = rownames(temp[order((temp$Ex),(temp$In), (temp$Ast), (temp$Mic), (temp$Oli), (temp$Opc), decreasing = T),])
 
@@ -59,7 +59,7 @@ grid.text(ifelse(abs(mat2[i, j])>1.3,'x',''), x, y, gp = gpar(fontsize = 15))
 }
 rownames(mat2) = path_names_apoe[rownames(mat2), 'shortened name']
 
-pdf('../plots/apoe_associated_paths_new.pdf', width = 4.7, height = 5.7)
+pdf('../plots/Figure_1/apoe_associated_paths.pdf', width = 4.7, height = 5.7)
 Heatmap(as.matrix(mat2), width = 2.5,colorRamp2(c(-2,0,2), c('blue','white','red')),cluster_rows = F, cluster_columns = F, border = T, cell_fun = cell_fun) #row_split = names)
 dev.off()
 

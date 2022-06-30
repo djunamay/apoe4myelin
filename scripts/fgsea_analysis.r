@@ -24,3 +24,5 @@ names(x) = df$pathway
 pdf('../plots/Extended_2/fgsea_lipid_associated_paths.pdf', width = 4, height = 4)
 barplot(x[order(x)], las = 1, horiz = T,xlab = 'normalized enrichment score')
 dev.off()
+
+print('done.')

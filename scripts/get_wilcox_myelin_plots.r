@@ -9,7 +9,7 @@ gg = gg[gg$padj<0.05,]
 ggg = gg$logFC
 names(ggg) = rownames(gg)
 
-pdf('../plots/wilcox_ad_myelin.pdf', width = 3, height = 3.5)
+pdf('../plots/Extended_9/wilcox_ad_myelin.pdf', width = 3, height = 3.5)
 barplot(ggg[order(ggg, decreasing = T)], las = 2, horiz = T, main = 'AD')
 dev.off()
 
