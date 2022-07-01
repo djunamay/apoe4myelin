@@ -119,9 +119,9 @@ data
 ```
 2. here is some info regarding the origins of each piece of data:
 
-| Data File                                                      | Origin                                                              
-|----------------------------------------------------------------|---------------------------------------------------------------------|
-| <td colspan=2>single_cell_data/                                                                                                                |
+| Data File                                                      | Origin                                                              |
+|-
+| <td colspan=2>single_cell_data                                                                                                       |         
 |----------------------------------------------------------------|---------------------------------------------------------------------|
 | Cell_group_colors.rds                                          | NA                                                                  |
 | ensembl.GRCh38p12.genes.complete.annot.rds                     |                                                                     |
@@ -134,7 +134,7 @@ data
 | Metadata.APOE.project.rds                                      | provided by ROSMAP                                                  |
 | RefCellTypeMarkers.adultBrain.rds                              | provided by ROSMAP                                                  |
 | Summary.data.celltype.rds                                      | provided by ROSMAP                                                  |
-| PanglaoDB.by.organ.by.celltype.rds
+| PanglaoDB.by.organ.by.celltype.rds                             |                                                                     |
 | nebula_oli_degs.rds                                            | run ../scripts/get_nebula_degs.r                                    |
 | wilcoxon_degs_all.rds                                          | run ../scripts/get_wilcox_degs.r                                    |
 | wilcoxon_degs_AD.rds                                           | run ../scripts/get_wilcox_degs.r                                    |
