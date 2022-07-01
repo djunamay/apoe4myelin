@@ -84,22 +84,23 @@ write.csv(cc, '../data/supplementary_tables/Supplementary_Table_S7.csv')
 ## Supplementary Table S8.
 df = read.csv('../data/other_analyses_outputs/pfc_lipidomics_data.csv')
 write.csv(df, '../data/supplementary_tables/Supplementary_Table_S8a.csv')
-
-# also indclude the full lipidomic data in another tab (and explain _1 and _2 as chihyu did)
-
 data_subset = read.csv('../data/other_analyses_outputs/pfc_lipidomics_data_metadata.csv')
 write.csv(data_subset, '../data/supplementary_tables/Supplementary_Table_S8b.csv')
+data_subset = read.csv('../data/other_analyses_outputs/pfc_lipidomics_qc_metrics.csv')
+write.csv(data_subset, '../data/supplementary_tables/Supplementary_Table_S8c.csv')
+data_subset = read.csv('../data/other_analyses_outputs/lipicomics_all_data_no_qc.csv')
+write.csv(data_subset, '../data/supplementary_tables/Supplementary_Table_S8d.csv')
 
 ## Supplementary Table S9.
 mat = read.csv('../data/other_analyses_outputs/scaled_expression_ipsc_post_mortem.csv')
 write.csv(mat, '../data/supplementary_tables/Supplementary_Table_S9.csv')
 
 ## Supplementary Table S10.
-norm_counts = read.csv('../data/iPSC_data/FPKM_table_OPC.txt')
+norm_counts = read.csv('../data/iPSC_data/FPKM_table_OPC.txt', sep = '\t')
 write.csv(norm_counts,'../data/supplementary_tables/Supplementary_Table_S10.csv')
 
 ## Supplementary Table S12.
-degs = read.csv('../data/iPSC_data/OPC_DEG_statistics.txt')
+degs = read.csv('../data/iPSC_data/OPC_DEG_statistics.txt', sep = '\t')
 write.csv(degs, '../data/supplementary_tables/Supplementary_Table_S12.csv')
 
 ## Supplementary Table S13.

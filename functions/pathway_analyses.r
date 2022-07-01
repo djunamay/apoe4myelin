@@ -308,4 +308,18 @@ get_gset_by_category = function(cat, gsets){
   gset = unlist(lapply(names(gsets), function(x) unlist(sum(sapply(cat, grepl, x))>0)))
   gset = (gsets[gset])
   return(gset)
-} 
+}
+
+get_barplot = function(all_data, x, y){
+
+    df = as.matrix(t(table(all_data[,x], all_data[,y])))
+    names = unique(all_data[,y])
+    coul <- RColorBrewer::brewer.pal(length(names), "Set2")
+    names(coul) = names
+    res = stats::fisher.test(df)
+
+    bp = graphics::barplot(t(apply(df, 1, function(x){x/colSums(df)})), col = coul, legend = TRUE, las = 2)
+    graphics::text(bp, paste0('p-value = ',round(res$p.value, digits = 2)), ylab = y)
+    return(bp)
+
+}
