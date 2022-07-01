@@ -221,18 +221,3 @@ Extended Data Figure 9
 conda activate apoe_env
 Rscript ../scripts/get_wilcox_myelin_plots.r
 ```
-
-# tonight:
-# run everyhting -- > make plots + supplementary tables
-# check supp tables
-# check GSVA / seed
-# double-check / compare them to the MS
-# re-read MS and check figure calls
-
-### can do this later
-# add goodness of fit code in the end?
-# finish/edit supplementary_tables code
-# add a run_all bash script
-# re-run everyhting and check against figures
-# upload the data files
-# push the plot folders without plots
