@@ -120,7 +120,7 @@ data
 2. here is some info regarding the origins of each piece of data:
 
 | Data File                                                      | Origin                                                              |
-|-
+|-|-
 | <td colspan=2>single_cell_data                                                                                                       |         
 |----------------------------------------------------------------|---------------------------------------------------------------------|
 | Cell_group_colors.rds                                          | NA                                                                  |
