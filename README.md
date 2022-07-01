@@ -17,9 +17,9 @@
 *To whom correspondence should be addressed: lhtsai@mit.edu, manoli@mit.edu*B
 
 ### Data availability
-- If you would like to *process the raw Fastq* files and associated metadata, these files can be downloaded [here](link to synapse).
+- If you would like to *process the raw Fastq* files and associated metadata, these files can be downloaded [here](link to synapse). [coming soon]
 - If you would like to *perform your own quality control and celltype annotation* on the aggregated counts matrix and associated metadata, that data can be found [here](link to synapse).
-- If you would like to *access the fully-processed, annotated, and qc-ed data*, that data can be found [here](link to dropbox).
+- If you would like to *access the fully-processed, annotated, and qc-ed data*, that data can be found [here](https://www.dropbox.com/sh/8i8hhvsyzoqdpzu/AAB8uV6pHN56OvFoRJF3Keqea?dl=0).
 
 
 ### Reproduce analyses and plots
@@ -38,7 +38,7 @@ conda env create -f ../environment/apoe_env.yml
 ```
 
 ##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
-1. Download the FASTQ files [here](...)
+1. Download the FASTQ files [here](...) [coming soon]
 
 ##### 3b. If you'd like to recapitulate our QC and celltype annotation
 1. Follow instructions [here](https://github.com/shmohammadi86/ACTIONet/tree/R-release) to install the ACTIONet package.
@@ -52,7 +52,7 @@ Rscript ../scripts/qc_and_annotation.r #TODO: check/edit this
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
 1. follow instructions [here](https://github.com/lhe17/nebula) to download the nebula package
 2. follow instructions [here](https://github.com/immunogenomics/presto) to download the immunogenomics/presto package
-3. download the [data](https://www.dropbox.com/sh/gqx3rfkubby20gj/AABRRdGsWNKzJqNoJqRmOBkta?dl=0) directory into a local directory named /data. This directory contains the following data:
+3. download the [data](https://www.dropbox.com/sh/8i8hhvsyzoqdpzu/AAB8uV6pHN56OvFoRJF3Keqea?dl=0) directory into a local directory named /data. This directory contains the following data:
 
 ```
 data
@@ -197,7 +197,7 @@ Rscript ../scripts/e4_effects_stratification_by_AD.r
 Extended Data Figure 4
 ```bash
 conda activate apoe_env
-Rscript ../scripts/lipidomic_analysis_pfc.r #TODO: add a few lines of code, include another table with all the lipidomics species and describe as chihyu did
+Rscript ../scripts/lipidomic_analysis_pfc.r
 ```
 
 Extended Data Figure 6
