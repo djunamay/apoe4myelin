@@ -52,7 +52,21 @@ Rscript ../scripts/qc_and_annotation.r #TODO: check/edit this
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
 1. follow instructions [here](https://github.com/lhe17/nebula) to download the nebula package
 2. follow instructions [here](https://github.com/immunogenomics/presto) to download the immunogenomics/presto package
-3. download the [data](https://www.dropbox.com/sh/8i8hhvsyzoqdpzu/AAB8uV6pHN56OvFoRJF3Keqea?dl=0) directory into a local directory named /data. This directory contains the following data:
+3. Create the following /plots directory within this git repo
+
+APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
+└───plots
+    └───Extended_1
+    └───Extended_2
+    └───Extended_3
+    └───Extended_4
+    └───Extended_5
+    └───Extended_6
+    └───Figure_1
+    └───Figure_2
+    └───Figure_3
+
+4. download the [data](https://www.dropbox.com/sh/8i8hhvsyzoqdpzu/AAB8uV6pHN56OvFoRJF3Keqea?dl=0) directory into a local directory named /data. This directory contains the following data:
 
 ```
 data
@@ -63,11 +77,12 @@ data
     └───expressed_genes_per_celltype.rds
     └───individual_level_averages_per_celltype.rds
     └───Mapping
-    └───metadata_by_individual.rds
+    └───metadata_by_individual.csv
     └───metadata_PFC_all_individuals_092520.tsv
     └───Metadata.APOE.project.rds
     └───RefCellTypeMarkers.adultBrain.rds
     └───Summary.data.celltype.rds
+    └───PanglaoDB.by.organ.by.celltype.rds
 └───differentially_expressed_genes_data
     └───nebula_oli_degs.rds
     └───wilcoxon_degs_all.rds
@@ -106,14 +121,20 @@ data
 
 | Data File                                                      | Origin                                                              
 |----------------------------------------------------------------|---------------------------------------------------------------------|
+| single_cell_data/                                                                                                                    |
+|----------------------------------------------------------------|---------------------------------------------------------------------|
+| Cell_group_colors.rds                                          | NA                                                                  |
+| ensembl.GRCh38p12.genes.complete.annot.rds                     |                                                                     |
 | single_cell_experiment_object.rds                              | run ../scripts/run_qc_and_annotation.r                              |
 | expressed_genes_per_celltype.rds                               | run ../scripts/run_qc_and_annotation.r                              |
 | individual_level_averages_per_celltype.rds                     | run ../scripts/run_qc_and_annotation.r                              |
-| metadata_by_individual.rds                                     | provided by ROSMAP                                                  |
+| Mapping                                                        |                                                                     |
+| metadata_by_individual.csv                                     | provided by ROSMAP                                                  |
 | metadata_PFC_all_individuals_092520.tsv                        | provided by ROSMAP                                                  |
 | Metadata.APOE.project.rds                                      | provided by ROSMAP                                                  |
 | RefCellTypeMarkers.adultBrain.rds                              | provided by ROSMAP                                                  |
 | Summary.data.celltype.rds                                      | provided by ROSMAP                                                  |
+| PanglaoDB.by.organ.by.celltype.rds
 | nebula_oli_degs.rds                                            | run ../scripts/get_nebula_degs.r                                    |
 | wilcoxon_degs_all.rds                                          | run ../scripts/get_wilcox_degs.r                                    |
 | wilcoxon_degs_AD.rds                                           | run ../scripts/get_wilcox_degs.r                                    |
