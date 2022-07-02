@@ -1,8 +1,9 @@
 ########## get plots for Figure 1 ##########
 ############################################
 
+print('|| plotting for figure 1... ||')
+
 source('../functions/plotting.r')
-source('../functions/pathway_analyses.r')
 
 ##### required libraries ####
 library('readxl')
@@ -74,8 +75,6 @@ df = mat3[temp_order,c('Ex','In','Ast', 'Mic', 'Oli', 'Opc')]
 cell_fun = function(j, i, x, y, width, height, fill) {
         grid.text(ifelse(abs(df[i, j])>1.3,'x',''), x, y, gp = gpar(fontsize = 15))
 }
-
-options(repr.plot.width = 4.7, repr.plot.height = 5, repr.plot.res = 150)
 rownames(df) = path_names_lipid[rownames(df), 'shortened name']
 
 pdf('../plots/Figure_1/lipid_paths.pdf', width = 4.7, height = 4.7)
