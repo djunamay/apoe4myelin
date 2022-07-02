@@ -71,3 +71,12 @@ get_matrix = function(scores, top_paths){
     df$names = NULL
     return(df[top_paths,])
 }
+####################################################################################################################
+get_stratified_fits = function(stratified_summary, gsva_out_full, model, coefficient){
+    out = lapply(names(gsva_out_full), function(x) gsva_out_full[[x]][rownames(gsva_out_full[[x]])%in%as.character(rownames(stratified_summary)),])
+    names(out) = names(gsva_out_full)
+    fit <- lmFit(t(out[['Oli']]), design=model)
+    fit <- eBayes(fit)
+    allgenesets <- topTable(fit, coef=coefficient, number=Inf, confint = T) %>% .[order(.$P.Value, decreasing = F),]
+    return(allgenesets)
+}
