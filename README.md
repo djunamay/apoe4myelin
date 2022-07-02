@@ -53,7 +53,7 @@ Rscript ../scripts/qc_and_annotation.r #TODO: check/edit this
 1. follow instructions [here](https://github.com/lhe17/nebula) to download the nebula package
 2. follow instructions [here](https://github.com/immunogenomics/presto) to download the immunogenomics/presto package
 3. Create the following /plots directory within this git repo
-
+```
 APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 └───plots
     └───Extended_1
@@ -65,7 +65,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
     └───Figure_1
     └───Figure_2
     └───Figure_3
-
+```
 4. download the [data](https://www.dropbox.com/sh/8i8hhvsyzoqdpzu/AAB8uV6pHN56OvFoRJF3Keqea?dl=0) directory into a local directory named /data. This directory contains the following data:
 
 ```
