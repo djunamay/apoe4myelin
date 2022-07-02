@@ -39,6 +39,14 @@ pdf('../plots/Extended_4/amyloid_msex_lipid_cohort.pdf')
 get_barplot(data_subset, 'grp', 'msex')
 dev.off()
 
+pdf('../plots/Extended_4/amyloid_msex_lipid_cohort_b.pdf')
+get_barplot(data_subset[data_subset$AD=='noAD',], 'grp', 'msex')
+dev.off()
+
+pdf('../plots/Extended_4/amyloid_msex_lipid_cohort_c.pdf')
+get_barplot(data_subset[data_subset$AD=='AD',], 'grp', 'msex')
+dev.off()
+
 # show the plots for lipid species of interest (pval < 0.1)
 print(df[df$p.value<0.05,])
 
@@ -49,7 +57,7 @@ ggplot(data_subset, aes(x=(APOE), y=(data_subset[,'ChE.18.1._1']), col = APOE)) 
 stat_compare_means(comparisons = list(c('APOE4-noncarrier', 'APOE4-carrier')),method = "wilcox.test") + geom_violin() +  geom_boxplot(width = .1) + geom_jitter(size = .5) + theme_classic() + facet_grid(~ AD)
 dev.off()
 
-pdf('../plots/ChE.18.1._1_boxplot.pdf', width = 4, height = 7)
+pdf('../plots/Extended_4/ChE.18.1._1_boxplot.pdf', width = 4, height = 7)
 ggplot(data_subset, aes(x=(APOE), y=data_subset[,'ChE.18.1._1'], col = APOE)) +
 stat_compare_means(comparisons = list(c('APOE4-noncarrier', 'APOE4-carrier')),method = "wilcox.test") +  geom_boxplot(width = 1) + theme_classic() + facet_grid(~ AD)
 dev.off()

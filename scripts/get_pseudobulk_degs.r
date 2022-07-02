@@ -1,6 +1,4 @@
-av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds') # check are these the average logcounts? does this make sense for the
-# distribution that limma expects?
-
+av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
 source('../functions/differential_expression.r')
 
 ### required libraries
