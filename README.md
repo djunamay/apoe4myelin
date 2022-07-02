@@ -108,33 +108,42 @@ data
         └───Lipidomics_RawData.csv
     └───pfc_lipidomics
         └───ChE_summary_cyc_05342022_all_samples.csv
-        └───metadata_PFC_all_individuals_092520.tsv
         └───ROSMAP_clinical.csv
         └───ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv
 └───other_analyses_outputs
-    └───pathways.rds
-    └───pathway_scores.rds    
+    └───pathways.rds                                                 
+    └───pathway_scores.rds                                            
+    └───cholesterol_analysis.rds                                      
+    └───cc_lipidomic_data.csv                                        
+    └───stratified_anaylsis.rds                                      
+    └───pfc_lipidomics_data.csv                                      
+    └───pfc_lipidomics_data_metadata.csv                             
+    └───pfc_lipidomics_qc_metrics.csv                                 
+    └───lipicomics_all_data_no_qc.csv                                 
+    └───pfc_lipidomics_data_metadata.csv                              
+    └───ipsc_post_mortem_pca_var_explained.csv                       
+    └───APOE_expression_post_mortem_oligos.csv                        
+    └───er_stress_results.readRDS                                      
+    └───SOAT1_CYP_stats_ipsc.csv  
 └───supplementary_tables
     └───...
 ```
 2. here is some info regarding the origins of each piece of data:
 
-| Data File                                                      | Origin                                                              |
-|-|-
-| <td colspan=2>single_cell_data                                                                                                       |         
+| Data File                                                      | Origin                                                              |       
 |----------------------------------------------------------------|---------------------------------------------------------------------|
 | Cell_group_colors.rds                                          | NA                                                                  |
-| ensembl.GRCh38p12.genes.complete.annot.rds                     |                                                                     |
+| ensembl.GRCh38p12.genes.complete.annot.rds                     | ...                                                                 |
 | single_cell_experiment_object.rds                              | run ../scripts/run_qc_and_annotation.r                              |
 | expressed_genes_per_celltype.rds                               | run ../scripts/run_qc_and_annotation.r                              |
 | individual_level_averages_per_celltype.rds                     | run ../scripts/run_qc_and_annotation.r                              |
-| Mapping                                                        |                                                                     |
+| Mapping                                                        | NA                                                                  |
 | metadata_by_individual.csv                                     | provided by ROSMAP                                                  |
 | metadata_PFC_all_individuals_092520.tsv                        | provided by ROSMAP                                                  |
 | Metadata.APOE.project.rds                                      | provided by ROSMAP                                                  |
 | RefCellTypeMarkers.adultBrain.rds                              | provided by ROSMAP                                                  |
 | Summary.data.celltype.rds                                      | provided by ROSMAP                                                  |
-| PanglaoDB.by.organ.by.celltype.rds                             |                                                                     |
+| PanglaoDB.by.organ.by.celltype.rds                             |                                                                    |
 | nebula_oli_degs.rds                                            | run ../scripts/get_nebula_degs.r                                    |
 | wilcoxon_degs_all.rds                                          | run ../scripts/get_wilcox_degs.r                                    |
 | wilcoxon_degs_AD.rds                                           | run ../scripts/get_wilcox_degs.r                                    |
@@ -142,33 +151,30 @@ data
 | pseudo_bulk_degs_single_cell_all_celltypes                     | run ../scripts/get_pseudobulk_degs.r                                |
 | FPKM_tables_.txt                                               | provided by MIT biomicro center core facility                       |
 | ipsc_bulk_rnaseq_count_files/                                  | provided by MIT biomicro center core facility                       |
-| ipsc_metadata.rds                                              | NA                                                                  |
+| OPC_DEG_statistics.txt                                         | run ..                                                              |
 | GO_Biological_Process_2018.txt                                 | from mayaan lab  [here](https://maayanlab.cloud/Enrichr/#libraries) |
 | HumanCyc_2016.txt                                              | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
 | KEGG_2019_Human.txt                                            | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
 | Reactome_2016.txt                                              | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
-| cc_lipidomics_values.rds                                       | provided by _                                                       |
+| c_lipidomics/cc_lipidomics/Lipidomics_RawData_(2).csv          | provided by _                                                       |
 | pfc_lipidomics_values/ChE_summary_cyc_05342022_all_samples.csv | provided by Emory University                                        |
 | pfc_lipidomics_values/ROSMAP_clinical.csv                      | on synapse [here](https://www.synapse.org/#!Synapse:syn21682218)    |
 | pfc_lipidomics_values/ROSMAP_Lipidomics_Emory_.._metadata.csv  | on Synapse [here](https://www.synapse.org/#!Synapse:syn26452615)    |
-| processed_pathways.rds                                         | run ../scripts/get_pathways.r                                       |
-| processed_pathway_fits.rds                                     | run ../scripts/pathway_analyses.r                                   |
-| cholesterol_and_er_gene_level_results.rds                      | run ../scripts/dissecting_cholesterol_er_dysregulation.r            |
-| lipidomics_pfc_wilcoxon_results.rds                            | run ../scripts/lipidomic_analysis_pfc.r                             |
-| lipidomics_cc_wilcoxon_results.rds                             | run ../scripts/lipidomic_analysis_cc.r                              |
 | pathways.rds                                                   | run ../scripts/get_pathways.r                                       |
-| pathway_scores.rds                                             | run ../scripts/pathway_analyses.r                                   |  
-| cholesterol_analysis.rds                                       | run ../scripts/dissecting_cholesterol_dysregulation.r               |
-| cc_lipidomics_data.rds                                         | run ../scripts/lipidomic_analysis_cc.r                              |
-| stratified_stats.csv                                           | run ../scripts/e4_effects_stratification_by_AD.r                    |
+| pathway_scores.rds                                             | run ../scripts/pathway_analyses.r                                   |
+| cholesterol_analysis.rds                                       | run ../scripts/dissecting_cholesterol_dysregulation.r
+| cc_lipidomic_data.csv                                          | run ../scripts/lipidomic_analysis_cc.r
 | stratified_anaylsis.rds                                        | run ../scripts/e4_effects_stratification_by_AD.r                    |
-| pfc_lipidomics_data.rds                                        | run ../scripts/lipidomic_analysis_pfc.r                             |
+| pfc_lipidomics_data.csv                                        | run ../scripts/lipidomic_analysis_pfc.r                             |
+| pfc_lipidomics_data_metadata.csv                               | run ../scripts/lipidomic_analysis_pfc.r                             |
+| pfc_lipidomics_qc_metrics.csv                                  | run ../scripts/lipidomic_analysis_pfc.r                             |
+| lipicomics_all_data_no_qc.csv                                  | run ../scripts/lipidomic_analysis_pfc.r                             |
 | pfc_lipidomics_data_metadata.csv                               | run ../scripts/lipidomic_analysis_pfc.r                             |
 | ipsc_post_mortem_pca_var_explained.csv                         | run ../scripts/comparison_of_ipsc_and_brain.r                       |
-| scaled_expression_ipsc_post_mortem.csv                         | run ../scripts/comparison_of_ipsc_and_brain.r                       |
-| APOE_expression_post_mortem_oligos.csv                         | run ../scripts/APOE_expression_oligodendrocytes.r                   |
 | APOE_expression_post_mortem_oligos.csv                         | run ../scripts/APOE_expression_oligodendrocytes.r                   |
 | er_stress_results.readRDS                                      | run ../scripts/get_postmortem_er_stress_pathways.r                  |
+| SOAT1_CYP_stats_ipsc.csv                                       | run ../scripts/ipsc_gene_perturbations.r
+
 
 3. Now follow these steps to recapitulate the analysis:
 
@@ -234,10 +240,16 @@ Extended Data Figure 8
 conda activate apoe_env
 Rscript ../scripts/get_postmortem_er_stress_pathways.r
 Rscript ../scripts/er_postmortem_plots.r
-Rscript ../scripts/ipsc_pathway_perturbations.r
+Rscript ../scripts/ipsc_gene_perturbations.r
 ```
 
 Extended Data Figure 9
+```bash
+conda activate apoe_env
+Rscript ../scripts/get_wilcox_myelin_plots.r
+```
+
+4. Or run it all at once
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_wilcox_myelin_plots.r
