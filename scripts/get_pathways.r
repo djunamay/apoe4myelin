@@ -1,8 +1,9 @@
 ########## get pathway databases for use in analysis ##########
 ###############################################################
+print('|| getting pathway databases... ||')
 
 ##### required libraries ####
-source('../functions/pathway_analyses.r')
+source('../functions/pathway_setup.r')
 library('readxl')
 library('SingleCellExperiment')
 library('GSA')
@@ -10,22 +11,20 @@ library('GSA')
 all_data = list()
 
 # load the data
-print('loading the data..')
 expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
 av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
 summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
 
 # load all the pathway terms
-print('loading the pathway terms...')
 bp = read.geneset('../data/pathway_databases/GO_Biological_Process_2018.txt')
 cy = read.geneset('../data/pathway_databases/HumanCyc_2016.txt')
 ke = read.geneset('../data/pathway_databases/KEGG_2019_Human.txt')
 re = read.geneset('../data/pathway_databases/Reactome_2016.txt')
-
 all_paths = c(bp, cy, ke, re)
 
 # filter out the lowly expressed genes (10%, for each celltype)
-print('filtering pathways by expression...')
+print('filtering out lowly expressed genes...')
+
 low_removed_bp = filter_lowly_exp_genes(expressed, bp)
 low_removed_reactome = filter_lowly_exp_genes(expressed, re)
 low_removed_kegg = filter_lowly_exp_genes(expressed, ke)
@@ -45,7 +44,8 @@ all_data[['pathways']][['all_bp']] = bp
 all_data[['pathways']][['all']] = all_paths
 
 # get apoe-associated genesets
-print('filtering APOE4 terms...')
+print('getting thematic genesets...')
+
 gene = 'APOE'
 index = unlist(lapply(names(all_paths), function(x) c(gene)%in%all_paths[[x]]))
 apoe_gsets = all_paths[index]
@@ -64,5 +64,6 @@ all_data[['pathways']][['all_lipid_associated']] = lipid_paths
 all_data[['pathways']][['low_removed_lipid_associated']] = low_removed_lipid_paths
 
 # save all the data
+print('saving pathway databases...')
 saveRDS(all_data, '../data/other_analyses_outputs/pathways.rds')
 print('done.')
