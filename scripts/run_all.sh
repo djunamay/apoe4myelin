@@ -34,7 +34,8 @@ echo '*** Making Extended Data Figure 4 plots...'
 Rscript ../scripts/lipidomic_analysis_pfc.r
 #Extended Data Figure 6
 echo '*** Making Extended Data Figure 6 plots...'
-Rscript ../scripts/comparison_of_ipsc_and_brain.r
+Rscript ../scripts/comparison_of_ipsc_and_brain_get_scaled_matrices.r
+Rscript ../scripts/comparison_of_ipsc_and_brain_plots.r
 Rscript ../scripts/APOE_expression_oligodendrocytes.r
 Rscript ../scripts/apoe_expression_ipsc.r
 #Extended Data Figure 8

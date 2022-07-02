@@ -163,17 +163,8 @@ data
 | pathways.rds                                                   | run ../scripts/get_pathways.r                                       |
 | pathway_scores.rds                                             | run ../scripts/pathway_analyses.r                                   |
 | cholesterol_analysis.rds                                       | run ../scripts/dissecting_cholesterol_dysregulation.r
-| cc_lipidomic_data.csv                                          | run ../scripts/lipidomic_analysis_cc.r
-| stratified_anaylsis.rds                                        | run ../scripts/e4_effects_stratification_by_AD.r                    |
-| pfc_lipidomics_data.csv                                        | run ../scripts/lipidomic_analysis_pfc.r                             |
-| pfc_lipidomics_data_metadata.csv                               | run ../scripts/lipidomic_analysis_pfc.r                             |
-| pfc_lipidomics_qc_metrics.csv                                  | run ../scripts/lipidomic_analysis_pfc.r                             |
-| lipicomics_all_data_no_qc.csv                                  | run ../scripts/lipidomic_analysis_pfc.r                             |
-| pfc_lipidomics_data_metadata.csv                               | run ../scripts/lipidomic_analysis_pfc.r                             |
-| ipsc_post_mortem_pca_var_explained.csv                         | run ../scripts/comparison_of_ipsc_and_brain.r                       |
-| APOE_expression_post_mortem_oligos.csv                         | run ../scripts/APOE_expression_oligodendrocytes.r                   |
-| er_stress_results.readRDS                                      | run ../scripts/get_postmortem_er_stress_pathways.r                  |
-| SOAT1_CYP_stats_ipsc.csv                                       | run ../scripts/ipsc_gene_perturbations.r
+| e4_stratified_anaylsis.rds                                     | run ../scripts/e4_effects_stratification_by_AD.r                    |
+
 
 
 3. Now follow these steps to recapitulate the analysis:
@@ -191,7 +182,7 @@ Figure 2
 ```bash
 conda activate apoe_env
 Rscript ../scripts/dissecting_cholesterol_dysregulation.r
-Rscript ../scripts/lipidomic_analysis_cc.r #TODO: check and clean this up
+Rscript ../scripts/lipidomic_analysis_cc.r
 Rscript ../scripts/get_figure_2_plots.r  
 ```
 Figure 3
@@ -211,48 +202,50 @@ Extended Data Figure 2
 ```bash
 conda activate apoe_env
 Rscript ../scripts/fgsea_analysis.r
-Rscript ../scripts/pseudo_bulk.r #TODO: clean /check this
+Rscript ../scripts/get_postmortem_er_stress_pathways.r
+Rscript ../scripts/pseudo_bulk.r
 Rscript ../scripts/plots_for_extended_data_figure2.r #TODO: check / edit this
 ```
 
 Extended Data Figure 3
 ```bash
 conda activate apoe_env
-Rscript ../scripts/e4_effects_stratification_by_AD.r #TODO: clean/ check this
+Rscript ../scripts/e4_effects_stratification_by_AD.r
+Rscript ../scripts/e4_stratification_plots.r
 ```
 
 Extended Data Figure 4
 ```bash
 conda activate apoe_env
-Rscript ../scripts/lipidomic_analysis_pfc.r #TODO: clean/check this
+Rscript ../scripts/lipidomic_analysis_pfc_get_data.r
 ```
 
 Extended Data Figure 6
 ```bash
 conda activate apoe_env
-Rscript ../scripts/comparison_of_ipsc_and_brain.r #TODO: clean/check this
-Rscript ../scripts/APOE_expression_oligodendrocytes.r #TODO cleanup
-Rscript ../scripts/apoe_expression_ipsc.r  #TODO cleanup
+Rscript ../scripts/comparison_of_ipsc_and_brain_get_scaled_matrices.r
+Rscript ../scripts/comparison_of_ipsc_and_brain_plots.r
+Rscript ../scripts/APOE_expression_oligodendrocytes.r
+Rscript ../scripts/apoe_expression_ipsc.r  
 ```
 
 Extended Data Figure 8
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_postmortem_er_stress_pathways.r  #TODO cleanup
-Rscript ../scripts/er_postmortem_plots.r  #TODO cleanup
-Rscript ../scripts/ipsc_gene_perturbations.r  #TODO cleanup
+Rscript ../scripts/er_postmortem_plots.r  
+Rscript ../scripts/ipsc_gene_perturbations.r  
 ```
 
 Extended Data Figure 9
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_wilcox_myelin_plots.r  #TODO cleanup
+Rscript ../scripts/get_wilcox_myelin_plots.r
 ```
 
 4. Or run it all at once
 ```bash
-conda activate apoe_env
-Rscript ../scripts/get_wilcox_myelin_plots.r  #TODO cleanup
+chmod x
+../scripts/run_all.sh  
 ```
 
 [] see to-dos

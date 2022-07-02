@@ -1,8 +1,8 @@
 ########## ER stress related to extended data figure 8 #############
 ##########################################################################
+print('|| plotting ER stress results... ||')
 
 source('../functions/plotting.r')
-source('../functions/pathway_analyses.r')
 
 ##### required libraries ####
 library('readxl')
@@ -12,7 +12,6 @@ library('tidyr')
 library('ggplot2')
 library('ggpubr')
 
-print('loading data..')
 data = readRDS('../data/other_analyses_outputs/er_stress_results.rds')
 
 # plot the ATF6 pathways

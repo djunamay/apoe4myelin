@@ -82,17 +82,17 @@ cc = read.csv('../data/supplementary_tables/cc_lipidomics_data.csv', check.names
 write.csv(cc, '../data/supplementary_tables/Supplementary_Table_S7.csv')
 
 ## Supplementary Table S8.
-df = read.csv('../data/other_analyses_outputs/pfc_lipidomics_data.csv')
+df = read.csv('../data/supplementary_tables/pfc_lipidomics_data.csv')
 write.csv(df, '../data/supplementary_tables/Supplementary_Table_S8a.csv')
-data_subset = read.csv('../data/other_analyses_outputs/pfc_lipidomics_data_metadata.csv')
+data_subset = read.csv('../data/supplementary_tables/pfc_lipidomics_data_metadata.csv')
 write.csv(data_subset, '../data/supplementary_tables/Supplementary_Table_S8b.csv')
-data_subset = read.csv('../data/other_analyses_outputs/pfc_lipidomics_qc_metrics.csv')
+data_subset = read.csv('../data/supplementary_tables/pfc_lipidomics_qc_metrics.csv')
 write.csv(data_subset, '../data/supplementary_tables/Supplementary_Table_S8c.csv')
-data_subset = read.csv('../data/other_analyses_outputs/lipicomics_all_data_no_qc.csv')
+data_subset = read.csv('../data/supplementary_tables/lipicomics_all_data_no_qc.csv')
 write.csv(data_subset, '../data/supplementary_tables/Supplementary_Table_S8d.csv')
 
 ## Supplementary Table S9.
-mat = read.csv('../data/other_analyses_outputs/scaled_expression_ipsc_post_mortem.csv')
+mat = read.csv('../data/supplementary_tables/ipsc_postmortem_merged_scaled_matrices_individual_level.csv')
 write.csv(mat, '../data/supplementary_tables/Supplementary_Table_S9.csv')
 
 ## Supplementary Table S10.

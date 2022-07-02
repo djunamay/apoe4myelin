@@ -84,3 +84,18 @@ RunDiffExprAnalysisLimma_pseudobulk <- function(logcounts, var, predict) {
     res <- topTable(fit, coef=var, n=Inf, sort.by="none")
     return(list("res"=res))
 }
+##############################################################################################################################
+lipid_species_wilcox_test = function(data_subset,grp){
+    stats = list()
+    for(i in colnames(data_subset)[2:5]){
+      y = data_subset[data_subset$apoe_genotype%in%c('33','23','22'),i]
+      x = data_subset[!data_subset$apoe_genotype%in%c('33','23','22'),i]
+      temp = wilcox.test(x,y,conf.int=T, conf.level = 0.90)
+      stats[[i]] = c(temp$conf.int, temp$estimate, temp$p.value)
+    }
+    stats = do.call('rbind', stats)
+    stats = as.data.frame(stats)
+    colnames(stats) = c('lower_90_CI', 'upper_90_CI', 'sample_estimates.median_difference_APOE4carrier_vs_noncarrier.', 'p.value')
+    stats$grp = grp
+    return(stats)
+}

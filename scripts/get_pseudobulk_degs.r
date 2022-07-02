@@ -1,7 +1,7 @@
 av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds') # check are these the average logcounts? does this make sense for the
 # distribution that limma expects?
 
-source('../functions/bulk_degs.r')
+source('../functions/differential_expression.r')
 
 ### required libraries
 library("edgeR")
@@ -28,3 +28,5 @@ for(i in names(av_expression)){
 pseudo_bulk = do.call('rbind', all_out)
 
 write.csv(pseudo_bulk, '../data/other_analyses_outputs/pseudo_bulk_degs_single_cell_all_celltypes.csv')
+
+print('done')

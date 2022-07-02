@@ -1,7 +1,7 @@
 ########## compute wilcoxon degs ##########
 ###########################################
 
-source('../functions/bulk_degs.r')
+source('../functions/differential_expression.r')
 
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
 
@@ -19,3 +19,5 @@ out_nonad = Wilcox.differential(logcounts(oli_nonad), ifelse(oli_nonad$apoe_geno
 saveRDS(out_all, '../data/differentially_expressed_genes_data/oli_wilcox_results.rds')
 saveRDS(out_ad, '../data/differentially_expressed_genes_data/oli_wilcox_results_AD.rds')
 saveRDS(out_nonad, '../data/differentially_expressed_genes_data/oli_wilcox_results_noAD.rds')
+
+print('done.')

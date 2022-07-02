@@ -1,5 +1,6 @@
 ########## ER stress related to extended data figure 8 #############
 ##########################################################################
+print('|| analysis of ER stress... ||')
 
 source('../functions/pathway_setup.r')
 source('../functions/pathway_fits.r')

@@ -1,5 +1,6 @@
 ########## myelin plots related to extended data figure 8 #############
 ##########################################################################
+print('|| plotting myelin gene perturbations (post-mortem oligos) ||')
 
 # show the degs for myelin genes with and without AD
 ad = readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results_AD.rds')
