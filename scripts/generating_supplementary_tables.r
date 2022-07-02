@@ -114,8 +114,9 @@ all_data = rbind(out_all, oli_ad, oli_nonad)
 write.csv(all_data, '../data/supplementary_tables/Supplementary_Table_S13.csv')
 
 ## Supplementary Table S14.
-data = readRDS('../data/other_analyses_outputs/nebula_oli_degs.rds')
-write.csv(data, '../data/supplementary_tables/Supplementary_Table_S14.csv')
+nebula = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype.rds')$Oli
+nebula$padj = p.adjust(nebula$p_Apoe_e4yes, 'fdr')
+write.csv(nebula, '../data/supplementary_tables/Supplementary_Table_S14.csv')
 
 ## Supplementary Table S15.
 degs = read.csv('../data/other_analyses_outputs/pseudo_bulk_degs_single_cell_all_celltypes.csv')

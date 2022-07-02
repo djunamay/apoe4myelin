@@ -182,7 +182,7 @@ Figure 1
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_pathways.r
-Rscript ../scripts/get_nebula_degs.r
+Rscript ../scripts/get_nebula_degs.r #TODO change this to Jose's code
 Rscript ../scripts/pathway_analyses.r
 Rscript ../scripts/get_figure_1_plots.r
 ```
@@ -191,7 +191,7 @@ Figure 2
 ```bash
 conda activate apoe_env
 Rscript ../scripts/dissecting_cholesterol_dysregulation.r
-Rscript ../scripts/lipidomic_analysis_cc.r
+Rscript ../scripts/lipidomic_analysis_cc.r #TODO: check and clean this up
 Rscript ../scripts/get_figure_2_plots.r  
 ```
 Figure 3
@@ -210,47 +210,50 @@ Rscript ../scripts/plots_for_extended_data_figure_1.r #TODO: check / edit this
 Extended Data Figure 2
 ```bash
 conda activate apoe_env
-Rscript ../scripts/fgsea_analysis.r # edit which input data using
-Rscript ../scripts/pseudo_bulk.r
+Rscript ../scripts/fgsea_analysis.r
+Rscript ../scripts/pseudo_bulk.r #TODO: clean /check this
 Rscript ../scripts/plots_for_extended_data_figure2.r #TODO: check / edit this
 ```
 
 Extended Data Figure 3
 ```bash
 conda activate apoe_env
-Rscript ../scripts/e4_effects_stratification_by_AD.r
+Rscript ../scripts/e4_effects_stratification_by_AD.r #TODO: clean/ check this
 ```
 
 Extended Data Figure 4
 ```bash
 conda activate apoe_env
-Rscript ../scripts/lipidomic_analysis_pfc.r
+Rscript ../scripts/lipidomic_analysis_pfc.r #TODO: clean/check this
 ```
 
 Extended Data Figure 6
 ```bash
 conda activate apoe_env
-Rscript ../scripts/comparison_of_ipsc_and_brain.r
-Rscript ../scripts/APOE_expression_oligodendrocytes.r
-Rscript ../scripts/apoe_expression_ipsc.r
+Rscript ../scripts/comparison_of_ipsc_and_brain.r #TODO: clean/check this
+Rscript ../scripts/APOE_expression_oligodendrocytes.r #TODO cleanup
+Rscript ../scripts/apoe_expression_ipsc.r  #TODO cleanup
 ```
 
 Extended Data Figure 8
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_postmortem_er_stress_pathways.r
-Rscript ../scripts/er_postmortem_plots.r
-Rscript ../scripts/ipsc_gene_perturbations.r
+Rscript ../scripts/get_postmortem_er_stress_pathways.r  #TODO cleanup
+Rscript ../scripts/er_postmortem_plots.r  #TODO cleanup
+Rscript ../scripts/ipsc_gene_perturbations.r  #TODO cleanup
 ```
 
 Extended Data Figure 9
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_wilcox_myelin_plots.r
+Rscript ../scripts/get_wilcox_myelin_plots.r  #TODO cleanup
 ```
 
 4. Or run it all at once
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_wilcox_myelin_plots.r
+Rscript ../scripts/get_wilcox_myelin_plots.r  #TODO cleanup
 ```
+
+[] see to-dos
+[] modify nebula methods section
