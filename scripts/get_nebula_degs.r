@@ -1,5 +1,6 @@
 ########## plots for Figure 2 ##########
 ########################################
+print('|| getting DEGs by NBMM... ||')
 
 # required packages
 library(nebula)
@@ -7,6 +8,7 @@ library(nebula)
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
 
 # for all
+print('computing degs...')
 ace = sce[,sce$cell.type=='Oli']
 ace$APOE4 = ifelse(ace$apoe_genotype%in%c('34', '44', '24'), 1, 0)
 
@@ -16,7 +18,7 @@ meta = colData(ace)
 mod = model.matrix(model, data=meta)
 
 # run nebula
-re = nebula(counts,meta$projid, pred=mod, offset=meta$TotalCounts, cpc=0.1, model = "NBGMM", kappa = 800, cutoff_cell = 20) # use default cpc?
+re = nebula(counts,meta$projid, pred=mod, offset=meta$TotalCounts, cpc=0.1, model = "NBGMM", kappa = 800, cutoff_cell = 20)
 
 # remove genes that dont pass the QC
 
