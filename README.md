@@ -247,6 +247,3 @@ Rscript ../scripts/get_wilcox_myelin_plots.r
 chmod x
 ../scripts/run_all.sh  
 ```
-
-[] see to-dos
-[] modify nebula methods section
