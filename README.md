@@ -33,7 +33,7 @@ conda env create -f ../environment/apoe_env.yml
 3. Now run:
 ```bash
 conda activate apoe_env
-Rscript ../scripts/qc_and_annotation.r #TODO: check/edit this
+Rscript ../scripts/qc_and_annotation.r
 ```
 
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
@@ -53,7 +53,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
     └───Figure_2
     └───Figure_3
 ```
-3. download necessary [data](https://www.dropbox.com/sh/8i8hhvsyzoqdpzu/AAB8uV6pHN56OvFoRJF3Keqea?dl=0) directory into a local directory named /data. This directory includes the following files:
+3. download necessary [data](https://osf.io/uyczk/) from OSF into a local directory named /data. This directory includes the following files:
 
 | Data File                                                             | Description / Origin                                                |       
 |-----------------------------------------------------------------------|---------------------------------------------------------------------|
@@ -95,15 +95,13 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 
 3. create an empty directory in ./data titled other_analyses_outputs
 
-# TODO: make sure the figure labels still match
-
 3. Now run the following code snippets to recapitulate the analysis:
 
 Figure 1
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_pathways.r
-Rscript ../scripts/get_nebula_degs.r #TODO change this to Jose's code --> have the output be E4_nebula_associations_by_celltype
+Rscript ../scripts/get_nebula_degs.r 
 Rscript ../scripts/pathway_analyses.r
 Rscript ../scripts/get_figure_1_plots.r
 ```
@@ -125,7 +123,7 @@ Rscript ../scripts/get_figure_3_plots.r
 Extended Data Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/plots_for_extended_data_figure_1.r #TODO: check / edit this to reproduce all extended data figure 1 plots
+Rscript ../scripts/plots_for_extended_data_figure_1.r 
 ```
 
 Extended Data Figure 2
@@ -134,7 +132,7 @@ conda activate apoe_env
 Rscript ../scripts/fgsea_analysis.r
 Rscript ../scripts/get_postmortem_er_stress_pathways.r
 Rscript ../scripts/pseudo_bulk.r
-Rscript ../scripts/plots_for_extended_data_figure2.r #TODO: check / edit this to reproduce all the extended plots (need to replace the one panel that is not with the new set of apoe-related pathways)
+Rscript ../scripts/plots_for_extended_data_figure2.r 
 ```
 
 Extended Data Figure 3
