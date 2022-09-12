@@ -22,6 +22,8 @@ Heatmap(Map, col=c("white","black"), rect_gp = gpar(col = "black"), name="assign
 dev.off()
 
 #Evaluate celltype scores random
+# TODO: this is not working, there is an error here: Error in Celltype.activity.random[colnames(Celltype.activity), ] :
+#   subscript out of bounds
 pdf("../plots/Extended_2/Evaluate.celltype.scores.random.pdf", height = 2, width = 3)
 Celltype.activity.random <- gsva(Celltype.averages, gset.idx.list = lapply(RefCellTypeMarkers, function(i) sample(rownames(sce), length(i))))
 Celltype.activity.random <- Celltype.activity.random[colnames(Celltype.activity),]

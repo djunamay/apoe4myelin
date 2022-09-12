@@ -1,10 +1,14 @@
 ########## plots for extended data figure 1 ##########
 ######################################################
 source('../functions/qc_and_annotation_aux_functions.r')
+source("../functions/qc_and_annotation_aux_functions.r")
+
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
 Mapping = readRDS('../data/single_cell_data/Mapping.rds')
 Metadata = readRDS('../data/single_cell_data/Metadata.APOE.project.rds')
 All.colors = readRDS('../data/single_cell_data/Cell_group_colors.rds')
+
+library(ComplexHeatmap)
 
 #actionet 2D
 pdf("../plots/Extended_1/2D_cells_celltypes_noLabs.pdf")
@@ -35,10 +39,12 @@ pdf("../plots/Extended_1/Mic_Tcell_2D.pdf", width = 4, height = 4)
 Plot.coords(as.data.frame(x$Mic), x = "sub.x", y = "sub.y", Col = All.colors[x$Mic$cell.type], Trans = x$Mic$sub.connectivity/max(x$Mic$sub.connectivity), cex = 0.25)
 dev.off()
 
+# TODO: there are no vascular celltypes annotated in the sce object
 pdf("../plots/Extended_1/Vascular_2D.pdf", width = 4, height = 4)
 Plot.coords(as.data.frame(x$Endo), x = "sub.x", y = "sub.y", Col = All.colors[x$Endo$cell.type], Trans = x$Endo$sub.connectivity/max(x$Endo$sub.connectivity), cex = 0.25)
 dev.off()
 
+# TODO: the metadata slot in the sce object is empty
 #marker plots
 xGenes <- c("SYT1", "NRGN", "GAD1", "VCAN", "AQP4", "MBP", "CSF1R", "CD247", "FLT1", "PDGFRB", "TAGLN", "ABCA9")
 Net <- sce@metadata$network
@@ -63,7 +69,8 @@ RefCellTypeMarkers <- readRDS("../data/single_cell_data/RefCellTypeMarkers.adult
 PanglaoDB <- readRDS("../data/single_cell_data/PanglaoDB.by.organ.by.celltype.rds")
 
 # PsychENCODE enrichment
-S <- Aggregate.pairwise.FC.colPairwise(Summary.data.celltype@assays[["E"]])
+is.sparseMatrix <- function(x) is(x, 'sparseMatrix')
+S <- Aggregate.pairwise.FC.colPairwise(assays(Summary.data.celltype)[["E"]])
 x <- Permutation.enrichment.analysis(x = t(S), marker.genes = RefCellTypeMarkers)
 
 # PanglaoDB enrichment
@@ -73,6 +80,7 @@ gSet <- Append.to.list(PanglaoDB$`Immune system`["T cells"], gSet)
 gSet <- Append.to.list(PanglaoDB$`Smooth muscle`["Smooth muscle cells"], gSet)
 xx <- Permutation.enrichment.analysis(x = t(S), marker.genes = gSet)
 
+# TODO: Remove.zero.pvalues function is not found
 temp <- x$enrichment
 temp[Bonferronit(Remove.zero.pvalues(convert.z.score(temp)))>0.01] <- 0
 temp <- temp[c("Ex","In","Ast","Oli","Opc","Mic","Endo","Per","Fib","SMC","Tcell"),c("Ex","In","Ast","Oli","Opc","Mic","Endo","Per")]
@@ -84,6 +92,7 @@ pdf("../plots/Extended_1/Supp_Celltype_markers_enrichment.pdf", width = 5, heigh
 Heatmap(temp, cluster_rows = F, cluster_columns = F,rect_gp = gpar(col = "black"), name="z-score a") + Heatmap(temp2, cluster_columns = F, rect_gp = gpar(col = "black"), name="z-score")
 dev.off()
 
+# TODO: variable L is not found
 #individual correlations
 L <- do.call(cbind, L)
 Lab <- rep(names(L), sapply(L, ncol))
@@ -105,6 +114,7 @@ C <- lapply(L[c("Endo","Per","SMC","Fib","Tcell")], function(i) cor(i)[upper.tri
 mean(sapply(C, mean))
 #0.6519454
 
+# TODO: check if this works on a single cell object that has all of the minor cell types --> for all the plots below
 pdf("../plots/Extended_1/Crossindividual_celltype_cor.pdf", height = 4, width = 4)
 C <- lapply(L[c("Ex", "In","Ast", "Oli", "Opc", "Mic","Endo","Per","SMC","Fib","Tcell")], function(i) cor(i)[upper.tri(cor(i))])
 boxplot(C, ylim=c(0,1), col=All.colors[c("Ex", "In","Ast", "Oli", "Opc", "Mic","Endo","Per","SMC","Fib","Tcell")], las=2, pch=20, cex=0.5)
