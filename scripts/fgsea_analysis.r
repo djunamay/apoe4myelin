@@ -3,6 +3,7 @@
 
 # required packages
 library(fgsea)
+print('running fgsea analysis for extended data figure 2')
 
 neb = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype.rds')
 

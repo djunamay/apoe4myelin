@@ -51,7 +51,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
     └───Extended_6
     └───Figure_1
     └───Figure_2
-    └───Figure_3
+    └───Figure_4
 ```
 3. download necessary [data](https://osf.io/uyczk/) from OSF into a local directory named /data. This directory includes the following files:
 
@@ -101,8 +101,8 @@ Figure 1
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_pathways.r
-Rscript ../scripts/get_nebula_degs.r 
-Rscript ../scripts/pathway_analyses.r
+Rscript ../scripts/get_nebula_degs.r # replace w Jose's code
+Rscript ../scripts/pathway_analyses.r # what are the 12 warnings that come up?
 Rscript ../scripts/get_figure_1_plots.r
 ```
 
@@ -110,42 +110,42 @@ Figure 2
 ```bash
 conda activate apoe_env
 Rscript ../scripts/dissecting_cholesterol_dysregulation.r
-Rscript ../scripts/lipidomic_analysis_cc.r
+Rscript ../scripts/lipidomic_analysis_cc.r # what are the warnings that come up?
 Rscript ../scripts/get_figure_2_plots.r  
 ```
-Figure 3
+Figure 4
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_wilcox_degs.r
-Rscript ../scripts/get_figure_3_plots.r
+Rscript ../scripts/get_figure_4_plots.r
 ```
 
 Extended Data Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/plots_for_extended_data_figure_1.r 
+Rscript ../scripts/plots_for_extended_data_figure_1.r # some things that need to be checked/fixed by Jose
 ```
 
 Extended Data Figure 2
 ```bash
 conda activate apoe_env
 Rscript ../scripts/fgsea_analysis.r
-Rscript ../scripts/get_postmortem_er_stress_pathways.r
 Rscript ../scripts/pseudo_bulk.r
-Rscript ../scripts/plots_for_extended_data_figure2.r 
+Rscript ../scripts/plots_for_extended_data_figure2.r # some things that need to be checked/fixed by Jose
 ```
 
 Extended Data Figure 3
 ```bash
 conda activate apoe_env
 Rscript ../scripts/e4_effects_stratification_by_AD.r
-Rscript ../scripts/e4_stratification_plots.r
+Rscript ../scripts/e4_stratification_plots.r # 24 warnings here - check them
 ```
 
 Extended Data Figure 4
 ```bash
 conda activate apoe_env
 Rscript ../scripts/lipidomic_analysis_pfc_get_data.r
+Rscript ../scripts/lipidomic_analysis_pfc_make_plots.r
 ```
 
 Extended Data Figure 6
@@ -160,6 +160,7 @@ Rscript ../scripts/apoe_expression_ipsc.r
 Extended Data Figure 8
 ```bash
 conda activate apoe_env
+Rscript ../scripts/get_postmortem_er_stress_pathways.r
 Rscript ../scripts/er_postmortem_plots.r  
 Rscript ../scripts/ipsc_gene_perturbations.r  
 ```

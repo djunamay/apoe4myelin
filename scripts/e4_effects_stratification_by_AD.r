@@ -34,7 +34,7 @@ all_data = list()
 expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
 av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
 summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
-summary$APOE4 = ifelse(summary$apoe_genotype == '33','e3','e4')
+summary$APOE4 = ifelse(summary$apoe_genotype == '33', 0, 1)
 summary$AD = ifelse(summary$niareagansc%in%c(1,2),1,0)
 rownames(summary) = summary[,'projid...2']
 low_removed_lipid_paths = data$pathways$low_removed_lipid_associated
@@ -48,11 +48,11 @@ all_data[['res']][['lipid_associated']][['gsva_out']] = out_lipid_terms
 # E4 effect, stratified by AD status
 meta = summary[summary$niareagansc%in%c(3,4)& summary$apoe_genotype!=44,]
 mod = model.matrix(~APOE4 + amyloid + nft + age_death + msex + pmi, data=meta)
-all_data[['res']][['lipid_associated']][['APOE34_effect_nia34']] = get_stratified_fits(meta, out_lipid_terms, mod, 'APOE4e4')
+all_data[['res']][['lipid_associated']][['APOE34_effect_nia34']] = get_stratified_fits(meta, out_lipid_terms, mod, 'APOE4')
 
 meta = summary[summary$niareagansc%in%c(1,2)& summary$apoe_genotype!=44,]
 mod = model.matrix(~APOE4 + amyloid + nft + age_death + msex + pmi, data=meta)
-all_data[['res']][['lipid_associated']][['APOE34_effect_nia12']] = get_stratified_fits(meta, out_lipid_terms, mod, 'APOE4e4')
+all_data[['res']][['lipid_associated']][['APOE34_effect_nia12']] = get_stratified_fits(meta, out_lipid_terms, mod, 'APOE4')
 
 # AD effect, stratified by APOE4
 mod = model.matrix(~APOE4 + AD + age_death + msex + pmi, data=summary)

@@ -47,7 +47,7 @@ pdf('../plots/Extended_4/amyloid_msex_lipid_cohort_c.pdf')
 get_barplot(data_subset[data_subset$AD=='AD',], 'grp', 'msex')
 dev.off()
 
-# show the plots for lipid species of interest (pval < 0.1)
+# show the plots for lipid species of interest (pval < 0.05)
 print(df[df$p.value<0.05,])
 
 data_subset$APOE = factor(data_subset$APOE, levels = c('APOE4-noncarrier','APOE4-carrier'))

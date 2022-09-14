@@ -26,6 +26,7 @@ temp = cor.test(cholest_genes_dist$biosynth, ifelse(cholest_genes_dist$apoe_geno
 write.csv(as.data.frame(do.call('rbind',(temp))), '../data/supplementary_tables/cholesterol_correlation_results.csv')
 
 # plotting the degs
+print('plotting data...')
 pdf('../plots/Figure_2/cholesterol_degs.pdf', width = 3, height = 4)
 barplot(x[order(x)], horiz = T, las = 1)
 dev.off()

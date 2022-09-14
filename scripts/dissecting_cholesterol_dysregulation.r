@@ -25,7 +25,7 @@ all_data = list()
 expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
 av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
 summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
-summary$APOE4 = ifelse(summary$apoe_genotype == '33','e3','e4')
+summary$APOE4 = ifelse(summary$apoe_genotype == '33', 0, 1)
 rownames(summary) = summary[,'projid...2']
 
 f1_data = readRDS('../data/other_analyses_outputs/pathway_scores.rds')

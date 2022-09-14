@@ -26,13 +26,11 @@ rownames(summary) = summary[,'projid...2']
 
 # load the data from figure 1
 cholest = readRDS('../data/other_analyses_outputs/cholesterol_analysis.rds')
-er_stress = readRDS('../data/other_analyses_outputs/er_stress_results.rds')
 geno = summary[colnames(df), 'apoe_genotype']
 
 # save plot for each of the signature
 o = list()
 o[['sig1']] = cholest$union_cholest_biosynth$genes
-o[['sig2']] = names(er_stress$ER$ATF6_pathway_degs)
 
 for(i in names(o)){
   df = av_expression$Oli[c(o[[i]]),]

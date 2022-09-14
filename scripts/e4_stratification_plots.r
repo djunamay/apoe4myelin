@@ -19,6 +19,9 @@ dev.off()
 # show boxplots for the cholesterol pathway of interest
 out_lipid_terms = all_data[['res']][['lipid_associated']][['gsva_out']]
 df = as.data.frame(out_lipid_terms$Oli[,'cholesterol biosynthesis III (via desmosterol) Homo sapiens PWY66-4'])
+summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
+rownames(summary) = summary[,'projid...2']
+
 colnames(df) = c('pathway')
 df$apoe_genotype = summary[rownames(df), 'apoe_genotype']
 df$APOE = ifelse(df$apoe_genotype%in%c(33), 'E3', 'E4')

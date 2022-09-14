@@ -9,6 +9,7 @@ library(ggpubr)
 library(matrixStats)
 
 # import the human post-mortem lipidomics data
+print('loading and processing the data')
 hdata = read.csv('../data/lipidomics_dataset/cc_lipidomics/Lipidomics_RawData.csv')
 hdata2 = read.csv('../data/lipidomics_dataset/cc_lipidomics/Lipidomics_RawData_2.csv')
 
@@ -47,6 +48,7 @@ apoe = as.data.frame(ifelse((startsWith(as.character(colnames(t)),'4') | startsW
 colnames(apoe) = c('apoe')
 
 # prep data for boxplot
+print('plotting the data')
 ff = t[startsWith(as.character(rownames(t)), 'Sterol'),]
 colnames(ff) = paste0(colnames(ff), '_', 1:length(colnames(ff)))
 ff$name = rownames(ff)

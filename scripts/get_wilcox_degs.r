@@ -1,11 +1,13 @@
 ########## compute wilcoxon degs ##########
 ###########################################
 
+print('loading the sce object')
 source('../functions/differential_expression.r')
 
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
 
 # for all
+print('computing degs')
 oli = sce[,sce$cell.type=='Oli']
 out_all = Wilcox.differential(logcounts(oli), ifelse(oli$apoe_genotype==33, 0, 1))
 

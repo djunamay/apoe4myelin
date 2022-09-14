@@ -35,7 +35,7 @@ get_fits = function(gsva_out, meta){
     for(i in names(gsva_out)){
         predict = meta[as.character(rownames(gsva_out[[i]])),]
         mod = model.matrix(~APOE4 + amyloid + nft + age_death + msex + pmi, data=predict)
-        fits[[i]] = fit.gsva(mod, i, gsva_out, 'APOE4e4')
+        fits[[i]] = fit.gsva(mod, i, gsva_out, 'APOE4')
     }
     return(fits)
 }
