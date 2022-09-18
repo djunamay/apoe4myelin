@@ -32,8 +32,8 @@ Please note, a data-use agreement must be submitted to access these data. Follow
 3. Now run:
 ```bash
 conda activate apoe_env
-Rscript ../scripts/generate_raw_sce_object.r
-Rscript ../scripts/qc_and_annotation.r
+Rscript ../scripts/generate_raw_sce_object.r # modify to save the sce
+Rscript ../scripts/qc_and_annotation.r # check that this runs fine
 ```
 
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
@@ -54,7 +54,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
     └───Figure_4
 ```
 3. download necessary [data](https://osf.io/uyczk/) from OSF into a local directory named /data. This directory includes the following files:
-
+# check that all of these are uploaded on OSF; if not - upload
 | Data File                                                     | Description / Origin                                                                                                                                                                                                         |       
 |---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | pathway_databases/GO_Biological_Process_2018.txt              | from mayaan lab  [here](https://maayanlab.cloud/Enrichr/#libraries)                                                                                                                                                          |
@@ -107,7 +107,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 Run this first:
 ```bash
 conda activate apoe_env
-Rscript ../scripts/generate_qc_sce_object.r
+Rscript ../scripts/generate_qc_sce_object.r # modify this to save the processed sce; doubl-check that it corresponds to the sce I was using
 Rscript ../scripts/get_pathways.r
 Rscript ../scripts/nebula_degs.r # check that this produces the deg table I was using
 Rscript ../scripts/get_expressed_genes_per_celltype.r 
@@ -140,7 +140,7 @@ Rscript ../scripts/get_figure_4_plots.r
 Extended Data Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/plots_for_extended_data_figure_1.r # some things that need to be checked/fixed by Jose
+Rscript ../scripts/plots_for_extended_data_figure_1.r # check - if there is anything that still isn't running -remove
 ```
 
 Extended Data Figure 2
@@ -148,7 +148,7 @@ Extended Data Figure 2
 conda activate apoe_env
 Rscript ../scripts/fgsea_analysis.r
 Rscript ../scripts/pseudo_bulk.r
-Rscript ../scripts/plots_for_extended_data_figure2.r # some things that need to be checked/fixed by Jose
+Rscript ../scripts/plots_for_extended_data_figure2.r # check - if there is anything that still isn't running -remove
 ```
 
 Extended Data Figure 3
