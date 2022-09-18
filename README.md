@@ -54,7 +54,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
     └───Figure_4
 ```
 3. download necessary [data](https://osf.io/uyczk/) from OSF into a local directory named /data. This directory includes the following files:
-# check that all of these are uploaded on OSF; if not - upload
+###### TODO: check that all of these are uploaded on OSF; if not - upload
 | Data File                                                     | Description / Origin                                                                                                                                                                                                         |       
 |---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | pathway_databases/GO_Biological_Process_2018.txt              | from mayaan lab  [here](https://maayanlab.cloud/Enrichr/#libraries)                                                                                                                                                          |
