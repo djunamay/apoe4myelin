@@ -16,6 +16,10 @@ path1 = '../data/iPSC_data/ipsc_bulk_rnaseq_count_files'
 file_term = 'geneexp.txt'
 counts_no_drug = load_counts(path1, file_term)
 
+# name the counts columns
+meta1 = read.table('../data/iPSC_data/ipsc_bulk_rnaseq_count_files/ipsc_metadata.csv', sep = ',', header = F)
+rownames(meta1) = meta1$V1
+
 # normalize the counts
 norm_counts_no_drug = normalize_counts(counts_no_drug)
 write.csv(norm_counts_no_drug, '../data/iPSC_data/ipsc_bulk_no_drug.csv')

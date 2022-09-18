@@ -1,7 +1,6 @@
 ########## plots for extended data figure 1 ##########
 ######################################################
 source('../functions/qc_and_annotation_aux_functions.r')
-source("../functions/qc_and_annotation_aux_functions.r")
 
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
 Mapping = readRDS('../data/single_cell_data/Mapping.rds')

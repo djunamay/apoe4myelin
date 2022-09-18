@@ -512,3 +512,33 @@ Append.to.list <- function(Eli, Li) {
   return(Li)
 }
 ######################################################
+Remove.zero.pvalues <- function(Qmat)  {
+  Qmat[Qmat==0] <- min(Qmat[Qmat!=0])*0.1
+  return(Qmat)
+}
+######################################################
+
+sum_counts = function(counts, label, cell_labels){
+    # Sums cell-level counts by factors in label vector
+    #
+    # Args:
+    #   counts: a sparse matrix with read counts (gene x cell)
+    #   label: variable of interest by which to sum counts
+    #   cell_labels: vector of cell labels
+    #
+    # Returns:
+    #   summed counts
+    #   number of cells used per summation
+
+    colnames(label) = 'ID'
+    label$index = 1
+    label$celltype = cell_labels
+    label = as.data.frame(pivot_wider(label, values_from = index, names_from = ID))
+    label[is.na(label)] = 0
+    label$celltype = NULL
+    summed_counts = counts%*%as.matrix(label)
+
+    ncells = colSums(label)
+
+    return(list('summed_counts' = summed_counts, 'ncells' = ncells))
+}

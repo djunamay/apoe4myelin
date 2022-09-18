@@ -3,9 +3,9 @@
 
 Find the corresponding paper [here]().
 ### Data availability
-- If you would like to *process the raw Fastq* files and associated metadata, these files can be downloaded [here](link to synapse fastq files)
-- If you would like to *access the fully-processed, annotated, and qc-ed data*, that data can be found [here](link to single cell experiment object).
-- All other datasets needed for this analysis are available through [OSF](https://osf.io/uyczk/).
+- If you would like to *process the un-qc'ed counts matrix* and associated metadata, these files can be downloaded [here](link to synapse pre-qc data)
+- If you would like to *access the fully-processed, annotated, and qc-ed data*, that data can be found [here](link to synapse qc_counts_data).
+- All other datasets needed for this analysis are available through [the open science framework](https://osf.io/uyczk/).
 
 ### Reproduce analyses and plots
 Follow these instructions to reproduce analyses and plots, as shown in the paper.
@@ -23,16 +23,16 @@ conda env create -f ../environment/apoe_env.yml
 ```
 
 ##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
-1. Download the FASTQ files from Synapse [here](...) 
-2. Download the metadata files from Synapse [here](...)
+1. Download the un-qc'ed counts matrix and associated metadata from Synapse [here](link to pre-qc counts matrix and associated metadata) 
+Please note, a data-use agreement must be submitted to access these data. Follow instructions on Synapse [here](https://www.synapse.org/#!RegisterAccount:0).
 
 ##### 3b. If you'd like to recapitulate our QC and celltype annotation
 1. Follow instructions [here](https://github.com/shmohammadi86/ACTIONet/tree/R-release) to install the ACTIONet package.
-2. Download the single cell data counts matrix from Synapse [here](...)
-3. Download the metadata files from Synapse [here](...)
+2. Follow instructions from point 3a to access the data.
 3. Now run:
 ```bash
 conda activate apoe_env
+Rscript ../scripts/generate_raw_sce_object.r
 Rscript ../scripts/qc_and_annotation.r
 ```
 
@@ -55,53 +55,70 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 ```
 3. download necessary [data](https://osf.io/uyczk/) from OSF into a local directory named /data. This directory includes the following files:
 
-| Data File                                                             | Description / Origin                                                |       
-|-----------------------------------------------------------------------|---------------------------------------------------------------------|
-| pathway_databases/GO_Biological_Process_2018.txt                      | from mayaan lab  [here](https://maayanlab.cloud/Enrichr/#libraries) |
-| pathway_databases/HumanCyc_2016.txt                                   | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
-| pathway_databases/KEGG_2019_Human.txt                                 | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
-| pathway_databases/Reactome_2016.txt                                   | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)  |
-| iPSC_data/FPKM_table_AST.txt                                          |                                                                     |
-| iPSC_data/FPKM_table_MIC.txt                                          |                                                                     |
-| iPSC_data/FPKM_table_NEU.txt                                          |                                                                     |
-| iPSC_data/FPKM_table_OPC.txt                                          |                                                                     |
-| single_cell_data/Cell_group_colors.rds                                | NA                                                                  |
-| single_cell_data/expressed_genes_per_celltype.rds                     |                                                                     |
-| single_cell_data/Mapping.rds                                          | NA                                                                  |
-| single_cell_data/RefCellTypeMarkers.adultBrain.rds                    |                                                                     |
-| single_cell_data/PanglaoDB.by.organ.by.celltype.rds                   |                                                                     |
-| differentially_expressed_genes/E4_nebula_associations_by_celltype.rds |                                                                     |
-| differentially_expressed_genes/oli_wilcox_results.rds                 | run ../scripts/get_nebula_degs.r                                    |
-| differentially_expressed_genes/oli_wilcox_results_AD.rds              | run ../scripts/get_nebula_degs.r                                    |
-| differentially_expressed_genes/oli_wilcox_results_noAD.rds            | run ../scripts/get_nebula_degs.r                                    |
-| differentially_expressed_genes/OPC_deg_statistics.txt                 |                                                                     |
+| Data File                                                     | Description / Origin                                                                                                                                                                                                         |       
+|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pathway_databases/GO_Biological_Process_2018.txt              | from mayaan lab  [here](https://maayanlab.cloud/Enrichr/#libraries)                                                                                                                                                          |
+| pathway_databases/HumanCyc_2016.txt                           | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)                                                                                                                                                           |
+| pathway_databases/KEGG_2019_Human.txt                         | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)                                                                                                                                                           |
+| pathway_databases/Reactome_2016.txt                           | from mayaan lab [here](https://maayanlab.cloud/Enrichr/#libraries)                                                                                                                                                           |
+| iPSC_data/FPKM_table_AST.txt                                  | FPKM normalized counts from GEO accession number: [GSE102956](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE102956)                                                                                                  |
+| iPSC_data/FPKM_table_MIC.txt                                  | FPKM normalized counts from GEO accession number: [GSE102956](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE102956)                                                                                                  |
+| iPSC_data/FPKM_table_NEU.txt                                  | FPKM normalized counts from GEO accession number: [GSE102956](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE102956)                                                                                                  |
+| iPSC_data/FPKM_table_OPC.txt                                  | see methods section "Bulk RNA-sequencing from isogenic iPSC-derived oligodendroglia" in our paper; run ../scripts/get_opc_ipsc_counts_table.r                                                                                |
+| iPSC_data/opc_ipsc_bulk_rnaseq_count_files/                   | see methods section "Bulk RNA-sequencing from isogenic iPSC-derived oligodendroglia" in our paper                                                                                                                            |                                                                                                                           |
+| single_cell_data/Cell_group_colors.rds                        | colors assigned manually                                                                                                                                                                                                     |
+| single_cell_data/expressed_genes_per_celltype.rds             | run ../scripts/get_expressed_genes_per_celltype.r                                                                                                                                                                            |
+| single_cell_data/Mapping.rds                                  | colors assigned manually                                                                                                                                                                                                     |
+| single_cell_data/RefCellTypeMarkers.adultBrain.rds            | Reference cell type marker genes were obtained from PsychENCODE, reported in Wang, D. et al. Comprehensive functional genomic resource and integrative model for the human brain. Science 362, (2018)                        |
+| single_cell_data/PanglaoDB.by.organ.by.celltype.rds           | downloaded from Panglao database (https://panglaodb.se/); Franzén, O., Gan, L.-M. & Björkegren, J. L. M. PanglaoDB: a web server for exploration of mouse and human single-cell RNA sequencing data. Database  2019, (2019). |                                                                                                                                                                                                       |
+| differentially_expressed_genes/E4_nebula_associations_Oli.rds | run ../scripts/nebula_degs.r                                                                                                                                                                                                 |
+| differentially_expressed_genes/oli_wilcox_results.rds         | run ../scripts/get_wilcox_degs.r                                                                                                                                                                                             |
+| differentially_expressed_genes/oli_wilcox_results_AD.rds      | run ../scripts/get_wilcox_degs.r                                                                                                                                                                                             |
+| differentially_expressed_genes/oli_wilcox_results_noAD.rds    | run ../scripts/get_wilcox_degs.r                                                                                                                                                                                             |
+| differentially_expressed_genes/OPC_deg_statistics.txt         | see methods section "Bulk RNA-sequencing from isogenic iPSC-derived oligodendroglia" in our paper                                                                                                                            |
 
 
-6. Download the single-cell-related data from Synapse [here] and add these data to the ./data directory into their respective sub-folders. This includes the following files:
+4. Download the single-cell- and lipidomic-related data from Synapse [here] and add these data to the ./data directory according to the directories given in the table below. This includes the following files:
 
-| Data File                                                                          | Description / Origin |       
-|------------------------------------------------------------------------------------|----------------------|
-| single_cell_data/single_cell_experiment_object.rds                                 | 
-| single_cell_data/individual_level_averages_per_celltype.rds                        |
-| single_cell_data/metadata_by_individual.csv                                        |
-| single_cell_data/metadata_PFC_all_individuals_092520.tsv                           |
-| lipidomic_datasets/cc_lipidomics/Lipidomics_RawData_2.csv                          |
-| lipidomic_datasets/cc_lipidomics/Lipidomics_RawData.csv                            |
-| lipidomic_datasets/pfc_lipidomics/ChE_summary_cyc_05342022_all_samples.csv         |
-| lipidomic_datasets/pfc_lipidomics/ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv |
-| lipidomic_datasets/pfc_lipidomics/single_cell_counts.csv                           | pre-qc               
-| lipidomic_datasets/pfc_lipidomics/single_cell_rowdata.csv                          | pre-qc               
-| lipidomic_datasets/pfc_lipidomics/single_cell_coldata.csv                          | pre-qc               
+| Data File                                                       | Description / Origin                                                                                                                                  |       
+|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| single_cell_data/individual_level_averages_per_celltype/Ast.csv | run ../scripts/get_individual_level_averages_object.r                                                                                                 |
+| single_cell_data/individual_level_averages_per_celltype/Ex.csv  | run ../scripts/get_individual_level_averages_object.r                                                                                                 |
+| single_cell_data/individual_level_averages_per_celltype/In.csv  | run ../scripts/get_individual_level_averages_object.r                                                                                                 |
+| single_cell_data/individual_level_averages_per_celltype/Mic.csv | run ../scripts/get_individual_level_averages_object.r                                                                                                 |
+| single_cell_data/individual_level_averages_per_celltype/Oli.csv | run ../scripts/get_individual_level_averages_object.r                                                                                                 |
+| single_cell_data/individual_level_averages_per_celltype/Opc.csv | run ../scripts/get_individual_level_averages_object.r                                                                                                 |
+| single_cell_data/qc_counts_data/qc_column_metadata.csv | collected and shared by ROSMAP (Dr David Bennett and colleagues)                                                                                      |
+| single_cell_data/qc_counts_data/qc_counts.mtx | see methods sections "Quality control for cell inclusion" and "Clustering analysis and QC filtering" in our paper, and ../scripts/qc_and_annotation.r |
+| single_cell_data/qc_counts_data/qc_gene_names.txt | see methods section "snRNA-seq data preprocessing" in our paper                                                                                       |
+| single_cell_data/raw_counts_data/column_metadata.csv | collected and shared by ROSMAP (Dr David Bennett and colleagues)                                                                                      |
+| single_cell_data/raw_counts_data/gene_names.csv | see methods section "snRNA-seq data preprocessing" in our paper                                                                                       |
+| single_cell_data/raw_counts_data/raw_counts.mtx | see methods section "snRNA-seq data preprocessing" in our paper                                                                                       |
+| cc_lipidomics/Lipidomics_RawData.csv | see methods section "Untargeted lipidomics of post-mortem corpus callosum" in our paper                                                               |
+| cc_lipidomics/Lipidomics_RawData_2.csv | see methods section "Untargeted lipidomics of post-mortem corpus callosum" in our paper                                                               |
+| pfc_lipidomics/ChE_summary_cyc_05312022_all_samples.csv | see methods section "Untargeted Lipidomics on post-mortem prefrontal cortex" in our paper                                                             | 
+| pfc_lipidomics/ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv | accession through Synapse [here](https://www.synapse.org/#!Synapse:syn26475187)                                                                       |
 
-3. create an empty directory in ./data titled other_analyses_outputs
+5. Download the iPSC RNA-seq counts tables for astrocytes, microglia, and neurons from from GEO accession number: [GSE102956](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE102956)
+6. create an empty directory in ./data titled "other_analyses_outputs"
 
-3. Now run the following code snippets to recapitulate the analysis:
+7. Now run the following code snippets to recapitulate the analysis:
+
+Run this first:
+```bash
+conda activate apoe_env
+Rscript ../scripts/generate_qc_sce_object.r
+Rscript ../scripts/get_pathways.r
+Rscript ../scripts/nebula_degs.r # check that this produces the deg table I was using
+Rscript ../scripts/get_expressed_genes_per_celltype.r 
+Rscript ../scripts/get_individual_level_averages_object.r 
+Rscript ../scripts/get_opc_ipsc_counts_table.r 
+Rscript ../scripts/make_metadata_file.r 
+```
 
 Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_pathways.r
-Rscript ../scripts/get_nebula_degs.r # replace w Jose's code
 Rscript ../scripts/pathway_analyses.r # what are the 12 warnings that come up?
 Rscript ../scripts/get_figure_1_plots.r
 ```
@@ -171,3 +188,4 @@ conda activate apoe_env
 Rscript ../scripts/get_wilcox_myelin_plots.r
 ```
 
+If you have any questions, notice any inconsistencies, need help, or would like to brainstorm future collaborations and ideas, please don't hesitate to reach out: djuna@mit.edu
