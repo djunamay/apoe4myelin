@@ -4,7 +4,7 @@
 source("qc_and_annotation_aux_functions.r")
 #################################################################################
 # load raw snRNAseq counts in single cell experiment format
-sce <- readRDS("/Volumes/Backup Plus/scAPOE_final/sce.APOE.project.rds")
+sce <- readRDS("../data/single_cell_data/single_cell_experiment_object_raw.rds")
 #################################################################################
 # basic QC filtering 
 sce <- QC.filter.sce(sce)

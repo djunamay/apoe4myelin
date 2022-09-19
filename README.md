@@ -3,6 +3,7 @@
 
 Find the corresponding paper [here]().
 ### Data availability
+#TODO: add synapse links here
 - If you would like to *process the un-qc'ed counts matrix* and associated metadata, these files can be downloaded [here](link to synapse pre-qc data)
 - If you would like to *access the fully-processed, annotated, and qc-ed data*, that data can be found [here](link to synapse qc_counts_data).
 - All other datasets needed for this analysis are available through [the open science framework](https://osf.io/uyczk/).

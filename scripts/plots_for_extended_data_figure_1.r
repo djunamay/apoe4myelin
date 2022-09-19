@@ -38,29 +38,27 @@ pdf("../plots/Extended_1/Mic_Tcell_2D.pdf", width = 4, height = 4)
 Plot.coords(as.data.frame(x$Mic), x = "sub.x", y = "sub.y", Col = All.colors[x$Mic$cell.type], Trans = x$Mic$sub.connectivity/max(x$Mic$sub.connectivity), cex = 0.25)
 dev.off()
 
-# TODO: there are no vascular celltypes annotated in the sce object
-pdf("../plots/Extended_1/Vascular_2D.pdf", width = 4, height = 4)
-Plot.coords(as.data.frame(x$Endo), x = "sub.x", y = "sub.y", Col = All.colors[x$Endo$cell.type], Trans = x$Endo$sub.connectivity/max(x$Endo$sub.connectivity), cex = 0.25)
-dev.off()
-
-# TODO: the metadata slot in the sce object is empty
-#marker plots
-xGenes <- c("SYT1", "NRGN", "GAD1", "VCAN", "AQP4", "MBP", "CSF1R", "CD247", "FLT1", "PDGFRB", "TAGLN", "ABCA9")
-Net <- sce@metadata$network
-ExpM <- assays(sce)[["logcounts"]]
-Celltype.markers.imputed <- do.call(cbind, lapply(xGenes, function(i) igraph::page.rank(Net, personalized = ExpM[i,])$vector))
-colnames(Celltype.markers.imputed) <- xGenes
-rownames(Celltype.markers.imputed) <- colnames(ExpM)
-x <- Celltype.markers.imputed
-intersect(rownames(x), rownames(sce@colData)) -> keep
-x <- x[keep,]
-X <- sce@colData[keep,c("re.x","re.y")]
-
-pdf("../plots/Extended_1/2D_cells_marker_plots_imputed.pdf")
-for(i in colnames(x)) {
-  plot(X[,"re.x"], X[,"re.y"], pch = 20, cex = 0.15, axes = F, xlab = "", ylab = "", col=scales::col_numeric(palette = blues9, domain = NULL)(x[,i]), main=i)
-}
-dev.off()
+# pdf("../plots/Extended_1/Vascular_2D.pdf", width = 4, height = 4)
+# Plot.coords(as.data.frame(x$Endo), x = "sub.x", y = "sub.y", Col = All.colors[x$Endo$cell.type], Trans = x$Endo$sub.connectivity/max(x$Endo$sub.connectivity), cex = 0.25)
+# dev.off()
+#
+# #marker plots
+# xGenes <- c("SYT1", "NRGN", "GAD1", "VCAN", "AQP4", "MBP", "CSF1R", "CD247", "FLT1", "PDGFRB", "TAGLN", "ABCA9")
+# Net <- sce@metadata$network
+# ExpM <- assays(sce)[["logcounts"]]
+# Celltype.markers.imputed <- do.call(cbind, lapply(xGenes, function(i) igraph::page.rank(Net, personalized = ExpM[i,])$vector))
+# colnames(Celltype.markers.imputed) <- xGenes
+# rownames(Celltype.markers.imputed) <- colnames(ExpM)
+# x <- Celltype.markers.imputed
+# intersect(rownames(x), rownames(sce@colData)) -> keep
+# x <- x[keep,]
+# X <- sce@colData[keep,c("re.x","re.y")]
+#
+# pdf("../plots/Extended_1/2D_cells_marker_plots_imputed.pdf")
+# for(i in colnames(x)) {
+#   plot(X[,"re.x"], X[,"re.y"], pch = 20, cex = 0.15, axes = F, xlab = "", ylab = "", col=scales::col_numeric(palette = blues9, domain = NULL)(x[,i]), main=i)
+# }
+# dev.off()
 
 #marker enrichment
 Summary.data.celltype <- readRDS("../data/single_cell_data/Summary.data.celltype.rds")
@@ -91,18 +89,6 @@ pdf("../plots/Extended_1/Supp_Celltype_markers_enrichment.pdf", width = 5, heigh
 Heatmap(temp, cluster_rows = F, cluster_columns = F,rect_gp = gpar(col = "black"), name="z-score a") + Heatmap(temp2, cluster_columns = F, rect_gp = gpar(col = "black"), name="z-score")
 dev.off()
 
-# TODO: variable L is not found
-#individual correlations
-L <- do.call(cbind, L)
-Lab <- rep(names(L), sapply(L, ncol))
-M <- do.call(cbind, L)
-C <- cor(M)
-Ann <- HeatmapAnnotation(celltype=Lab, col=list(celltype=All.colors))
-
-pdf("../plots/Extended_1/celltype_invidividual_correlation.pdf", height = 6)
-Heatmap(C, bottom_annotation = Ann, show_row_names = F, show_column_names = F, name = "cor")
-dev.off()
-
 #cross-individual celltype correlation
 sce.by.celltype <- Split.sce.cols(sce, "cell.type")
 L <- lapply(sce.by.celltype, function(i) Get.column.group.average(assays(i)[[2]], i$projid))
@@ -119,6 +105,18 @@ C <- lapply(L[c("Ex", "In","Ast", "Oli", "Opc", "Mic","Endo","Per","SMC","Fib","
 boxplot(C, ylim=c(0,1), col=All.colors[c("Ex", "In","Ast", "Oli", "Opc", "Mic","Endo","Per","SMC","Fib","Tcell")], las=2, pch=20, cex=0.5)
 abline(h=0.9435248, lty=2)
 abline(h=0.6519454, lty=2)
+dev.off()
+
+# TODO: variable L is not found
+#individual correlations
+L <- do.call(cbind, L)
+Lab <- rep(names(L), sapply(L, ncol))
+M <- do.call(cbind, L)
+C <- cor(M)
+Ann <- HeatmapAnnotation(celltype=Lab, col=list(celltype=All.colors))
+
+pdf("../plots/Extended_1/celltype_invidividual_correlation.pdf", height = 6)
+Heatmap(C, bottom_annotation = Ann, show_row_names = F, show_column_names = F, name = "cor")
 dev.off()
 
 #fraction plots
