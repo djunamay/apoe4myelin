@@ -8,13 +8,15 @@ library(GSVA)
 source('../functions/qc_and_annotation_aux_functions.r')
 
 #Evaluate celltype scores
-Summary.DE.celltype <- readRDS("../data/single_cell_data/Summary.data.celltype.rds")
-Celltype.averages <- assays(Summary.DE.celltype)[["E"]]
+Celltype.averages <- readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
+temp = lapply(names(Celltype.averages), function(x) rowMeans(Celltype.averages[[x]]))
+names(temp) = names(Celltype.averages)
+Celltype.averages = do.call('cbind', temp)
 RefCellTypeMarkers = readRDS('../data/single_cell_data/RefCellTypeMarkers.adultBrain.rds')
-sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
+sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 
 pdf("../plots/Extended_2/Evaluate.celltype.scores.pdf", height = 2, width = 3)
-Celltype.activity <- gsva(Celltype.averages, gset.idx.list = RefCellTypeMarkers)
+Celltype.activity <- t(gsva(Celltype.averages, gset.idx.list = RefCellTypeMarkers))
 Celltype.activity <- Celltype.activity[colnames(Celltype.activity),]
 Heatmap(Celltype.activity, cluster_rows = F, cluster_columns = F, rect_gp = gpar(col = "black"), name="geneset\nactivity score")
 Map <- Table.to.matrix(table(colnames(Celltype.activity)[apply(Celltype.activity, 1, which.max)], rownames(Celltype.activity)))
@@ -22,10 +24,9 @@ Heatmap(Map, col=c("white","black"), rect_gp = gpar(col = "black"), name="assign
 dev.off()
 
 #Evaluate celltype scores random
-# TODO: this is not working, there is an error here: Error in Celltype.activity.random[colnames(Celltype.activity), ] :
 #   subscript out of bounds
 pdf("../plots/Extended_2/Evaluate.celltype.scores.random.pdf", height = 2, width = 3)
-Celltype.activity.random <- gsva(Celltype.averages, gset.idx.list = lapply(RefCellTypeMarkers, function(i) sample(rownames(sce), length(i))))
+Celltype.activity.random <- t(gsva(Celltype.averages, gset.idx.list = lapply(RefCellTypeMarkers, function(i) sample(rownames(sce), length(i)))))
 Celltype.activity.random <- Celltype.activity.random[colnames(Celltype.activity),]
 Heatmap(Celltype.activity.random[colnames(Celltype.activity), rownames(Celltype.activity)], rect_gp = gpar(col = "black"), cluster_rows = F, cluster_columns = F, name="geneset\nactivity score")
 Maprandom <- Table.to.matrix(table(colnames(Celltype.activity.random)[apply(Celltype.activity.random, 1, which.max)], rownames(Celltype.activity.random)))

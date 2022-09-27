@@ -12,7 +12,7 @@ df = all_data[['res']][['lipid_associated']][['APOE34_effect_nia34']]
 df = df[df$P.Value<0.05,]
 x = (df$logFC)
 names(x) = rownames(df)
-pdf('../plots/Extended_3/APOE34_lipid_effects_no_path.pdf', width = 3, height = 6)
+pdf('../plots/Extended_2/APOE34_lipid_effects_no_path.pdf', width = 3, height = 6)
 barplot(x[order(x)], horiz = T, las = 1)
 dev.off()
 
@@ -20,13 +20,13 @@ dev.off()
 out_lipid_terms = all_data[['res']][['lipid_associated']][['gsva_out']]
 df = as.data.frame(out_lipid_terms$Oli[,'cholesterol biosynthesis III (via desmosterol) Homo sapiens PWY66-4'])
 summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
-rownames(summary) = summary[,'projid...2']
+rownames(summary) = summary[,'projid']
 
 colnames(df) = c('pathway')
 df$apoe_genotype = summary[rownames(df), 'apoe_genotype']
 df$APOE = ifelse(df$apoe_genotype%in%c(33), 'E3', 'E4')
-df$AD = (summary[rownames(df), 'niareagansc'])
-df$AD = ifelse(df$AD%in%c(1,2),'AD','non AD')
+df$AD = (summary[rownames(df), 'AD'])
+df$AD = ifelse(df$AD%in%c('yes'),'AD','non AD')
 df$AD = factor(df$AD, levels = c('non AD','AD'))
 df$both = paste0(df$APOE, '_', df$AD)
 df$both = factor(df$both, levels = c('E3_non AD', 'E3_AD', 'E4_non AD', 'E4_AD'))
@@ -51,7 +51,7 @@ x[['p_AD_and_APOE34_effects']] <- ggplot(df[df$apoe_genotype!=44,], aes(x=factor
   geom_boxplot() + geom_jitter(shape=16, position=position_jitter(0.2)) + theme_classic()#+ stat_compare_means('wilcox.test')
 
 for(i in names(x)){
-    pdf(paste0('../plots/Extended_3/',i,'.pdf'), width = 2, height = 2)
+    pdf(paste0('../plots/Extended_2/',i,'.pdf'), width = 2, height = 2)
     print(x[[i]])
     dev.off()
 }

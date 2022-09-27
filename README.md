@@ -108,7 +108,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 Run this first:
 ```bash
 conda activate apoe_env
-Rscript ../scripts/generate_qc_sce_object.r # modify this to save the processed sce; doubl-check that it corresponds to the sce I was using
+Rscript ../scripts/generate_qc_sce_object.r 
 Rscript ../scripts/get_pathways.r
 Rscript ../scripts/nebula_degs.r # check that this produces the deg table I was using
 Rscript ../scripts/get_expressed_genes_per_celltype.r 
@@ -120,7 +120,7 @@ Rscript ../scripts/make_metadata_file.r
 Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/pathway_analyses.r # what are the 12 warnings that come up?
+Rscript ../scripts/pathway_analyses.r 
 Rscript ../scripts/get_figure_1_plots.r
 ```
 
@@ -128,7 +128,7 @@ Figure 2
 ```bash
 conda activate apoe_env
 Rscript ../scripts/dissecting_cholesterol_dysregulation.r
-Rscript ../scripts/lipidomic_analysis_cc.r # what are the warnings that come up?
+Rscript ../scripts/lipidomic_analysis_cc.r 
 Rscript ../scripts/get_figure_2_plots.r  
 ```
 Figure 4
@@ -141,7 +141,7 @@ Rscript ../scripts/get_figure_4_plots.r
 Extended Data Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/plots_for_extended_data_figure_1.r # check - if there is anything that still isn't running -remove
+Rscript ../scripts/plots_for_extended_data_figure_1.r 
 ```
 
 Extended Data Figure 2
@@ -149,24 +149,19 @@ Extended Data Figure 2
 conda activate apoe_env
 Rscript ../scripts/fgsea_analysis.r
 Rscript ../scripts/pseudo_bulk.r
-Rscript ../scripts/plots_for_extended_data_figure2.r # check - if there is anything that still isn't running -remove
+Rscript ../scripts/plots_for_extended_data_figure2.r 
+Rscript ../scripts/e4_effects_stratification_by_AD.r
+Rscript ../scripts/e4_stratification_plots.r
 ```
 
 Extended Data Figure 3
 ```bash
 conda activate apoe_env
-Rscript ../scripts/e4_effects_stratification_by_AD.r
-Rscript ../scripts/e4_stratification_plots.r # 24 warnings here - check them
+Rscript ../scripts/lipidomic_analysis_pfc_get_data.r  # check 
+Rscript ../scripts/lipidomic_analysis_pfc_make_plots.r # check
 ```
 
-Extended Data Figure 4
-```bash
-conda activate apoe_env
-Rscript ../scripts/lipidomic_analysis_pfc_get_data.r
-Rscript ../scripts/lipidomic_analysis_pfc_make_plots.r
-```
-
-Extended Data Figure 6
+Extended Data Figure 5
 ```bash
 conda activate apoe_env
 Rscript ../scripts/comparison_of_ipsc_and_brain_get_scaled_matrices.r
@@ -175,7 +170,7 @@ Rscript ../scripts/APOE_expression_oligodendrocytes.r
 Rscript ../scripts/apoe_expression_ipsc.r  
 ```
 
-Extended Data Figure 8
+Extended Data Figure 7
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_postmortem_er_stress_pathways.r
@@ -183,7 +178,7 @@ Rscript ../scripts/er_postmortem_plots.r
 Rscript ../scripts/ipsc_gene_perturbations.r  
 ```
 
-Extended Data Figure 9
+Extended Data Figure 8
 ```bash
 conda activate apoe_env
 Rscript ../scripts/get_wilcox_myelin_plots.r

@@ -5,11 +5,11 @@
 library(fgsea)
 print('running fgsea analysis for extended data figure 2')
 
-neb = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype.rds')
+neb = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype_Oli.rds')
 
 expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
-scores = sign(neb$Oli$logFC_Apoe_e4yes) * -log10(neb$Oli$p_Apoe_e4yes)
-names(scores) = rownames(neb$Oli)
+scores = sign(neb$logFC_Apoe_e4yes) * -log10(neb$p_Apoe_e4yes)
+names(scores) = rownames(neb)
 sorted = sort(scores)
 
 pathways = readRDS('../data/other_analyses_outputs/pathways.rds')

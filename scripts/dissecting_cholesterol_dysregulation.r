@@ -26,10 +26,10 @@ expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
 av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
 summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
 summary$APOE4 = ifelse(summary$apoe_genotype == '33', 0, 1)
-rownames(summary) = summary[,'projid...2']
+rownames(summary) = summary[,'projid']
 
 f1_data = readRDS('../data/other_analyses_outputs/pathway_scores.rds')
-nebula = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype.rds')$Oli
+nebula = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype_Oli.rds')
 
 # get union of cholesterol biosynthesis genes and make union for density plot
 print('getting union of cholesterol biosynthesis genes...')
@@ -42,8 +42,8 @@ temp[['biosynth']] = biosynth_genes
 out = gsva(as.matrix(av_expression[['Oli']]), temp, mx.diff=TRUE, verbose=F, kcdf=c("Gaussian"), min.sz=5, max.sz = 150, parallel.sz=50)
 df = as.data.frame(t(out))
 df$apoe_geno = summary[rownames(df), 'apoe_genotype']
-df$AD = summary[rownames(df), 'niareagansc']
-df$AD = ifelse(df$AD%in%c(1,2), 'AD', 'noAD')
+df$AD = summary[rownames(df), 'AD']
+df$AD = ifelse(df$AD%in%c('yes'), 'AD', 'noAD')
 
 all_data[['union_cholest_biosynth']]$genes = biosynth_genes
 all_data[['union_cholest_biosynth']]$density_plot_input = df
