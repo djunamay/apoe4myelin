@@ -99,6 +99,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 | single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rd    | |
 
 4. Download the single-cell- and lipidomic-related data from Synapse [here] and add these data to the ./data directory according to the directories given in the table below. This includes the following files:
+N.B. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](https://www.synapse.org/#!Synapse:syn3191087.11).
 
 | Data File                                                       | Description / Origin                                                                                                                            |       
 |-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
