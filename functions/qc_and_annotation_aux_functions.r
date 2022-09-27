@@ -17,7 +17,7 @@ QC.filter.sce <- function(sce, nGenesL=500, nGenesH=10000, nCellsObs=10) {
   gc()
   rowData(sce)$nCellsDetected <- Matrix::rowSums(assays(sce)[["counts"]]>0)
   
-  Genes.complete <- readRDS("~/Documents/apoe_resubmission/data_codes_etc/ensembl.GRCh38p12.genes.complete.annot.rds")
+  Genes.complete <- readRDS("../data/single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rds")
   Genes <- Genes.complete[Genes.complete$Gene.type=="protein_coding"]
   Genes <- unique(Genes$Gene.name)
   
@@ -71,7 +71,7 @@ ACTIONet.clustering.analysis <- function(xsce, Renorm=FALSE, doCluster = TRUE, C
     #reducedDim(xsce)[[1]] <- NULL
     xsce <- reduce.sce(xsce)
   }
-  out <- run.ACTIONet(xsce, ...)
+  out <- run.ACTIONet(xsce, k_max =2, ...)
   if(doCluster) out <- cluster.ACTIONet(out, annotation.name = ClustLabel)
   
   xsce@metadata$network <- out$ACTIONet
@@ -81,7 +81,7 @@ ACTIONet.clustering.analysis <- function(xsce, Renorm=FALSE, doCluster = TRUE, C
   
   xsce@metadata[[paste0(ClustLabel,".profiles")]] <- Get.column.group.average(x = assays(xsce)[["logcounts"]], group = xsce@metadata[[ClustLabel]])
   xsce@metadata[[paste0(ClustLabel,".signatures")]] <- Aggregate.pairwise.FC.colPairwise(xsce@metadata[[paste0(ClustLabel,".profiles")]])
-  xsce@metadata[[paste0(ClustLabel,".top.genes")]] <- Extract.tops.by.column(xsce@metadata[[paste0(ClustLabel,".signatures")]])
+  #xsce@metadata[[paste0(ClustLabel,".top.genes")]] <- Extract.tops.by.column(xsce@metadata[[paste0(ClustLabel,".signatures")]])
   xsce@metadata[[paste0(ClustLabel,".cor")]] <- cor(xsce@metadata[[paste0(ClustLabel,".signatures")]])
   
   DF <- DataFrame(num=1:ncol(xsce), tag=colnames(xsce),
@@ -260,19 +260,19 @@ Plot.coords <- function(xdf, x="x", y="y", Col="tomato", Trans=1, cex = 0.15, ad
 Plot.cluster.stats.annot <- function(xsce, cell.type.colors=NULL, cell.type="cell.type", clusterLab="cluster", ...) {
   annoMapMatrix <- Extract.cell.annotation.mappings(xsce, ...)
   
-  if(is.null(cell.type.colors)) cell.type.colors <- ACTIONet.color.bank0[1:length(xsce@metadata$ClusterCelltypeMapping[,cell.type])]
+  #if(is.null(cell.type.colors)) cell.type.colors <- ACTIONet.color.bank0[1:length(xsce@metadata$ClusterCelltypeMapping[,cell.type])]
   par(mfrow=c(6,1), mar=c(3.5, 4, 1.5, 2.5))
   
-  boxplot(log(xsce@colData$TotalCounts)~factor(xsce@colData[,clusterLab], levels = annoMapMatrix[,clusterLab]), las=2, col=cell.type.colors[annoMapMatrix[,cell.type]], ylab="total counts (log)", xlab="")
+  boxplot(log(xsce@colData$TotalCounts)~factor(xsce@colData[,clusterLab], levels = unique(annoMapMatrix[,clusterLab])), las=2, ylab="total counts (log)", xlab="")
   
-  boxplot(xsce@colData$MitoNonMitoRation~factor(xsce@colData[,clusterLab], levels = annoMapMatrix[,clusterLab]), las=2, col=cell.type.colors[annoMapMatrix[,cell.type]], ylab="mitochondrial ratio", xlab="")
+  boxplot(xsce@colData$MitoNonMitoRation~factor(xsce@colData[,clusterLab], levels = unique(annoMapMatrix[,clusterLab])), las=2, ylab="mitochondrial ratio", xlab="")
   
-  boxplot(xsce@colData$nGenesDetected~factor(xsce@colData[,clusterLab], levels = annoMapMatrix[,clusterLab]), las=2, col=cell.type.colors[annoMapMatrix[,cell.type]], ylab="genes detected", xlab="")
+  boxplot(xsce@colData$nGenesDetected~factor(xsce@colData[,clusterLab], levels = unique(annoMapMatrix[,clusterLab])), las=2, ylab="genes detected", xlab="")
   
   barplot(table(xsce@colData[,clusterLab])[annoMapMatrix[,clusterLab]], las=2, col=cell.type.colors[annoMapMatrix[,cell.type]], ylab="cell count", xlab="")
-  barplot(rowSums(Table.to.matrix(table(xsce@colData[,clusterLab], xsce@colData$projid))>10)[annoMapMatrix[,clusterLab]], las=2, col=cell.type.colors[annoMapMatrix[,cell.type]], ylab="individual count (>10cells)", xlab="")
+  #barplot(rowSums(Table.to.matrix(table(xsce@colData[,clusterLab], xsce@colData$projid))>10)[annoMapMatrix[,clusterLab]], las=2, ylab="individual count (>10cells)", xlab="")
   
-  barplot(Counts.to.fractions(Table.to.matrix(table(xsce@colData$projid, xsce@colData[,clusterLab])))[,annoMapMatrix[,clusterLab]], las=2, col=ACTIONet.color.bank, ylab="individuals", xlab="")
+  #barplot(Counts.to.fractions(Table.to.matrix(table(xsce@colData$projid, xsce@colData[,clusterLab])))[,annoMapMatrix[,clusterLab]], las=2, col=ACTIONet.color.bank, ylab="individuals", xlab="")
 }
 ######################################################
 Plot.top.genes <- function(xsce, Col="tomato", mfrowPar=c(4,4), marPar=c(3,8,3,3)) {

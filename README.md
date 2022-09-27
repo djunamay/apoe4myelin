@@ -20,7 +20,7 @@ git clone https://github.com/djunamay/APOE4_impairs_myelination_via_cholesterol_
 ##### 2. Create the conda environment by running:
 
 ```bash
-conda env create -f ../environment/apoe_env.yml
+conda env create -f ./environment/apoe_env.yml
 ```
 
 ##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
@@ -28,13 +28,32 @@ conda env create -f ../environment/apoe_env.yml
 Please note, a data-use agreement must be submitted to access these data. Follow instructions on Synapse [here](https://www.synapse.org/#!RegisterAccount:0).
 
 ##### 3b. If you'd like to recapitulate our QC and celltype annotation
-1. Follow instructions [here](https://github.com/shmohammadi86/ACTIONet/tree/R-release) to install the ACTIONet package.
-2. Follow instructions from point 3a to access the data.
-3. Now run:
+1. create a custom conda environment by running:
 ```bash
-conda activate apoe_env
-Rscript ../scripts/generate_raw_sce_object.r # modify to save the sce
-Rscript ../scripts/qc_and_annotation.r # check that this runs fine
+conda create -n actionet_legacy_env  -c conda-forge r-devtools
+```
+2. install the ACTIONet package (legacy version) from github by running the following:
+```bash
+conda activate actionet_legacy_env
+R
+```
+In your R console, run this:
+```R
+library(devtools)
+devtools::install_github("shmohammadi86/ACTIONet_legacy")
+install.packages("harmony")
+install.packages("R.utils")
+install.packages("BiocManager")
+BiocManager::install("BiocParallel")
+install.packages("ggpubr")
+
+```
+3. Follow instructions from point 3a to access the pre-qc data.
+4. Now run:
+```bash
+conda activate actionet_legacy_env
+Rscript ./scripts/generate_raw_sce_object.r 
+Rscript ./scripts/qc_and_annotation.r 
 ```
 
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
@@ -53,6 +72,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
     └───Figure_1
     └───Figure_2
     └───Figure_4
+    └──qc_annotation
 ```
 3. download necessary [data](https://osf.io/uyczk/) from OSF into a local directory named /data. This directory includes the following files:
 ###### TODO: check that all of these are uploaded on OSF; if not - upload
@@ -77,7 +97,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 | differentially_expressed_genes/oli_wilcox_results_AD.rds      | run ../scripts/get_wilcox_degs.r                                                                                                                                                                                             |
 | differentially_expressed_genes/oli_wilcox_results_noAD.rds    | run ../scripts/get_wilcox_degs.r                                                                                                                                                                                             |
 | differentially_expressed_genes/OPC_deg_statistics.txt         | see methods section "Bulk RNA-sequencing from isogenic iPSC-derived oligodendroglia" in our paper                                                                                                                            |
-
+| single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rd    | |
 
 4. Download the single-cell- and lipidomic-related data from Synapse [here] and add these data to the ./data directory according to the directories given in the table below. This includes the following files:
 
@@ -108,80 +128,86 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 Run this first:
 ```bash
 conda activate apoe_env
-Rscript ../scripts/generate_qc_sce_object.r 
-Rscript ../scripts/get_pathways.r
-Rscript ../scripts/nebula_degs.r # check that this produces the deg table I was using
-Rscript ../scripts/get_expressed_genes_per_celltype.r 
-Rscript ../scripts/get_individual_level_averages_object.r 
-Rscript ../scripts/get_opc_ipsc_counts_table.r 
-Rscript ../scripts/make_metadata_file.r 
+Rscript ./scripts/generate_qc_sce_object.r 
+Rscript ./scripts/get_pathways.r
+Rscript ./scripts/nebula_degs.r # check that this produces the deg table I was using
+Rscript ./scripts/get_expressed_genes_per_celltype.r 
+Rscript ./scripts/get_individual_level_averages_object.r 
+Rscript ./scripts/get_opc_ipsc_counts_table.r 
+Rscript ./scripts/make_metadata_file.r 
 ```
 
 Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/pathway_analyses.r 
-Rscript ../scripts/get_figure_1_plots.r
+Rscript ./scripts/pathway_analyses.r 
+Rscript ./scripts/get_figure_1_plots.r
 ```
 
 Figure 2
 ```bash
 conda activate apoe_env
-Rscript ../scripts/dissecting_cholesterol_dysregulation.r
-Rscript ../scripts/lipidomic_analysis_cc.r 
-Rscript ../scripts/get_figure_2_plots.r  
+Rscript ./scripts/dissecting_cholesterol_dysregulation.r
+Rscript ./scripts/lipidomic_analysis_cc.r 
+Rscript ./scripts/get_figure_2_plots.r  
 ```
 Figure 4
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_wilcox_degs.r
-Rscript ../scripts/get_figure_4_plots.r
+Rscript ./scripts/get_wilcox_degs.r
+Rscript ./scripts/get_figure_4_plots.r
 ```
 
 Extended Data Figure 1
 ```bash
 conda activate apoe_env
-Rscript ../scripts/plots_for_extended_data_figure_1.r 
+Rscript ./scripts/plots_for_extended_data_figure_1.r 
 ```
 
 Extended Data Figure 2
 ```bash
 conda activate apoe_env
-Rscript ../scripts/fgsea_analysis.r
-Rscript ../scripts/pseudo_bulk.r
-Rscript ../scripts/plots_for_extended_data_figure2.r 
-Rscript ../scripts/e4_effects_stratification_by_AD.r
-Rscript ../scripts/e4_stratification_plots.r
+Rscript ./scripts/fgsea_analysis.r
+Rscript ./scripts/pseudo_bulk.r
+Rscript ./scripts/plots_for_extended_data_figure2.r 
+Rscript ./scripts/e4_effects_stratification_by_AD.r
+Rscript ./scripts/e4_stratification_plots.r
 ```
 
 Extended Data Figure 3
 ```bash
 conda activate apoe_env
-Rscript ../scripts/lipidomic_analysis_pfc_get_data.r  # check 
-Rscript ../scripts/lipidomic_analysis_pfc_make_plots.r # check
+Rscript ./scripts/lipidomic_analysis_pfc_get_data.r  # check 
+Rscript ./scripts/lipidomic_analysis_pfc_make_plots.r # check
 ```
 
 Extended Data Figure 5
 ```bash
 conda activate apoe_env
-Rscript ../scripts/comparison_of_ipsc_and_brain_get_scaled_matrices.r
-Rscript ../scripts/comparison_of_ipsc_and_brain_plots.r
-Rscript ../scripts/APOE_expression_oligodendrocytes.r
-Rscript ../scripts/apoe_expression_ipsc.r  
+Rscript ./scripts/comparison_of_ipsc_and_brain_get_scaled_matrices.r
+Rscript ./scripts/comparison_of_ipsc_and_brain_plots.r
+Rscript ./scripts/APOE_expression_oligodendrocytes.r
+Rscript ./scripts/apoe_expression_ipsc.r  
 ```
 
 Extended Data Figure 7
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_postmortem_er_stress_pathways.r
-Rscript ../scripts/er_postmortem_plots.r  
-Rscript ../scripts/ipsc_gene_perturbations.r  
+Rscript ./scripts/get_postmortem_er_stress_pathways.r
+Rscript ./scripts/er_postmortem_plots.r  
+Rscript ./scripts/ipsc_gene_perturbations.r  
 ```
 
 Extended Data Figure 8
 ```bash
 conda activate apoe_env
-Rscript ../scripts/get_wilcox_myelin_plots.r
+Rscript ./scripts/get_wilcox_myelin_plots.r
 ```
 
+Or, run the full analysis pipeline:
+```bash
+conda activate apoe_env
+chmod +x run_all_analyses.sh
+./scripts/run_all_analyses.sh
+```
 If you have any questions, notice any inconsistencies, need help, or would like to brainstorm future collaborations and ideas, please don't hesitate to reach out: djuna@mit.edu

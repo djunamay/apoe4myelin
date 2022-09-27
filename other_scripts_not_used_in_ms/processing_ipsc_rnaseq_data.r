@@ -2,8 +2,6 @@
 #############################################################################################################
 ## iPSC APOE4 vs APOE3 data downloaded from the biomicro servers: 191210Tsa/
 # /net/bmc-pub10/data1/bmc/public/Tsai/191210Tsa
-# TODO: get var info to compute DEGs
-# TODO: remove lowly expressed genes
 
 source('../functions/bulk_degs.r')
 
