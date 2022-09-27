@@ -1,3 +1,4 @@
+# APOE environment
 name: apoe_env
 channels:
   - bioconda
