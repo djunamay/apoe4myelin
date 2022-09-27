@@ -1,8 +1,8 @@
 name: apoe_env
 channels:
   - bioconda
-  - conda-forge
   - anaconda
+  - conda-forge
   - defaults
 dependencies:
   - _libgcc_mutex=0.1
