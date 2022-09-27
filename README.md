@@ -3,7 +3,6 @@
 
 Find the corresponding paper [here]().
 ### Data availability
-#TODO: add synapse links here
 - If you would like to *process the un-qc'ed counts matrix* and associated metadata, these files can be downloaded [here](link to synapse pre-qc data)
 - If you would like to *access the fully-processed, annotated, and qc-ed data*, that data can be found [here](link to synapse qc_counts_data).
 - All other datasets needed for this analysis are available through [the open science framework](https://osf.io/uyczk/).
@@ -75,7 +74,6 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
     └──qc_annotation
 ```
 3. download necessary [data](https://osf.io/uyczk/) from OSF into a local directory named /data. This directory includes the following files:
-###### TODO: check that all of these are uploaded on OSF; if not - upload
 | Data File                                                     | Description / Origin                                                                                                                                                                                                         |       
 |---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | pathway_databases/GO_Biological_Process_2018.txt              | from mayaan lab  [here](https://maayanlab.cloud/Enrichr/#libraries)                                                                                                                                                          |
