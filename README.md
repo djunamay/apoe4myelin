@@ -214,4 +214,4 @@ conda activate apoe_env
 chmod +x run_all_analyses.sh
 ./scripts/run_all_analyses.sh
 ```
-If you have any questions, notice any inconsistencies, need help, or would like to brainstorm future collaborations and ideas, please don't hesitate to reach out: djuna@mit.edu
+If you have any questions, notice any inconsistencies, need help, or would like to brainstorm future collaborations and ideas, please don't hesitate to reach out: djuna@mit.edu, jose.davila@fht.org
