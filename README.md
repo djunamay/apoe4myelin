@@ -4,8 +4,7 @@
 Find the corresponding paper [here](). *paper is accepted for publication, link coming soon*
 ### snRNAseq & lipidomic Data availability
 <p align="center">
-  <img src="data_overview.png" width="350" title="hover text">
-  <img src="your_relative_path_here_number_2_large_name" width="350" alt="accessibility text">
+  <img src="data_overview-01.png" width="500" title="hover text">
 </p>
 - If you would like to process the `raw counts matrix and associated metadata`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
 - If you would like to access the `fully-processed, annotated, and qc-ed data`, that data can be found [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
