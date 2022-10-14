@@ -8,7 +8,7 @@ Find the corresponding paper [here](). *paper is accepted for publication, link 
 
 ### other Data availability
 - All other datasets needed for this analysis are available through [the open science framework](https://osf.io/uyczk/).
-- each file is described in detail [below](#3c. If you'd like to recapitulate any of the analyses presented in the paper)
+- each file is described in detail [below](#3c.-If-you'd-like-to-recapitulate-any-of-the-analyses-presented-in-the-paper)
 
 ### Reproduce analyses and plots
 Follow these instructions to reproduce analyses and plots, as shown in the paper.
