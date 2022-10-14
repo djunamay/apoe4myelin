@@ -73,7 +73,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
     └───Figure_4
     └──qc_annotation
 ```
-3. download necessary [data](https://osf.io/uyczk/) from OSF into a local directory named /data. This directory includes the following files:
+3. download necessary [data](https://osf.io/uyczk/) from OSF into a directory named /data within this git repo. This directory includes the following files:
 
 | Data File                                                     | Description / Origin                                                                                                                                                                                                    |       
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -129,7 +129,7 @@ Run this first:
 conda activate apoe_env
 Rscript ./scripts/generate_qc_sce_object.r 
 Rscript ./scripts/get_pathways.r
-Rscript ./scripts/nebula_degs.r # check that this produces the deg table I was using
+Rscript ./scripts/nebula_degs.r 
 Rscript ./scripts/get_expressed_genes_per_celltype.r 
 Rscript ./scripts/get_individual_level_averages_object.r 
 Rscript ./scripts/get_opc_ipsc_counts_table.r 
