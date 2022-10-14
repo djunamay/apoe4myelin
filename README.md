@@ -3,7 +3,7 @@
 
 Find the corresponding paper [here](). *paper is accepted for publication, link coming soon*
 ### snRNAseq Data availability
-- If you would like to process the `un-qc'ed counts matrix* and associated metadata`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
+- If you would like to process the `raw counts matrix and associated metadata`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
 - If you would like to access the `fully-processed, annotated, and qc-ed data`, that data can be found [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
 
 ### other Data availability
