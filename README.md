@@ -3,12 +3,12 @@
 
 Find the corresponding paper [here](). *paper is accepted for publication, link coming soon*
 ### snRNAseq Data availability
-- If you would like to *process the `un-qc'ed counts matrix* and associated metadata`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
-- If you would like to *access the fully-processed, annotated, and qc-ed data*, that data can be found [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
+- If you would like to process the `un-qc'ed counts matrix* and associated metadata`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
+- If you would like to access the `fully-processed, annotated, and qc-ed data`, that data can be found [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
 
 ### other Data availability
 - All other datasets needed for this analysis are available through [the open science framework](https://osf.io/uyczk/).
-- each file is described in detail [below](##### 3c. If you'd like to recapitulate any of the analyses presented in the paper)
+- each file is described in detail [below](# 3c. If you'd like to recapitulate any of the analyses presented in the paper)
 
 ### Reproduce analyses and plots
 Follow these instructions to reproduce analyses and plots, as shown in the paper.
