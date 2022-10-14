@@ -126,7 +126,7 @@ N.B. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](
 
 Create Environment:
 ```bash
-conda env create -f apoe_env.yml
+conda env create -f ./environment/apoe_env.yml
 ```
 
 Run this first:
