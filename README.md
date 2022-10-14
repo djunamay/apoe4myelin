@@ -96,7 +96,7 @@ APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
 | differentially_expressed_genes/oli_wilcox_results_AD.rds      | run ./scripts/get_wilcox_degs.r                                                                                                                                                                                         |
 | differentially_expressed_genes/oli_wilcox_results_noAD.rds    | run ./scripts/get_wilcox_degs.r                                                                                                                                                                                         |
 | differentially_expressed_genes/OPC_deg_statistics.txt         | see methods section "Bulk RNA-sequencing from isogenic iPSC-derived oligodendroglia" in our paper                                                                                                                       |
-| single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rd    | |
+| single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rds    | |
 
 4. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. This includes the following files:
 N.B. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](https://www.synapse.org/#!Synapse:syn3191087.11).
