@@ -23,7 +23,7 @@ conda env create -f ./environment/apoe_env.yml
 ```
 
 ##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
-1. Download the un-qc'ed counts matrix and associated metadata from Synapse [here](link to pre-qc counts matrix and associated metadata) 
+1. Download the raw counts matrix and associated metadata from Synapse [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/)
 Please note, a data-use agreement must be submitted to access these data. Follow instructions on Synapse [here](https://www.synapse.org/#!RegisterAccount:0).
 
 ##### 3b. If you'd like to recapitulate our QC and celltype annotation
