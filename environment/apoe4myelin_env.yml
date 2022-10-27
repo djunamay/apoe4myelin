@@ -1,4 +1,4 @@
-name: apoe_env
+name: apoe4_env
 channels:
   - conda-forge
   - defaults
@@ -408,4 +408,4 @@ dependencies:
   - bioconductor-s4vectors=0.32.0
   - r-desc=1.4.0
   - r-colorspace=2.0_2
-prefix: /Users/work/miniconda3/envs/apoe_env
+prefix: /Users/work/miniconda3/envs/apoe4_env
