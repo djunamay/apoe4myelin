@@ -24,7 +24,7 @@ Follow these instructions to reproduce analyses and plots, as shown in the paper
 git clone https://github.com/djunamay/apoe4myelin.git
 ```
 
-##### 2. Create the conda environment and install dependencies:
+##### 2. Create the conda environments and install dependencies:
 
 First run this in your terminal:
 ```bash
@@ -32,7 +32,6 @@ conda env create -f ./environment/apoe_env.yml
 conda activate apoe4myelin_env
 R
 ```
-
 In your R console, run:
 ```R
 install.packages("BiocManager")
@@ -45,16 +44,11 @@ BiocManager::install("GSVA", version="3.14") # preferred package version = 1.42.
 BiocManager::install("edgeR", version="3.14") # preferred package version = 3.36.0
 BiocManager::install("fgsea", version="3.14") # preferred package version = 1.20.0
 ```
-##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
-1. Download the raw counts matrix and associated metadata from Synapse [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/).
-Please note, a data-use agreement must be submitted to access these data. Follow instructions on Synapse [here](https://www.synapse.org/#!RegisterAccount:0).
-
-##### 3b. If you'd like to recapitulate our QC and celltype annotation
-1. create a custom conda environment by running:
+create the second custom conda environment by running:
 ```bash
 conda create -n actionet_legacy_env  -c conda-forge r-devtools
 ```
-2. install the ACTIONet package (legacy version) from github by running the following:
+install the ACTIONet package (legacy version) from github by running the following:
 ```bash
 conda activate actionet_legacy_env
 R
@@ -70,8 +64,14 @@ BiocManager::install("BiocParallel")
 install.packages("ggpubr")
 
 ```
-3. Follow instructions from point `3a` to access the raw data and from point `3c.3` to access the `/single_cell_data` files marked by `*`
-4. Navigate to the scripts folder, Now run:
+##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
+1. Download the raw counts matrix and associated metadata from Synapse [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/).
+Please note, a data-use agreement must be submitted to access these data. Follow instructions on Synapse [here](https://www.synapse.org/#!RegisterAccount:0).
+
+##### 3b. If you'd like to recapitulate our QC and celltype annotation
+1. create `actionet_legacy_env` conda environment as described in point `2`
+2. Follow instructions from point `3a` to access the raw data and from point `3c.3` to access the `/single_cell_data` files marked by `*`
+3. Navigate to the scripts folder, Now run:
 ```bash
 conda activate actionet_legacy_env
 Rscript ../scripts/generate_raw_sce_object.r 
