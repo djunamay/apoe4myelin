@@ -62,7 +62,8 @@ install.packages("R.utils")
 install.packages("BiocManager")
 BiocManager::install("BiocParallel")
 install.packages("ggpubr")
-
+BiocManager::install("scran")
+BiocManager::install("scater")
 ```
 ##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
 1. Download the raw counts matrix and associated metadata from Synapse [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/).
