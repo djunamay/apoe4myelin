@@ -21,7 +21,7 @@ Follow these instructions to reproduce analyses and plots, as shown in the paper
 ##### 1. Download the repository by running:
 
 ```bash
-git clone https://github.com/djunamay/APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes.git
+git clone https://github.com/djunamay/apoe4myelin.git
 ```
 
 ##### 2. Create the conda environment by running:
