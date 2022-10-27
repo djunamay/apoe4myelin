@@ -6,16 +6,16 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - r-ggplot2
-  - r-tidyr
+  - r-ggplot2=3.3.5
+  - r-tidyr=1.2.0
   - r-tibble
-  - r-reshape2
-  - r-ggpubr
-  - r-readxl
-  - r-stringr
-  - r-gsa
-  - r-circlize
-  - r-matrixstats
+  - r-reshape2=1.4.4
+  - r-ggpubr=0.4.0
+  - r-readxl=1.3.1
+  - r-stringr=1.4.0
+  - r-gsa=1.03.1
+  - r-circlize=0.4.15
+  - r-matrixstats=0.61.0
   - parallel
   - bioconductor-complexheatmap=2.10.0
   - bioconductor-biocparallel
