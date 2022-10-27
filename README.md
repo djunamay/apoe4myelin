@@ -153,9 +153,12 @@ Navigate to the scripts folder, run this first:
 ```bash
 conda activate apoe4myelin_env
 Rscript ../scripts/generate_qc_sce_object.r 
+```
+```bash
 conda activate actionet_legacy_env
 Rscript ../scripts/get_individual_level_averages_object.r 
-conda activate apoe4myelin_env
+```
+```bash
 conda activate apoe4myelin_env
 Rscript ../scripts/get_pathways.r
 Rscript ../scripts/nebula_degs.r 
