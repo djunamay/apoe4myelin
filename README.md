@@ -26,7 +26,7 @@ git clone https://github.com/djunamay/apoe4myelin.git
 
 ##### 2. Create the conda environments and install dependencies:
 
-First run this in your terminal:
+To create the first conda environment, run this in your terminal:
 ```bash
 conda env create -f ./environment/apoe_env.yml
 conda activate apoe4myelin_env
@@ -44,11 +44,11 @@ BiocManager::install("GSVA", version="3.14") # preferred package version = 1.42.
 BiocManager::install("edgeR", version="3.14") # preferred package version = 3.36.0
 BiocManager::install("fgsea", version="3.14") # preferred package version = 1.20.0
 ```
-create the second custom conda environment by running:
+Create the second custom conda environment by running:
 ```bash
 conda create -n actionet_legacy_env  -c conda-forge r-devtools
 ```
-install the ACTIONet package (legacy version) from github by running the following:
+Install the ACTIONet package (legacy version) from github by running the following:
 ```bash
 conda activate actionet_legacy_env
 R
