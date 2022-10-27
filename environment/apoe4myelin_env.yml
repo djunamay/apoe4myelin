@@ -2,6 +2,7 @@ name: apoe4_env
 channels:
   - conda-forge
   - defaults
+  - bioconda
 dependencies:
   - r-blob=1.2.2
   - r-httr=1.4.2
