@@ -1,12 +1,15 @@
 library(tidyr)
 library(ACTIONet)
 source('../functions/qc_and_annotation_aux_functions.r')
+
+print('reading SCE')
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 sce =  scran.normalize(sce)
 meta = colData(sce)
 cell_labels = rownames(meta)
 
 # use matrix multiplication to summarize (sum) across counts per cell (including all individuals)
+print('sum counts by individual')
 labels = as.data.frame(as.character(interaction(meta$cell.type, meta$projid)))
 summed_logcounts_cellxind = sum_counts(logcounts(sce), labels, cell_labels)
 
@@ -25,4 +28,5 @@ for(i in celltype_unique){
     colnames(df) = individual[index]
     avs_by_ind_out[[i]] = df
 }
+print('save the averages')
 saveRDS(avs_by_ind_out, '../data/single_cell_data/individual_level_averages_per_celltype2.rds')
