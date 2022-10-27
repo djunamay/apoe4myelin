@@ -24,7 +24,7 @@ Follow these instructions to reproduce analyses and plots, as shown in the paper
 git clone https://github.com/djunamay/apoe4myelin.git
 ```
 
-##### 2. Create the conda environment by running:
+##### 2. Create the conda environment and install dependencies:
 
 ```bash
 conda env create -f ./environment/apoe_env.yml
