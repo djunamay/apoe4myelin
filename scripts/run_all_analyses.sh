@@ -1,17 +1,19 @@
 #!/bin/bash
 
-conda activate apoe_env
+conda activate apoe4myelin_env
 echo '*** Running pre - analysis scripts...'
 echo '***** generating SCE object...'
 Rscript ../scripts/generate_qc_sce_object.r
+conda activate actionet_legacy_env
+echo '***** getting individual level averages...'
+Rscript ../scripts/get_individual_level_averages_object.r
 echo '***** curating pathways...'
+conda activate apoe4myelin_env
 Rscript ../scripts/get_pathways.r
 echo '***** computing degs with nebula...'
 Rscript ../scripts/nebula_degs.r
 echo '***** getting expressed genes per celltype...'
 Rscript ../scripts/get_expressed_genes_per_celltype.r
-echo '***** getting individual level averages...'
-Rscript ../scripts/get_individual_level_averages_object.r
 echo '***** getting ipsc opc counts table...'
 Rscript ../scripts/get_opc_ipsc_counts_table.r
 echo '***** making metadata file...'
