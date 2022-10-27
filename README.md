@@ -70,7 +70,7 @@ Please note, a data-use agreement must be submitted to access these data. Follow
 
 ##### 3b. If you'd like to recapitulate our QC and celltype annotation
 1. create `actionet_legacy_env` conda environment as described in point `2`
-2. Follow instructions from point `3a` to access the raw data and from point `3c.3` to access the `/single_cell_data` files marked by `*`
+2. Follow instructions from point `3a` to access the raw data and from point `3c.5` to access the `/single_cell_data` files marked by `*`
 3. Navigate to the scripts folder, Now run:
 ```bash
 conda activate actionet_legacy_env
@@ -79,8 +79,9 @@ Rscript ../scripts/qc_and_annotation.r
 ```
 
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
-1. follow instructions [here](https://github.com/lhe17/nebula) to download the nebula package
-2. follow instructions [here](https://github.com/immunogenomics/presto) to download the immunogenomics/presto package
+1. create `actionet_legacy_env` and `apoe4myelin_env` conda environments as described in point `2`
+2. follow instructions [here](https://github.com/lhe17/nebula) to download the nebula package into the `apoe4myelin_env` environment
+3. follow instructions [here](https://github.com/immunogenomics/presto) to download the immunogenomics/presto package into the `apoe4myelin_env` environment
 4. Create the following /plots directory within this git repo
 ```
 apoe4myelin
@@ -96,7 +97,7 @@ apoe4myelin
     └───Figure_4
     └──qc_annotation
 ```
-3. download necessary [data](https://osf.io/uyczk/) from OSF into a directory named /data within this git repo. This directory includes the following files:
+5. download necessary [data](https://osf.io/uyczk/) from OSF into a directory named /data within this git repo. This directory includes the following files:
 
 | Data File                                                     | Description / Origin                                                                                                                                                                                                    |       
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -121,7 +122,7 @@ apoe4myelin
 | differentially_expressed_genes/OPC_deg_statistics.txt         | see methods section "Bulk RNA-sequencing from isogenic iPSC-derived oligodendroglia" in our paper                                                                                                                       |
 | single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rds    | |
 
-4. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. This includes the following files:
+6. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. This includes the following files:
 N.B. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](https://www.synapse.org/#!Synapse:syn3191087.11).
 
 | Data File                                                       | Description / Origin                                                                                                                            |       
@@ -143,23 +144,21 @@ N.B. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](
 | pfc_lipidomics/ChE_summary_cyc_05312022_all_samples.csv | see methods section "Untargeted Lipidomics on post-mortem prefrontal cortex" in our paper                                                       | 
 | pfc_lipidomics/ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv | accession through Synapse [here](https://www.synapse.org/#!Synapse:syn26475187)                                                                 |
 
-5. create an empty directory in ./data titled "other_analyses_outputs"
+7. create an empty directory in ./data titled "other_analyses_outputs"
 
-6. Now run the following code snippets to recapitulate the analysis:
+8. Now run the following code snippets to recapitulate the analysis:
 
-Create Environment:
-```bash
-conda env create -f ./environment/apoe_env.yml
-```
-
-Navigate to the scripts folder, Run this first:
+Navigate to the scripts folder, run this first:
 ```bash
 conda activate apoe4myelin_env
 Rscript ../scripts/generate_qc_sce_object.r 
+conda activate actionet_legacy_env
+Rscript ../scripts/get_individual_level_averages_object.r 
+conda activate apoe4myelin_env
+conda activate apoe4myelin_env
 Rscript ../scripts/get_pathways.r
 Rscript ../scripts/nebula_degs.r 
 Rscript ../scripts/get_expressed_genes_per_celltype.r 
-Rscript ../scripts/get_individual_level_averages_object.r 
 Rscript ../scripts/get_opc_ipsc_counts_table.r 
 Rscript ../scripts/make_metadata_file.r 
 ```
