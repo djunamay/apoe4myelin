@@ -70,7 +70,7 @@ BiocManager::install("BiocParallel")
 install.packages("ggpubr")
 
 ```
-3. Follow instructions from point 3a to access the raw data.
+3. Follow instructions from point 3a to access the raw data and from point 3c.3 to access the /single_cell_data files marked by *
 4. Navigate to the scripts folder, Now run:
 ```bash
 conda activate actionet_legacy_env
