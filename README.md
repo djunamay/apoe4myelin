@@ -83,7 +83,7 @@ Rscript ./scripts/qc_and_annotation.r
 2. follow instructions [here](https://github.com/immunogenomics/presto) to download the immunogenomics/presto package
 4. Create the following /plots directory within this git repo
 ```
-APOE4_impairs_myelination_via_cholesterol_dysregulation_in_oligodendrocytes
+apoe4myelin
 └───plots
     └───Extended_1
     └───Extended_2
