@@ -1,5 +1,5 @@
 # APOE environment
-name: apoe_env
+name: apoe4myelin_env
 channels:
   - bioconda
   - anaconda
