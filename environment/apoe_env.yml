@@ -447,4 +447,8 @@ dependencies:
     - pyreadr==0.4.4
     - pytz==2022.1
     - scipy==1.6.2
+    -clangxx_osx-64==12.0.0
+    - clang_osx-64=12.0.0
+    - libgfortran=5.0.0
+    - appnope=0.1.2
 prefix: /Users/work/miniconda3/envs/apoe_env
