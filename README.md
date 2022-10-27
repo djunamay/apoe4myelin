@@ -30,6 +30,17 @@ git clone https://github.com/djunamay/apoe4myelin.git
 conda env create -f ./environment/apoe_env.yml
 ```
 
+```R
+install.packages("BiocManager")
+BiocManager::install(version=“3.14”)
+BiocManager::install("ComplexHeatmap", version="3.14")
+BiocManager::install("BiocParallel", version="3.14")
+BiocManager::install("SingleCellExperiment", version="3.14")
+BiocManager::install("limma", version="3.14")
+BiocManager::install("GSVA", version="3.14")
+BiocManager::install("edgeR", version="3.14")
+BiocManager::install("fgsea", version="3.14")
+```
 ##### 3a. If you'd like to perform your own QC and celltype annotation from scratch
 1. Download the raw counts matrix and associated metadata from Synapse [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/).
 Please note, a data-use agreement must be submitted to access these data. Follow instructions on Synapse [here](https://www.synapse.org/#!RegisterAccount:0).
