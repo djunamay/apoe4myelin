@@ -71,11 +71,11 @@ install.packages("ggpubr")
 
 ```
 3. Follow instructions from point 3a to access the raw data.
-4. Now run:
+4. Navigate to the scripts folder, Now run:
 ```bash
 conda activate actionet_legacy_env
-Rscript ./scripts/generate_raw_sce_object.r 
-Rscript ./scripts/qc_and_annotation.r 
+Rscript ../scripts/generate_raw_sce_object.r 
+Rscript ../scripts/qc_and_annotation.r 
 ```
 
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
@@ -152,90 +152,90 @@ Create Environment:
 conda env create -f ./environment/apoe_env.yml
 ```
 
-Run this first:
+Navigate to the scripts folder, Run this first:
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/generate_qc_sce_object.r 
-Rscript ./scripts/get_pathways.r
-Rscript ./scripts/nebula_degs.r 
-Rscript ./scripts/get_expressed_genes_per_celltype.r 
-Rscript ./scripts/get_individual_level_averages_object.r 
-Rscript ./scripts/get_opc_ipsc_counts_table.r 
-Rscript ./scripts/make_metadata_file.r 
+Rscript ../scripts/generate_qc_sce_object.r 
+Rscript ../scripts/get_pathways.r
+Rscript ../scripts/nebula_degs.r 
+Rscript ../scripts/get_expressed_genes_per_celltype.r 
+Rscript ../scripts/get_individual_level_averages_object.r 
+Rscript ../scripts/get_opc_ipsc_counts_table.r 
+Rscript ../scripts/make_metadata_file.r 
 ```
 
 Figure 1
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/pathway_analyses.r 
-Rscript ./scripts/get_figure_1_plots.r
+Rscript ../scripts/pathway_analyses.r 
+Rscript ../scripts/get_figure_1_plots.r
 ```
 
 Figure 2
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/dissecting_cholesterol_dysregulation.r
-Rscript ./scripts/lipidomic_analysis_cc.r 
-Rscript ./scripts/get_figure_2_plots.r  
+Rscript ../scripts/dissecting_cholesterol_dysregulation.r
+Rscript ../scripts/lipidomic_analysis_cc.r 
+Rscript ../scripts/get_figure_2_plots.r  
 ```
 Figure 4
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/get_wilcox_degs.r
-Rscript ./scripts/get_figure_4_plots.r
+Rscript ../scripts/get_wilcox_degs.r
+Rscript ../scripts/get_figure_4_plots.r
 ```
 
 Extended Data Figure 1
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/plots_for_extended_data_figure_1.r 
+Rscript ../scripts/plots_for_extended_data_figure_1.r 
 ```
 
 Extended Data Figure 2
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/fgsea_analysis.r
-Rscript ./scripts/pseudo_bulk.r
-Rscript ./scripts/plots_for_extended_data_figure2.r 
-Rscript ./scripts/e4_effects_stratification_by_AD.r
-Rscript ./scripts/e4_stratification_plots.r
+Rscript ../scripts/fgsea_analysis.r
+Rscript ../scripts/pseudo_bulk.r
+Rscript ../scripts/plots_for_extended_data_figure2.r 
+Rscript ../scripts/e4_effects_stratification_by_AD.r
+Rscript ../scripts/e4_stratification_plots.r
 ```
 
 Extended Data Figure 3
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/lipidomic_analysis_pfc_get_data.r  # check 
-Rscript ./scripts/lipidomic_analysis_pfc_make_plots.r # check
+Rscript ../scripts/lipidomic_analysis_pfc_get_data.r  # check 
+Rscript ../scripts/lipidomic_analysis_pfc_make_plots.r # check
 ```
 
 Extended Data Figure 5
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/comparison_of_ipsc_and_brain_get_scaled_matrices.r
-Rscript ./scripts/comparison_of_ipsc_and_brain_plots.r
-Rscript ./scripts/APOE_expression_oligodendrocytes.r
-Rscript ./scripts/apoe_expression_ipsc.r  
+Rscript ../scripts/comparison_of_ipsc_and_brain_get_scaled_matrices.r
+Rscript ../scripts/comparison_of_ipsc_and_brain_plots.r
+Rscript ../scripts/APOE_expression_oligodendrocytes.r
+Rscript ../scripts/apoe_expression_ipsc.r  
 ```
 
 Extended Data Figure 7
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/get_postmortem_er_stress_pathways.r
-Rscript ./scripts/er_postmortem_plots.r  
-Rscript ./scripts/ipsc_gene_perturbations.r  
+Rscript ../scripts/get_postmortem_er_stress_pathways.r
+Rscript ../scripts/er_postmortem_plots.r  
+Rscript ../scripts/ipsc_gene_perturbations.r  
 ```
 
 Extended Data Figure 8
 ```bash
 conda activate apoe4myelin_env
-Rscript ./scripts/get_wilcox_myelin_plots.r
+Rscript ../scripts/get_wilcox_myelin_plots.r
 ```
 
 Or, run the full analysis pipeline:
 ```bash
 conda activate apoe4myelin_env
 chmod +x run_all_analyses.sh
-./scripts/run_all_analyses.sh
+../scripts/run_all_analyses.sh
 ```
 ### Citing this dataset and paper
 *coming soon*
