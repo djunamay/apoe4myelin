@@ -19,8 +19,7 @@ dependencies:
   - parallel
   - bioconductor-complexheatmap=2.10.0
   - bioconductor-biocparallel
-  - bioconductor-singlecellexperiment
+  - bioconductor-singlecellexperiment=1.16.0
   - bioconductor-limma=3.50.3
   - bioconductor-gsva=1.42.0
-  - bioconductor-ComplexHeatmap
-  - bioconductor-edgeR
+  - bioconductor-edgeR=3.36.0
