@@ -542,3 +542,36 @@ sum_counts = function(counts, label, cell_labels){
 
     return(list('summed_counts' = summed_counts, 'ncells' = ncells))
 }
+             
+######################################################
+normalize.default = function (ace, log_scale = TRUE){ # from ACTIONet V.2.0
+    S = SummarizedExperiment::assays(ace)[["counts"]]
+    B = rescale.matrix(S, log_scale)
+    rownames(B) = rownames(ace)
+    colnames(B) = colnames(ace)
+    SummarizedExperiment::assays(ace)[["logcounts"]] = B
+    return(ace)
+}
+######################################################
+rescale.matrix = function (S, log_scale = FALSE){  # from ACTIONet V.2.0
+    if (is.matrix(S)) {
+        cs = Matrix::colSums(S)
+        cs[cs == 0] = 1
+        B = median(cs) * scale(S, center = F, scale = cs)
+        if (log_scale == TRUE) {
+            B = log1p(B)
+        }
+    }
+    else {
+        A = as(S, "dgTMatrix")
+        cs = Matrix::colSums(A)
+        cs[cs == 0] = 1
+        x = median(cs) * (A@x/cs[A@j + 1])
+        if (log_scale == TRUE) {
+            x = log1p(x)
+        }
+        B = Matrix::sparseMatrix(i = A@i + 1, j = A@j + 1, x = x, 
+            dims = dim(A))
+    }
+    return(B)
+}
