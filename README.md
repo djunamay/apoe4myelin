@@ -123,8 +123,7 @@ apoe4myelin
 | differentially_expressed_genes/OPC_deg_statistics.txt         | see methods section "Bulk RNA-sequencing from isogenic iPSC-derived oligodendroglia" in our paper                                                                                                                       |
 | single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rds    | |
 
-6. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. This includes the following files:
-N.B. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](https://www.synapse.org/#!Synapse:syn3191087.11). The raw_counts_data directory does not need to be downloaded for this step.
+6. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](https://www.synapse.org/#!Synapse:syn3191087.11). Files marked with `*` must be downloaded from Synapse for this step. Some files can also be generated, as described in the `Description/Origin` column.
 
 | Data File                                                       | Description / Origin                                                                                                                            |       
 |-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -134,16 +133,16 @@ N.B. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](
 | single_cell_data/individual_level_averages_per_celltype/Mic.csv | run ./scripts/get_individual_level_averages_object.r                                                                                            |
 | single_cell_data/individual_level_averages_per_celltype/Oli.csv | run ./scripts/get_individual_level_averages_object.r                                                                                            |
 | single_cell_data/individual_level_averages_per_celltype/Opc.csv | run ./scripts/get_individual_level_averages_object.r                                                                                            |
-| single_cell_data/qc_counts_data/qc_column_metadata.csv | collected and shared by ROSMAP (Dr David Bennett and colleagues)                                                                                |
-| single_cell_data/qc_counts_data/qc_counts.mtx | see methods sections "Quality control for cell inclusion" and "Clustering analysis and QC filtering" in our paper, and ../scripts/qc_and_annotation.r |
-| single_cell_data/qc_counts_data/qc_gene_names.txt | see methods section "snRNA-seq data preprocessing" in our paper                                                                                 |
+| single_cell_data/qc_counts_data/qc_column_metadata.csv `*` | collected and shared by ROSMAP (Dr David Bennett and colleagues)                                                                                |
+| single_cell_data/qc_counts_data/qc_counts.mtx `*`| see methods sections "Quality control for cell inclusion" and "Clustering analysis and QC filtering" in our paper, and ../scripts/qc_and_annotation.r |
+| single_cell_data/qc_counts_data/qc_gene_names.txt `*`| see methods section "snRNA-seq data preprocessing" in our paper                                                                                 |
 | single_cell_data/raw_counts_data/column_metadata.csv | collected and shared by ROSMAP (Dr David Bennett and colleagues)                                                                                |
 | single_cell_data/raw_counts_data/gene_names.csv | see methods section "snRNA-seq data preprocessing" in our paper                                                                                 |
 | single_cell_data/raw_counts_data/raw_counts.mtx | see methods section "snRNA-seq data preprocessing" in our paper                                                                                 |
-| cc_lipidomics/Lipidomics_RawData.csv | see methods section "Untargeted lipidomics of post-mortem corpus callosum" in our paper                                                         |
-| cc_lipidomics/Lipidomics_RawData_2.csv | see methods section "Untargeted lipidomics of post-mortem corpus callosum" in our paper                                                         |
-| pfc_lipidomics/ChE_summary_cyc_05312022_all_samples.csv | see methods section "Untargeted Lipidomics on post-mortem prefrontal cortex" in our paper                                                       | 
-| pfc_lipidomics/ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv | accession through Synapse [here](https://www.synapse.org/#!Synapse:syn26475187)                                                                 |
+| cc_lipidomics/Lipidomics_RawData.csv `*`| see methods section "Untargeted lipidomics of post-mortem corpus callosum" in our paper                                                         |
+| cc_lipidomics/Lipidomics_RawData_2.csv `*`| see methods section "Untargeted lipidomics of post-mortem corpus callosum" in our paper                                                         |
+| pfc_lipidomics/ChE_summary_cyc_05312022_all_samples.csv `*`| see methods section "Untargeted Lipidomics on post-mortem prefrontal cortex" in our paper                                                       | 
+| pfc_lipidomics/ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv `*`| accession through Synapse [here](https://www.synapse.org/#!Synapse:syn26475187)                                                                 |
 
 7. create an empty directory in ./data titled "other_analyses_outputs"
 
