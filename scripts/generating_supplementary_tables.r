@@ -114,27 +114,27 @@ write.csv(norm_counts,'../data/supplementary_tables/Supplementary_Table_S10.csv'
 
 ## Supplementary Table S12.
 print('s12')
-degs = read.csv('../data/iPSC_data/OPC_DEG_statistics.txt', sep = '\t')
+degs = read.csv('../data/differentially_expressed_genes/OPC_DEG_statistics.txt', sep = '\t')
 write.csv(degs, '../data/supplementary_tables/Supplementary_Table_S12.csv')
 
 ## Supplementary Table S13.
 print('s13')
-out_all = as.data.frame(readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results.rds'))
+out_all = as.data.frame(readRDS('../data/differentially_expressed_genes/oli_wilcox_results.rds'))
 out_all$grp = 'APOE34 & APOE44 vs APOE33 (AD and nonAD)'
-oli_ad = as.data.frame(readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results_AD.rds'))
+oli_ad = as.data.frame(readRDS('../data/differentially_expressed_genes/oli_wilcox_results_AD.rds'))
 oli_ad$grp = 'APOE34 vs APOE33 (AD only)'
-oli_nonad = as.data.frame(readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results_noAD.rds'))
+oli_nonad = as.data.frame(readRDS('../data/differentially_expressed_genes/oli_wilcox_results_noAD.rds'))
 oli_nonad$grp = 'APOE34 vs APOE33 (nonAD only)'
 all_data = rbind(out_all, oli_ad, oli_nonad)
 write.csv(all_data, '../data/supplementary_tables/Supplementary_Table_S13.csv')
 
 ## Supplementary Table S14.
 print('s14')
-nebula = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype.rds')$Oli
+nebula = readRDS('../data/differentially_expressed_genes/E4_nebula_associations_by_celltype.rds')$Oli
 nebula$padj = p.adjust(nebula$p_Apoe_e4yes, 'fdr')
 write.csv(nebula, '../data/supplementary_tables/Supplementary_Table_S14.csv')
 
 ## Supplementary Table S15.
-print('s15')
-degs = read.csv('../data/other_analyses_outputs/pseudo_bulk_degs_single_cell_all_celltypes.csv')
-write.csv(degs, '../data/supplementary_tables/Supplementary_Table_S15.csv')
+#print('s15')
+#degs = read.csv('../data/other_analyses_outputs/pseudo_bulk_degs_single_cell_all_celltypes.csv')
+#write.csv(degs, '../data/supplementary_tables/Supplementary_Table_S15.csv')
