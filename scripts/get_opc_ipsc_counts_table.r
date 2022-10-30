@@ -28,6 +28,7 @@ load_counts = function(path1, file_term){
     return(all_counts)
 }
 
+print('load per-sample counts')                               
 # load the counts data
 path1 = '../data/iPSC_data/opc_ipsc_bulk_rnaseq_count_files'
 file_term = 'geneexp.txt'
@@ -54,5 +55,6 @@ counts = counts[!duplicated(counts$gene),]
 rownames(counts) = counts$gene
 counts$gene = NULL
 counts = counts[!rowSums(counts)==0,]
-
+print('saving')
 write.csv(counts, '../data/iPSC_data/ipsc_opc_rnaseq_counts.txt')
+print('done')
