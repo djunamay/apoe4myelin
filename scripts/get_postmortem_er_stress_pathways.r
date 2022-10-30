@@ -26,7 +26,7 @@ expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
 av_expression = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
 summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
 summary$APOE4 = ifelse(summary$apoe_genotype == '33', 0, 1)
-rownames(summary) = summary[,'projid...2']
+rownames(summary) = summary[,'projid']
 
 f1_data = readRDS('../data/other_analyses_outputs/pathway_scores.rds')
 nebula = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype.rds')
