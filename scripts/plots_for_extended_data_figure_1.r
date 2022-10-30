@@ -5,7 +5,7 @@ source('../functions/qc_and_annotation_aux_functions.r')
 print('loading sce')
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 Mapping = readRDS('../data/single_cell_data/Mapping.rds')
-Metadata = readRDS('../data/single_cell_data/Metadata.APOE.project.rds')
+Metadata = read.csv('../data/single_cell_data/metadata_by_individual.csv')
 All.colors = readRDS('../data/single_cell_data/Cell_group_colors.rds')
 Metadata$AD = as.character(Metadata$AD)
 
