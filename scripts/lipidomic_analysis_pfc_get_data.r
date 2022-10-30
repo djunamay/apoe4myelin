@@ -10,7 +10,7 @@ library(ggplot2)
 library(ggpubr)
 
 # load the che data
-data = as.data.frame(read_excel('../data/lipidomics_dataset/pfc_lipidomics/ChE summary_cyc_05312022_all samples.xlsx'))
+data = as.data.frame(read_excel('../data/pfc_lipidomics/ChE summary_cyc_05312022_all samples.xlsx'))
 data_new = na.omit(data[(as.numeric(data[,'Ratio of signal to noise'])>3 & as.numeric(data[,'Peak Quality'])>=0.6),]) # filter species
 index = endsWith(data_new$label,')') | endsWith(data_new$label,'1') | endsWith(data_new$label,'2') # filter species (don't consider peak combinations _c)
 data_new = data_new[index,] # filter species
@@ -19,9 +19,9 @@ rownames(data_subset) = data_new$label
 data_subset = data_subset[!rownames(data_subset)%in%c('ChE(18:1D7)_2','ChE(18:1D7)_1'),] # remove spike ins
 
 # load the metadata
-biospecimen = read.csv('../data/lipidomics_dataset/pfc_lipidomics/ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv')
+biospecimen = read.csv('../data/pfc_lipidomics/ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv')
 rownames(biospecimen) = biospecimen$specimenID
-full_meta = read.csv('../data/lipidomics_dataset/pfc_lipidomics/ROSMAP_clinical.csv')
+full_meta = read.csv('../data/pfc_lipidomics/ROSMAP_clinical.csv')
 rownames(full_meta) = full_meta$individualID
 name_conversion = merge(full_meta, biospecimen, by = 'individualID')[,c('projid', 'specimenID', 'individualID')]
 rownames(name_conversion) = name_conversion$specimenID
@@ -32,7 +32,7 @@ data_subset = as.data.frame(t(data_subset))
 data_subset = merge(data_subset, name_conversion, by = 0)
 
 # add additional variable info to the data
-nia = read.csv('../data/lipidomics_dataset/pfc_lipidomics/metadata_PFC_all_individuals_092520.tsv', sep = '\t')
+nia = read.csv('../data/pfc_lipidomics/metadata_PFC_all_individuals_092520.tsv', sep = '\t')
 full_meta = merge(full_meta, nia, by = 'projid')
 rownames(full_meta) = full_meta$projid
 
