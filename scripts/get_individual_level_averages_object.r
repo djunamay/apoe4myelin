@@ -3,7 +3,6 @@ source('../functions/qc_and_annotation_aux_functions.r')
 
 print('reading SCE')
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
-sce =  normalize.default(sce)
 meta = colData(sce)
 cell_labels = rownames(meta)
 
