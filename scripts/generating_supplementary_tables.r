@@ -6,7 +6,7 @@ library(SingleCellExperiment)
 print('s1')
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 coldata = colData(sce)
-coldata = coldata[!duplicated(coldata$projid),]
+meta = coldata[!duplicated(coldata$projid),]
 names = c('projid','age_death', 'amyloid', 'braaksc', 'ceradsc', 'cogdx', 'msex', 'nft', 'pmi', 'apoe_genotype')
 write.csv(meta[,names], '../data/supplementary_tables/Supplementary_Table_S1.csv')
 
