@@ -3,12 +3,12 @@ library('readxl')
 library(SingleCellExperiment)
 
 ## Supplementary Table S1.
-print('s1')
-sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
-coldata = colData(sce)
-meta = coldata[!duplicated(coldata$projid),]
-names = c('projid','age_death', 'amyloid', 'braaksc', 'ceradsc', 'cogdx', 'msex', 'nft', 'pmi', 'apoe_genotype')
-write.csv(meta[,names], '../data/supplementary_tables/Supplementary_Table_S1.csv')
+# print('s1')
+# sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
+# coldata = colData(sce)
+# meta = coldata[!duplicated(coldata$projid),]
+# names = c('projid','age_death', 'amyloid', 'braaksc', 'ceradsc', 'cogdx', 'msex', 'nft', 'pmi', 'apoe_genotype')
+# write.csv(meta[,names], '../data/supplementary_tables/Supplementary_Table_S1.csv')
 
 ## Supplementary Table S2.
 print('s2')
