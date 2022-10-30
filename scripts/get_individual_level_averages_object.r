@@ -28,4 +28,4 @@ for(i in celltype_unique){
     avs_by_ind_out[[i]] = df
 }
 print('save the averages')
-saveRDS(avs_by_ind_out, '../data/single_cell_data/individual_level_averages_per_celltype2.rds')
+saveRDS(avs_by_ind_out, '../data/single_cell_data/individual_level_averages_per_celltype.rds')
