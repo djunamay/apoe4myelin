@@ -3,7 +3,7 @@ library(SingleCellExperiment)
 library(tidyr)
 
 print('reading sce')
-sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
+sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 meta = colData(sce)
 cell_labels = rownames(meta)
 
