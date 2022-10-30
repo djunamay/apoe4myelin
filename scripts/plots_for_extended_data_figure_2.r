@@ -38,7 +38,6 @@ require(GSVA)
 pathways = readRDS('../data/other_analyses_outputs/pathways.rds')
 All.paths = pathways$pathways$apoe_gsets_all
 
-Celltype.averages <- assays(Summary.DE.celltype)[["E"]]
 APOE.paths.celltype.activity <- gsva(Celltype.averages, gset.idx.list = All.paths)
 Celltype.assign <- colnames(APOE.paths.celltype.activity[,c("Ex", "In", "Ast", "Mic", "Oli", "Opc")])[apply(APOE.paths.celltype.activity[,c("Ex", "In", "Ast", "Mic", "Oli", "Opc")], 1, which.max)]
 pdf("../plots/Extended_2/APOErelatedPathwayActivity.pdf", width = 2.5)
