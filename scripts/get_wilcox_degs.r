@@ -3,8 +3,10 @@
 library(SingleCellExperiment)
 print('loading the sce object')
 source('../functions/differential_expression.r')
+source('../functions/qc_and_annotation_aux_functions.r')
 
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
+sce =  normalize.default(sce)
 
 # for all
 print('subsetting sce object')
