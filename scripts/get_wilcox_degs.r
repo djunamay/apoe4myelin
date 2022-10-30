@@ -7,8 +7,9 @@ source('../functions/differential_expression.r')
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 
 # for all
-print('computing degs')
+print('subsetting sce object')
 oli = sce[,sce$cell.type=='Oli']
+print('computing degs')
 out_all = Wilcox.differential(logcounts(oli), ifelse(oli$apoe_genotype==33, 0, 1))
 
 # stratified by pathology
