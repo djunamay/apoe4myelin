@@ -80,7 +80,7 @@ Rscript ../scripts/qc_and_annotation.r
 ```
 
 ##### 3c. If you'd like to recapitulate any of the analyses presented in the paper
-1. create `actionet_legacy_env` and `apoe4myelin_env` conda environments as described in point `2`
+1. create `apoe4myelin_env` conda environment as described in point `2`
 2. follow instructions [here](https://github.com/lhe17/nebula) to download the nebula package into the `apoe4myelin_env` environment
 3. follow instructions [here](https://github.com/immunogenomics/presto) to download the immunogenomics/presto package into the `apoe4myelin_env` environment
 4. Create the following /plots directory within this git repo
