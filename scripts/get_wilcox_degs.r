@@ -1,6 +1,6 @@
 ########## compute wilcoxon degs ##########
 ###########################################
-
+library(SingleCellExperiment)
 print('loading the sce object')
 source('../functions/differential_expression.r')
 
