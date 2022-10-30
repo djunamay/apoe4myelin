@@ -7,9 +7,6 @@ source('../functions/qc_and_annotation_aux_functions.r')
 
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 
-print('running normalization')
-sce =  normalize.default(sce)
-
 # for all
 print('subsetting sce object')
 oli = sce[,sce$cell.type=='Oli']
