@@ -13,7 +13,7 @@ rownames(sce_qc) <- readLines("../data/single_cell_data/qc_counts_data/qc_gene_n
 colMeta <- DataFrame(read.csv("../data/single_cell_data/qc_counts_data/qc_column_metadata.csv", row.names = 1))
 colnames(sce_qc) <- rownames(colMeta)
 sce_qc@colData <- colMeta
-sce =  normalize.default(sce)
+sce_qc =  normalize.default(sce_qc)
 ##############################################################################################################
 # plot cells 2D
 plot(sce_qc@colData$x, sce_qc@colData$y, col=scales::alpha(sce_qc@colData$cell.type.color, sce_qc@colData$connectivity), cex=0.15, axes=F, xlab="", ylab="")
