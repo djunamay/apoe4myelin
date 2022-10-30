@@ -7,14 +7,18 @@ print('|| plotting APOE expression in oligodendrocytes (post-mortem)... ||')
 library(ggplot2)
 
 # load sce
+print('loading')
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
+print('subsetting')
 oli = sce[,sce$cell.type=='Oli']
 
 # get APOE expression
+print('apoe expression')
 d = as.data.frame(logcounts(oli)['APOE',])
 colnames(d) = c('APOE')
 
 # how is APOE detected relative to other genes?
+print('apoe detection')
 cts = counts(oli)
 cts_binary = cts>0
 sums = rowSums(cts_binary)
@@ -22,6 +26,7 @@ det.rate = sums/ncol(cts_binary)
 df = as.data.frame(det.rate)
 
 # make plots
+print('plotting')
 pdf('../plots/Extended_6/distribution_apoe.pdf', width = 3, height = 3)
 ggplot(df, aes(x = det.rate)) +
   geom_histogram(aes(y = ..density..),
