@@ -11,29 +11,29 @@ library(SingleCellExperiment)
 # write.csv(meta[,names], '../data/supplementary_tables/Supplementary_Table_S1.csv')
 
 ## Supplementary Table S2.
-# print('s2')
-# expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
-# out = list()
-# for(i in names(expressed)){
-  # df = as.data.frame(expressed[[i]])
-  # df$celltype = i
-  # colnames(df) = c('expressed_gene', 'celltype')
-  # out[[i]] = df
-# }
-# out = do.call('rbind', out)
-# write.csv(out, '../data/supplementary_tables/Supplementary_Table_S2.csv')
+print('s2')
+expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
+out = list()
+for(i in names(expressed)){
+  df = as.data.frame(expressed[[i]])
+  df$celltype = i
+  colnames(df) = c('expressed_gene', 'celltype')
+  out[[i]] = df
+ }
+out = do.call('rbind', out)
+write.csv(out, '../data/supplementary_tables/Supplementary_Table_S2.csv')
 
 ## Supplementary Table S3.
-print('s3')
-av = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
-out = list()
-for(i in names(av)){
-  df = as.data.frame(av[[i]])
-  df$celltype = i
-  out[[i]] = df
-}
-out = do.call('rbind', out)
-write.csv(out, '../data/supplementary_tables/Supplementary_Table_S3.csv')
+#print('s3')
+#av = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
+#out = list()
+#for(i in names(av)){
+#  df = as.data.frame(av[[i]])
+#  df$celltype = i
+#  out[[i]] = df
+#}
+#out = do.call('rbind', out)
+#write.csv(out, '../data/supplementary_tables/Supplementary_Table_S3.csv')
 
 ## Supplementary Table S4
 print('s4')
