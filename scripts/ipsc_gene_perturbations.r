@@ -35,7 +35,7 @@ for(i in names(out)){
 for(f in names(l)){
     x = l[[f]]$score
     names(x) = rownames(l[[f]])
-    pdf(paste0('../plots/Extended_8/', f,'.pdf'), width = 3, height = 5)
+    pdf(paste0('../plots/Extended_7/', f,'.pdf'), width = 3, height = 5)
     print(barplot(x[order(x)], las = 1, horiz = T))
     dev.off()
 }
@@ -49,7 +49,7 @@ df$gene = rownames(df)
 x = melt(df)
 x$variable = ifelse(startsWith(as.character(x$variable), 'E3'), 'APOE3', 'APOE4')
 
-pdf('../plots/Extended_8/SOAT1_CYP_boxplots_ipsc.pdf', width = 3, height = 4)
+pdf('../plots/Extended_7/SOAT1_CYP_boxplots_ipsc.pdf', width = 3, height = 4)
 ggplot(x, aes(x=variable, y=value, col = variable)) +
       geom_boxplot(width = .5) + geom_jitter() + facet_wrap(. ~ gene,  scales="free_y", nrow = 2) + theme_classic()
 dev.off()
