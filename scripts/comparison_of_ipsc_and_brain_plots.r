@@ -30,7 +30,7 @@ p <- ggplot(d,
   aes(x=PC1, y=PC2)) +
   geom_point(alpha = .5, aes(shape=model, color = names),size=5) + scale_colour_manual(values = (col[names]))
 
-pdf('../plots/Extended_6/pca_ipsc.pdf', width = 5, height = 4)
+pdf('../plots/Extended_5/pca_ipsc.pdf', width = 5, height = 4)
 p + theme_bw()  + theme(panel.background = element_rect(colour = "black", size=1), panel.grid.minor = element_blank(), panel.grid.major = element_blank())
 dev.off()
 
@@ -81,7 +81,7 @@ f$value = max(f$value) - f$value
 f$value = f$value/max(f$value) # show values as fraction of maximum distance from oligodendroglia
 f$Var1 = factor(f$Var1, levels = names(order))
 
-pdf('../plots/Extended_6/distplot.pdf', width = 3, height = 4)
+pdf('../plots/Extended_5/distplot.pdf', width = 3, height = 4)
 ggplot(f, aes(x=Var1, y=value)) +
   geom_boxplot() + theme_classic() + stat_compare_means(method = 'wilcox.test', comparisons = list(c('Opc', 'Oli'), c('Opc', 'In'), c('Opc', 'Ex'), c('Opc', 'Mic'), c('Opc', 'Ast')))
 dev.off()
@@ -116,12 +116,12 @@ d$grp = factor(d$grp, levels = c('Oli_human','Oli_iPSC','Opc_human','Ast_human',
 col1 = c("#F39B7FFF" ,"#F39B7FFF" , "#8491B4FF", "#E64B35FF" , "#E64B35FF" , "#3C5488FF", "#3C5488FF", "#4DBBD5FF", "#4DBBD5FF","#00A087FF","#00A087FF")
 names(col1) = levels(d$grp)
 
-pdf('../plots/Extended_6/boxplot_cholest.pdf', width = 3,  height = 4)
+pdf('../plots/Extended_5/boxplot_cholest.pdf', width = 3,  height = 4)
 ggplot(d, aes(x=grp, y=cholest)) +
   geom_boxplot() + theme_classic() + stat_compare_means(method = 'wilcox.test', comparisons = list(c('Oli_iPSC','Ast_iPSC'), c('Oli_iPSC', 'Mic_iPSC'), c('Oli_iPSC', 'Ex_iPSC')))
 dev.off()
 
-pdf('../plots/Extended_6/boxplot_myelin.pdf', width = 3,  height = 4)
+pdf('../plots/Extended_5/boxplot_myelin.pdf', width = 3,  height = 4)
 ggplot(d, aes(x=grp, y=myelination)) +
   geom_boxplot() + theme_classic() + stat_compare_means(method = 'wilcox.test', comparisons = list(c('Oli_iPSC','Ast_iPSC'), c('Oli_iPSC', 'Mic_iPSC'), c('Oli_iPSC', 'Ex_iPSC')))
 dev.off()
@@ -139,13 +139,13 @@ group2 = c('iPSC','iPSC','iPSC','iPSC','human','human','human','human','human','
 column_ha = HeatmapAnnotation(group = group, group2= group2, col = list(group = col[group], group2 = c[group2]))
 h1 = Heatmap(all_avs[paths$cholest,], border = T, rect_gp = gpar(col = 'black', lwd = 1), column_title = 'cholesterol biosynthesis',   column_title_gp = gpar(fontsize = 9),row_names_gp = gpar(fontsize = 11),column_names_gp = gpar(fontsize = 13), cluster_rows = T, bottom_annotation = column_ha)
 
-pdf('../plots/Extended_6/cholest_genes_expression.pdf', width = 5, height = 5)
+pdf('../plots/Extended_5/cholest_genes_expression.pdf', width = 5, height = 5)
 h1
 dev.off()
 
 h2 = Heatmap(all_avs[paths$myelination,], border = T, rect_gp = gpar(col = 'black', lwd = 1), column_title = 'myelination',   column_title_gp = gpar(fontsize = 9),row_names_gp = gpar(fontsize = 11),column_names_gp = gpar(fontsize = 13), cluster_rows = T, bottom_annotation = column_ha)
 
-pdf('../plots/Extended_6/myelin_expression.pdf', width = 5, height = 3.8)
+pdf('../plots/Extended_5/myelin_expression.pdf', width = 5, height = 3.8)
 h2
 dev.off()
 
