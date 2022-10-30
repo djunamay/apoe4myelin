@@ -9,7 +9,7 @@ library(tidyr)
 library(reshape2)
 library(ggplot2)
 
-out_APOE4 = read.table('../data/iPSC_data/OPC_DEG_statistics.txt',  header = T)
+out_APOE4 = read.table('../data/differentially_expressed_genes/OPC_DEG_statistics.txt',  header = T)
 pathways = readRDS('../data/other_analyses_outputs/pathways.rds')
 
 # look at the cholesterol biosynthesis signature
