@@ -20,7 +20,7 @@ re = nebula(C, sce.oli$projid, pred=df, offset=Matrix::colSums(C))
 ##############################################################################################################
 out <- re$summary
 rownames(out) <- out$gene
-out$score <- -log10(DEoutList[[i]]$p_APOE4yes) * ifelse(DEoutList[[i]]$logFC_APOE4yes>0, 1, -1)
+out$score <- -log10(out[[i]]$p_APOE4yes) * ifelse(out[[i]]$logFC_APOE4yes>0, 1, -1)
 print('saving degs')
 saveRDS(out, file="../data/differentially_expressed_genes/E4_nebula_associations_Oli.rds")
 ##############################################################################################################
