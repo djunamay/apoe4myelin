@@ -37,13 +37,16 @@ dev.off()
 
 #marker enrichment
 print('marker enrichment')
-Summary.data.celltype <- readRDS("../data/single_cell_data/Summary.data.celltype.rds")
+Summary.data.celltype <- readRDS("../data/single_cell_data/individual_level_averages_per_celltype.rds")
+temp = lapply(names(Summary.data.celltype), function(x) rowMeans(Summary.data.celltype[[x]]))
+names(temp) = names(Summary.data.celltype)
+Summary.data.celltype = do.call('cbind', temp)
 RefCellTypeMarkers <- readRDS("../data/single_cell_data/RefCellTypeMarkers.adultBrain.rds")
 PanglaoDB <- readRDS("../data/single_cell_data/PanglaoDB.by.organ.by.celltype.rds")
 
 # PsychENCODE enrichment
 is.sparseMatrix <- function(x) is(x, 'sparseMatrix')
-S <- Aggregate.pairwise.FC.colPairwise(assays(Summary.data.celltype)[["E"]])
+S <- Aggregate.pairwise.FC.colPairwise((Summary.data.celltype))
 x <- Permutation.enrichment.analysis(x = t(S), marker.genes = RefCellTypeMarkers)
 
 # PanglaoDB enrichment
