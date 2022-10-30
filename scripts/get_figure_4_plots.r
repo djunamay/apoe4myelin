@@ -2,7 +2,7 @@
 ########################################
 print('loading the data')
 # load the wilcox degs
-degs = readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results.rds')
+degs = readRDS('../data/differentially_expressed_genes/oli_wilcox_results.rds')
 
 # these are a selection of genes manually curated for figure 2
 print('plotting')
@@ -20,7 +20,7 @@ dev.off()
 # show the degs for myelin genes with and without AD
 options(repr.plot.width = 3, repr.plot.height =3.5, repr.plot.res = 100)
 
-ad = readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results_AD.rds')
+ad = readRDS('../data/differentially_expressed_genes/oli_wilcox_results_AD.rds')
 myelination <- c("MYRF","MOG","PLP1","PLLP","MAG","OPALIN")
 gg = ad[myelination,]
 gg = gg[gg$padj<0.05,]
@@ -34,7 +34,7 @@ dev.off()
 # show the degs for myelin genes with and without AD
 options(repr.plot.width = 3, repr.plot.height =3.5, repr.plot.res = 100)
 
-no = readRDS('../data/differentially_expressed_genes_data/oli_wilcox_results_noAD.rds')
+no = readRDS('../data/differentially_expressed_genes/oli_wilcox_results_noAD.rds')
 myelination <- c("MYRF","MOG","PLP1","PLLP","MAG","OPALIN")
 gg = no[myelination,]
 gg = gg[gg$padj<0.05,]
