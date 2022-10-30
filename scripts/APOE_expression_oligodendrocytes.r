@@ -5,7 +5,7 @@ print('|| plotting APOE expression in oligodendrocytes (post-mortem)... ||')
 
 # required packages
 library(ggplot2)
-
+library(SingleCellExperiment)
 # load sce
 print('loading')
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
