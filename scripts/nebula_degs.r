@@ -1,7 +1,7 @@
 ##############################################################################################################
 library(nebula)
 print('loading sce')
-sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
+sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 print('subsetting oli')
 sce.oli <- sce[,sce$cell.type%in%"Oli"]
 gc()
