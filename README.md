@@ -192,7 +192,7 @@ Extended Data Figure 2
 conda activate apoe4myelin_env
 Rscript ../scripts/fgsea_analysis.r
 Rscript ../scripts/pseudo_bulk.r
-Rscript ../scripts/plots_for_extended_data_figure2.r 
+Rscript ../scripts/plots_for_extended_data_figure_2.r 
 Rscript ../scripts/e4_effects_stratification_by_AD.r
 Rscript ../scripts/e4_stratification_plots.r
 ```
