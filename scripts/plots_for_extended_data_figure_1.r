@@ -2,6 +2,7 @@
 ######################################################
 source('../functions/qc_and_annotation_aux_functions.r')
 
+print('loading sce')
 sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 Mapping = readRDS('../data/single_cell_data/Mapping.rds')
 Metadata = readRDS('../data/single_cell_data/Metadata.APOE.project.rds')
@@ -11,6 +12,7 @@ Metadata$AD = as.character(Metadata$AD)
 library(ComplexHeatmap)
 
 #actionet 2D
+print('actionet 2d')
 pdf("../plots/Extended_1/2D_cells_celltypes_noLabs.pdf")
 Cols <- Mapping[sce$sub.cluster,"celltype.colors"]
 names(Cols) <- Mapping[sce$sub.cluster,"celltype.relable"]
@@ -18,6 +20,7 @@ Plot.coords(as.data.frame(sce@colData), x = "x", y = "y", Trans = sce@colData$co
 dev.off()
 
 #path variables
+print('path vars')
 require(ggpubr)
 pdf("../plots/Extended_1/Supp_PathoVariables_by_genotype_AD.pdf", height = 6)
 p1 <- ggboxplot(Metadata, x = "AD", y = "amyloid") + facet_wrap(~apoe_genotype) + stat_compare_means()
@@ -33,6 +36,7 @@ ggarrange(p1, p2, nrow = 2)
 dev.off()
 
 #marker enrichment
+print('marker enrichment')
 Summary.data.celltype <- readRDS("../data/single_cell_data/Summary.data.celltype.rds")
 RefCellTypeMarkers <- readRDS("../data/single_cell_data/RefCellTypeMarkers.adultBrain.rds")
 PanglaoDB <- readRDS("../data/single_cell_data/PanglaoDB.by.organ.by.celltype.rds")
@@ -61,6 +65,7 @@ Heatmap(temp, cluster_rows = F, cluster_columns = F,rect_gp = gpar(col = "black"
 dev.off()
 
 #cross-individual celltype correlation
+print('correlations')
 L = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
 
 C <- lapply(L[c("Ex", "In","Ast", "Oli", "Opc", "Mic")], function(i) cor(i)[upper.tri(cor(i))])
@@ -88,6 +93,7 @@ Heatmap(C, bottom_annotation = Ann, show_row_names = F, show_column_names = F, n
 dev.off()
 
 #fraction plots
+print('fraction plots')
 pdf("../plots/Extended_1/Supp_fraction_plots2.pdf", height = 3.5, width = 3.5)
 x <- sort(apply(Table.to.matrix(table(sce$projid, sce$cell.type)), 2, median), decreasing = T)
 barplot(x, col=All.colors[names(x)], las=2, ylab="median number of cells per subject")
