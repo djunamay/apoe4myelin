@@ -4,7 +4,7 @@ library('readxl')
 ## Supplementary Table S1.
 print('s1')
 meta = read.csv('../data/single_cell_data/metadata_by_individual.csv')
-names = c('X','age_death', 'amyloid', 'braaksc', 'ceradsc', 'cogdx', 'msex', 'nft', 'pmi', 'apoe_genotype')
+names = c('projid','age_death', 'amyloid', 'braaksc', 'ceradsc', 'cogdx', 'msex', 'nft', 'pmi', 'apoe_genotype')
 write.csv(meta[,names], '../data/supplementary_tables/Supplementary_Table_S1.csv')
 
 ## Supplementary Table S2.
