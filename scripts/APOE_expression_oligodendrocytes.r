@@ -7,7 +7,7 @@ print('|| plotting APOE expression in oligodendrocytes (post-mortem)... ||')
 library(ggplot2)
 
 # load sce
-sce = readRDS('../data/single_cell_data/single_cell_experiment_object.rds')
+sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
 oli = sce[,sce$cell.type=='Oli']
 
 # get APOE expression
