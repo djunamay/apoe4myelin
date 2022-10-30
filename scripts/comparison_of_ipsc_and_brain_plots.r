@@ -9,7 +9,7 @@ library(ComplexHeatmap)
 library(ggplot2)
 library(reshape2)
 
-merged_scaled = read.csv('../data/supplementary_tables/ipsc_postmortem_merged_scaled_matrices.csv', row.names = 'Row.names')
+merged_scaled = read.csv('../data/supplementary_tables/ipsc_postmortem_merged_scaled_matrices_individual_level.csv', row.names = 'Row.names')
 merged_scaled$X = NULL
 
 # get colors and names
