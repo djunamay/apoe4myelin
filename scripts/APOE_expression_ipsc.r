@@ -17,7 +17,7 @@ df = df[!df$means==0,,drop = F]
 d = df[order(df$means,decreasing = F),,drop = F]
 percentile = (which(rownames(d) =='APOE')/nrow(d))*100
 
-pdf('../plots/Extended_6/apoe_expression_ipsc.pdf', width = 5, height = 5)
+pdf('../plots/Extended_5/apoe_expression_ipsc.pdf', width = 5, height = 5)
 ggplot(df, aes(x = (means))) +
   geom_histogram(aes(y = ..density..),
                  colour = 1, fill = "white", binwidth =0.5 ) +
