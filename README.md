@@ -154,11 +154,11 @@ Navigate to the scripts folder, run this first:
 conda activate apoe4myelin_env
 Rscript ../scripts/generate_qc_sce_object.r 
 Rscript ../scripts/get_individual_level_averages_object.r 
+Rscript ../scripts/make_metadata_file.r 
 Rscript ../scripts/get_pathways.r
 Rscript ../scripts/nebula_degs.r 
 Rscript ../scripts/get_expressed_genes_per_celltype.r 
 Rscript ../scripts/get_opc_ipsc_counts_table.r 
-Rscript ../scripts/make_metadata_file.r 
 ```
 
 Figure 1
