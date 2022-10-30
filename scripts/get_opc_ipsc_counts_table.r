@@ -29,13 +29,13 @@ load_counts = function(path1, file_term){
 }
 
 # load the counts data
-path1 = '../data/iPSC_data/ipsc_bulk_rnaseq_count_files'
+path1 = '../data/iPSC_data/opc_ipsc_bulk_rnaseq_count_files'
 file_term = 'geneexp.txt'
 counts = load_counts(path1, file_term)
 x = strsplit(colnames(counts), '-')
 colnames(counts) = unlist(lapply(x, function(i) i[[2]]))
 
-meta1 = read.table('../data/iPSC_data/ipsc_bulk_rnaseq_count_files/ipsc_metadata.csv', sep = ',', header = F)
+meta1 = read.table('../data/iPSC_data/opc_ipsc_bulk_rnaseq_count_files/ipsc_metadata.csv', sep = ',', header = F)
 x = strsplit(meta1$V1, '-')
 xx = unlist(lapply(x, function(i) i[[2]]))
 x = strsplit(xx, ' :')
@@ -43,7 +43,7 @@ rownames(meta1) = unlist(lapply(x, function(i) i[[1]]))
 colnames(counts) = meta1[as.character(colnames(counts)),'V2']
 
 # add the gene names
-x = as.data.frame(read.table('../data/iPSC_data/ipsc_bulk_rnaseq_count_files/D19-13224-4367S_geneexp.txt', header = FALSE))
+x = as.data.frame(read.table('../data/iPSC_data/opc_ipsc_bulk_rnaseq_count_files/D19-13224-4367S_geneexp.txt', header = FALSE))
 gene.df = as.data.frame(cbind(as.character(x$V1), as.character(x$V3)))
 rownames(gene.df) = gene.df$V1
 
