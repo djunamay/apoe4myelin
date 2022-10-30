@@ -10,8 +10,8 @@ library(matrixStats)
 
 # import the human post-mortem lipidomics data
 print('loading and processing the data')
-hdata = read.csv('../data/lipidomics_dataset/cc_lipidomics/Lipidomics_RawData.csv')
-hdata2 = read.csv('../data/lipidomics_dataset/cc_lipidomics/Lipidomics_RawData_2.csv')
+hdata = read.csv('../data/cc_lipidomics/Lipidomics_RawData.csv')
+hdata2 = read.csv('../data/cc_lipidomics/Lipidomics_RawData_2.csv')
 
 # combine the separate human lipid data sheets
 df = hdata[,c('Molecular.Species','Lipid.Classes',colnames(hdata)[startsWith(colnames(hdata), 'X')])]
