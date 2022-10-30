@@ -29,7 +29,7 @@ summary$APOE4 = ifelse(summary$apoe_genotype == '33', 0, 1)
 rownames(summary) = summary[,'projid']
 
 f1_data = readRDS('../data/other_analyses_outputs/pathway_scores.rds')
-nebula = readRDS('../data/differentially_expressed_genes_data/E4_nebula_associations_by_celltype.rds')
+nebula = readRDS('../data/differentially_expressed_genes/E4_nebula_associations_by_celltype_Oli.rds')
 
 # get ER stress/unfolded protein response pathways
 paths = get_gset_names_by_category(c('unfolded protein'), names(all_paths))
@@ -51,9 +51,8 @@ df2$genotype = summary[rownames(df2),'apoe_genotype']
 df2$apoe = ifelse(df2$genotype == 33, 'E3', 'E4')
 colnames(df2) = c('value', 'genotype', 'APOE')
 
-df = nebula$Oli
-df$padj = p.adjust(df$p_Apoe_e4yes, 'fdr')
-degs = (df[df$padj<0.05,])
+nebula$padj = p.adjust(nebula$p_Apoe_e4yes, 'fdr')
+degs = (nebula[nebula$padj<0.05,])
 d = na.omit(degs[unname(unlist(low_removed$Oli[name])),])
 x = d[,1]
 names(x) = rownames(d)
