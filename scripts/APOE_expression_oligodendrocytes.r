@@ -27,7 +27,7 @@ df = as.data.frame(det.rate)
 
 # make plots
 print('plotting')
-pdf('../plots/Extended_6/distribution_apoe.pdf', width = 3, height = 3)
+pdf('../plots/Extended_5/distribution_apoe.pdf', width = 3, height = 3)
 ggplot(df, aes(x = det.rate)) +
   geom_histogram(aes(y = ..density..),
                  colour = 1, fill = "white", binwidth =0.01 ) +
