@@ -8,7 +8,7 @@ library('ggplot2')
 
 summary = read.csv('../data/single_cell_data/metadata_by_individual.csv')
 summary$APOE4 = ifelse(summary$apoe_genotype == '33','e3','e4')
-rownames(summary) = summary[,'projid...2']
+rownames(summary) = summary[,'projid']
 expressed = readRDS('../data/single_cell_data/expressed_genes_per_celltype.rds')
 
 
