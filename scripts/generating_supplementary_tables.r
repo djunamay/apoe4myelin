@@ -135,6 +135,6 @@ nebula$padj = p.adjust(nebula$p_Apoe_e4yes, 'fdr')
 write.csv(nebula, '../data/supplementary_tables/Supplementary_Table_S14.csv')
 
 ## Supplementary Table S15.
-#print('s15')
-#degs = read.csv('../data/other_analyses_outputs/pseudo_bulk_degs_single_cell_all_celltypes.csv')
-#write.csv(degs, '../data/supplementary_tables/Supplementary_Table_S15.csv')
+print('s15')
+degs = read.csv('../data/other_analyses_outputs/pseudo_bulk_degs_single_cell_all_celltypes.csv')
+write.csv(degs, '../data/supplementary_tables/Supplementary_Table_S15.csv')
