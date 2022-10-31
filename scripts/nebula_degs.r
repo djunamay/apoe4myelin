@@ -17,7 +17,9 @@ Predictors$APOE4 <- as.character(Predictors$APOE4)
 Predictors$batch <- as.character(Predictors$batch)
 df = model.matrix(~APOE4+amyloid+nft+age_death+batch, data=Predictors)
 print('computing degs')
-re = nebula(C, sce.oli$projid, pred=df, offset=Matrix::colSums(C))
+sparsematrix <- as(C, "CsparseMatrix")
+
+re = nebula(sparsematrix, sce.oli$projid, pred=df, offset=Matrix::colSums(sparsematrix))
 ##############################################################################################################
 out <- re$summary
 rownames(out) <- out$gene
