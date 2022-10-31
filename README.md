@@ -201,8 +201,8 @@ Rscript ../scripts/e4_stratification_plots.r
 Extended Data Figure 3
 ```bash
 conda activate apoe4myelin_env
-Rscript ../scripts/lipidomic_analysis_pfc_get_data.r  # check 
-Rscript ../scripts/lipidomic_analysis_pfc_make_plots.r # check
+Rscript ../scripts/lipidomic_analysis_pfc_get_data.r
+Rscript ../scripts/lipidomic_analysis_pfc_make_plots.r
 ```
 
 Extended Data Figure 5
