@@ -23,7 +23,9 @@ re = nebula(sparsematrix, sce.oli$projid, pred=df, offset=Matrix::colSums(sparse
 ##############################################################################################################
 out <- re$summary
 rownames(out) <- out$gene
-out$score <- -log10(out[[i]]$p_APOE4yes) * ifelse(out[[i]]$logFC_APOE4yes>0, 1, -1)
+out$score <- -log10(out$p_APOE4yes) * ifelse(out$logFC_APOE4yes>0, 1, -1)
 print('saving degs')
-saveRDS(out, file="../data/differentially_expressed_genes/E4_nebula_associations_Oli.rds")
+out = out[,c('p_APOE4yes', 'logFC_APOE4yes', 'score','gene')]
+colnames(out) = c('p_Apoe_e4yes', 'logFC_APOE4yes', 'score', 'gene')
+saveRDS(out, file="../data/differentially_expressed_genes/E4_nebula_associations_by_celltype_Oli.rds")
 ##############################################################################################################
