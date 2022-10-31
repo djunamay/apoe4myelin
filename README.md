@@ -71,7 +71,7 @@ Please note, a data-use agreement must be submitted to access these data. Follow
 
 ##### 3b. If you'd like to recapitulate our QC and celltype annotation
 1. create `actionet_legacy_env` conda environment as described in point `2`
-2. Follow instructions from point `3a` to access the raw data and from point `3c.5` to access the `/single_cell_data` files marked by `*`
+2. Follow instructions from point `3c.5` to access and download the `/single_cell_data` files marked by `*`
 3. Navigate to the scripts folder, Now run:
 ```bash
 conda activate actionet_legacy_env
