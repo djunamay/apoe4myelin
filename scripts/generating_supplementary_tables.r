@@ -3,12 +3,11 @@ library('readxl')
 library(SingleCellExperiment)
 
 ## Supplementary Table S1.
-# print('s1')
-# sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
-# coldata = colData(sce)
-# meta = coldata[!duplicated(coldata$projid),]
-# names = c('projid','age_death', 'amyloid', 'braaksc', 'ceradsc', 'cogdx', 'msex', 'nft', 'pmi', 'apoe_genotype')
-# write.csv(meta[,names], '../data/supplementary_tables/Supplementary_Table_S1.csv')
+print('s1')
+sce = readRDS('../data/single_cell_data/single_cell_experiment_object_qced.rds')
+coldata = colData(sce)
+meta = coldata[!duplicated(coldata$projid),]
+write.csv(meta, '../data/supplementary_tables/Supplementary_Table_S1.csv')
 
 ## Supplementary Table S2.
 print('s2')
@@ -24,16 +23,17 @@ out = do.call('rbind', out)
 write.csv(out, '../data/supplementary_tables/Supplementary_Table_S2.csv')
 
 ## Supplementary Table S3.
-#print('s3')
-#av = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
-#out = list()
-#for(i in names(av)){
-#  df = as.data.frame(av[[i]])
-#  df$celltype = i
-#  out[[i]] = df
-#}
-#out = do.call('rbind', out)
-#write.csv(out, '../data/supplementary_tables/Supplementary_Table_S3.csv')
+print('s3')
+names = c('Ex', 'In','Oli','Opc','Ast','Mic')
+av = readRDS('../data/single_cell_data/individual_level_averages_per_celltype.rds')
+out = list()
+for(i in names(av)){
+  df = as.data.frame(av[[i]])
+  df$celltype = i
+  out[[i]] = df
+}
+out = do.call('rbind', out[names])
+write.csv(out, '../data/supplementary_tables/Supplementary_Table_S3.csv')
 
 ## Supplementary Table S4
 print('s4')
