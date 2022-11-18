@@ -1,3 +1,6 @@
+| :exclamation:  We are experiencing some administrative delays in making the human post-mortem single cell data available on Synapse [syn38120890]. We are working on it and the data will be available ASAP.|
+|-----------------------------------------|
+
 ***This repository contains instructions for open data access and code to reproduce the analyses presented in***
 # APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes
 
