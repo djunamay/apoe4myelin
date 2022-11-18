@@ -5,6 +5,10 @@
 # APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes
 
 Find the corresponding paper [here](https://www.nature.com/articles/s41586-022-05439-w).
+[Associated podcast](https://www.nature.com/articles/d41586-022-03746-w)
+[Nature News](https://www.nature.com/articles/d41586-022-03724-2)
+[News and Views](https://www.nature.com/articles/d41586-022-03371-7)
+
 ### snRNAseq & lipidomic Data availability
 <p align="center">
   <img src="data_overview-01.png" width="800" title="hover text">
