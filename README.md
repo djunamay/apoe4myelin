@@ -241,7 +241,8 @@ conda activate apoe4myelin_env
 chmod +x run_all_analyses.sh
 ../scripts/run_all_analyses.sh
 ```
-### Citing this dataset and paper
-*coming soon*
+### If you use these data, please cite
+
+`Blanchard, J.W., Akay, L.A., Davila-Velderrain, J., von Maydell, D., et al. APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes. Nature (2022). https://doi.org/10.1038/s41586-022-05439-w`
 
 If you have any questions, notice any inconsistencies, need help, or would like to brainstorm future collaborations and ideas, please don't hesitate to reach out: djuna@mit.edu, jose.davila@fht.org
