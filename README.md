@@ -1,5 +1,3 @@
-| :exclamation:  We are experiencing some administrative delays in making the human post-mortem single cell data available on Synapse [syn38120890]. We are working on it and the data will be available ASAP.|
-|-----------------------------------------|
 
 ***This repository contains instructions for open data access and code to reproduce the analyses presented in***
 # APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes
@@ -14,9 +12,7 @@
   <img src="data_overview-01.png" width="800" title="hover text">
 </p>
 
-- If you would like to process the `raw counts matrix and associated metadata`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890/datasets/). If you would like access to the FASTq files, please contact us: djuna@mit.edu; Subject: `apoe4myelin fastq request`. *N.B. Data is currently being uploaded and a specific link will be posted soon* 
-- If you would like to access the `fully-processed, annotated, and qc-ed data`, that data can be found [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
-- If you would like to access the `annotated pre-qc lipidomic data`, that data can be found [here](https://www.synapse.org/#!Synapse:syn38120890/datasets/). *N.B. Data is currently being uploaded and a specific link will be posted soon* 
+- If you would like to process the `raw counts matrix and associated metadata`, the `fully-processed, annotated, and qc-ed data`, or the `annotated pre-qc lipidomic data`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890.2/datasets/). If you would like access to the FASTq files, please contact us: djuna@mit.edu; Subject: `apoe4myelin fastq request`. 
 
 ### other Data availability
 - All other datasets needed for this analysis are available through [the open science framework](https://osf.io/uyczk/).
