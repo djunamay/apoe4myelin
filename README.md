@@ -4,7 +4,7 @@
 ***This repository contains instructions for open data access and code to reproduce the analyses presented in***
 # APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes
 
-Find the corresponding paper [here](). *paper is accepted for publication, link coming soon*
+Find the corresponding paper [here](https://www.nature.com/articles/s41586-022-05439-w).
 ### snRNAseq & lipidomic Data availability
 <p align="center">
   <img src="data_overview-01.png" width="800" title="hover text">
