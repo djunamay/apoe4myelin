@@ -260,7 +260,7 @@ Plot.coords <- function(xdf, x="x", y="y", Col="tomato", Trans=1, cex = 0.15, ad
 Plot.cluster.stats.annot <- function(xsce, cell.type.colors=NULL, cell.type="cell.type", clusterLab="cluster", ...) {
   annoMapMatrix <- Extract.cell.annotation.mappings(xsce, ...)
   
-  #if(is.null(cell.type.colors)) cell.type.colors <- ACTIONet.color.bank0[1:length(xsce@metadata$ClusterCelltypeMapping[,cell.type])]
+  if(is.null(cell.type.colors)) cell.type.colors <- ACTIONet.color.bank0[1:length(xsce@metadata$ClusterCelltypeMapping[,cell.type])]
   par(mfrow=c(6,1), mar=c(3.5, 4, 1.5, 2.5))
   
   boxplot(log(xsce@colData$TotalCounts)~factor(xsce@colData[,clusterLab], levels = unique(annoMapMatrix[,clusterLab])), las=2, ylab="total counts (log)", xlab="")
@@ -270,9 +270,9 @@ Plot.cluster.stats.annot <- function(xsce, cell.type.colors=NULL, cell.type="cel
   boxplot(xsce@colData$nGenesDetected~factor(xsce@colData[,clusterLab], levels = unique(annoMapMatrix[,clusterLab])), las=2, ylab="genes detected", xlab="")
   
   barplot(table(xsce@colData[,clusterLab])[annoMapMatrix[,clusterLab]], las=2, col=cell.type.colors[annoMapMatrix[,cell.type]], ylab="cell count", xlab="")
-  #barplot(rowSums(Table.to.matrix(table(xsce@colData[,clusterLab], xsce@colData$projid))>10)[annoMapMatrix[,clusterLab]], las=2, ylab="individual count (>10cells)", xlab="")
+  barplot(rowSums(Table.to.matrix(table(xsce@colData[,clusterLab], xsce@colData$projid))>10)[annoMapMatrix[,clusterLab]], las=2, ylab="individual count (>10cells)", xlab="")
   
-  #barplot(Counts.to.fractions(Table.to.matrix(table(xsce@colData$projid, xsce@colData[,clusterLab])))[,annoMapMatrix[,clusterLab]], las=2, col=ACTIONet.color.bank, ylab="individuals", xlab="")
+  barplot(Counts.to.fractions(Table.to.matrix(table(xsce@colData$projid, xsce@colData[,clusterLab])))[,annoMapMatrix[,clusterLab]], las=2, col=ACTIONet.color.bank, ylab="individuals", xlab="")
 }
 ######################################################
 Plot.top.genes <- function(xsce, Col="tomato", mfrowPar=c(4,4), marPar=c(3,8,3,3)) {
