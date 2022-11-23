@@ -81,7 +81,7 @@ ACTIONet.clustering.analysis <- function(xsce, Renorm=FALSE, doCluster = TRUE, C
   
   xsce@metadata[[paste0(ClustLabel,".profiles")]] <- Get.column.group.average(x = assays(xsce)[["logcounts"]], group = xsce@metadata[[ClustLabel]])
   xsce@metadata[[paste0(ClustLabel,".signatures")]] <- Aggregate.pairwise.FC.colPairwise(xsce@metadata[[paste0(ClustLabel,".profiles")]])
-  #xsce@metadata[[paste0(ClustLabel,".top.genes")]] <- Extract.tops.by.column(xsce@metadata[[paste0(ClustLabel,".signatures")]])
+  xsce@metadata[[paste0(ClustLabel,".top.genes")]] <- Extract.tops.by.column(xsce@metadata[[paste0(ClustLabel,".signatures")]])
   xsce@metadata[[paste0(ClustLabel,".cor")]] <- cor(xsce@metadata[[paste0(ClustLabel,".signatures")]])
   
   DF <- DataFrame(num=1:ncol(xsce), tag=colnames(xsce),
