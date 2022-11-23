@@ -147,6 +147,7 @@ apoe4myelin
 | cc_lipidomics/Lipidomics_RawData_2.csv `*`| see methods section "Untargeted lipidomics of post-mortem corpus callosum" in our paper                                                         |
 | pfc_lipidomics/ChE_summary_cyc_05312022_all_samples.csv `*`| see methods section "Untargeted Lipidomics on post-mortem prefrontal cortex" in our paper                                                       | 
 | pfc_lipidomics/ROSMAP_Lipidomics_Emory_biospecimen_metadata.csv `*`| accession through Synapse [here](https://www.synapse.org/#!Synapse:syn26475187)                                                                 |
+| pfc_lipidomics/ | Use [this](https://www.synapse.org/#!Synapse:syn3191087) file, or use Supplementary Table S8, Tab 2 as input |
 
 7. create an empty directory in `./data` titled `other_analyses_outputs` and an empty directory in `.data` titled `supplementary_tables`
 
