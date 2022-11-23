@@ -101,7 +101,7 @@ apoe4myelin
     └───Figure_4
     └──qc_annotation
 ```
-5. download necessary [data](https://osf.io/uyczk/) from OSF into a directory named /data within this git repo. This directory includes the following files:
+5. download necessary [data](https://osf.io/uyczk/) from OSF into a directory named /data within this git repo. Files marked with `*` must be downloaded to recapitulate analysis steps only. Some files can also be generated, as described in the `Description/Origin` column. This directory includes the following files:
 
 | Data File                                                     | Description / Origin                                                                                                                                                                                                    |       
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -127,7 +127,7 @@ apoe4myelin
 | single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rds    | |
 | supplementary_tables/   `*`  | pathway renaming and selection for figure 1 (manual) & other supplementary tables from the paper|
 
-6. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. . Files marked with `*` must be downloaded for subsequent steps. Some files can also be generated, as described in the `Description/Origin` column.
+6. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. Files marked with `*` must be downloaded to recapitulate analysis steps only. Some files can also be generated, as described in the `Description/Origin` column.
 
 | Data File                                                       | Description / Origin                                                                                                                            |       
 |-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
