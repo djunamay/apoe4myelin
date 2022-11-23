@@ -26,7 +26,7 @@ gc()
 ##############################################################################################################
 #run clustering
 sce <- reduce.and.batch.correct.sce.Harmony(sce, batch.vec = as.character(sce$batch))
-sce <- ACTIONet.clustering.analysis(sce) # had to comment out Extract.tops.by.column in function file
+sce <- ACTIONet.clustering.analysis(sce) 
 ##############################################################################################################
 # cluster marker-based annotation
 RefCellTypeMarkers <- readRDS("../data/single_cell_data/RefCellTypeMarkers.adultBrain.rds")
@@ -39,7 +39,7 @@ sce <- Add.best.annotation(sce, geneSet = PanglaoDB$Brain, Annotlabel = "Panglao
 Cell.colors <- c(Ast="#E64B35FF", Ex="#4DBBD5FF", In="#00A087FF", Mic="#3C5488FF", Oli="#F39B7FFF", Opc="#8491B4FF", Endo="#FF7F00", Per="#BC80BD", na="lightgrey", macroglia="#C4451C", immune="#683B79", neuronal="#66B0FF", vascular="#7E6148FF", other="#E4E1E3", Tcell="#DEA0FD",Macrophage="#683B79",Fib="#FEAF16")
 
 pdf("../plots/qc_annotation/cluster.stats.pdf", width = 6, height = 10)
-Plot.cluster.stats.annot(sce, cell.type.colors = Cell.colors, varNames = "cluster") # only works with  some of the elements commented out in the function file
+Plot.cluster.stats.annot(sce, cell.type.colors = Cell.colors, varNames = "cluster") 
 dev.off()
 Openfile("cluster.stats.pdf")
 
@@ -74,12 +74,12 @@ Plot.coords(as.data.frame(sce@colData), Col = Cell.colors[sce@colData$PsychENCOD
 dev.off()
 Openfile("../plots/qc_annotation/pre_2D_cells_groups.pdf")
 
-pdf("../plots/qc_annotation/pre_2D_cells_celltypes.pdf") # not working
+pdf("../plots/qc_annotation/pre_2D_cells_celltypes.pdf")
 Plot.coords(as.data.frame(sce@colData), Col = Cell.colors[sce@colData$PsychENCODE.celltypes], add.text = T, add.legend = F, Trans = sce@colData$connectivity)
 dev.off()
 Openfile("../plots/qc_annotation/pre_2D_cells_celltypes.pdf")
 
-pdf("../plots/qc_annotation/pre_2D_cells_celltypes.PanglaoDB.pdf") # not working
+pdf("../plots/qc_annotation/pre_2D_cells_celltypes.PanglaoDB.pdf")
 Plot.coords(as.data.frame(sce@colData), Col = Vector.to.colors(sce@colData$PanglaoDB.celltypes), add.text = T, add.legend = F, Trans = sce@colData$connectivity)
 dev.off()
 Openfile("../plots/qc_annotation/pre_2D_cells_celltypes.PanglaoDB.pdf")
@@ -93,10 +93,10 @@ which(!sce$cluster%in%toRemove) -> Passed
 sce <- Sub.sce.cols(InSCE = sce, xcIndx = Passed)
 gc()
 ##############################################################################################################
-sce <- Add.subclustering.analysis(xsce = sce, groupVar = "PsychENCODE.celltypes", BatchCorrect = TRUE) # not working
+sce <- Add.subclustering.analysis(xsce = sce, groupVar = "PsychENCODE.celltypes", BatchCorrect = TRUE)
 ##############################################################################################################
 pdf("../plots/qc_annotation/pre_subcluster.correlation.pdf", width = 13, height = 11)
-Plot.subcluster.correlation(xsce = sce, xColors = Cell.colors) # could not find function "Extract.subcluster.global.signatures"
+Plot.subcluster.correlation(xsce = sce, xColors = Cell.colors) 
 dev.off()
 Openfile("../plots/qc_annotation/pre_subcluster.correlation.pdf")
 
@@ -105,7 +105,7 @@ Plot.cluster.stats.annot(sce, cell.type.colors = Cell.colors, clusterLab = "sub.
 dev.off()
 Openfile("../plots/qc_annotation/pre_subcluster.stats.pdf")
 
-pdf("../plots/qc_annotation/pre_subcluster.networks.pdf") # not working
+pdf("../plots/qc_annotation/pre_subcluster.networks.pdf")
 Plot.subcluster.networks(xsce = sce, cex=0.5)
 dev.off()
 Openfile("../plots/qc_annotation/pre_subcluster.networks.pdf")
@@ -116,7 +116,7 @@ dev.off()
 Openfile("../plots/qc_annotation/pre_subcluster.top.genes.pdf")
 
 pdf("../plots/qc_annotation/pre_subcluster.phylo.pdf", height = 12)
-Plot.subcluster.phylo(xsce = sce, addColor = TRUE) # could not find function "Extract.subcluster.global.signatures"
+Plot.subcluster.phylo(xsce = sce, addColor = TRUE) 
 dev.off()
 Openfile("../plots/qc_annotation/pre_subcluster.phylo.pdf")
 ##############################################################################################################
@@ -127,28 +127,28 @@ Plot.coords(sce@colData, Col = Vector.to.colors(sce@colData$cluster), add.text =
 dev.off()
 Openfile("../plots/qc_annotation/pre_2D_cells_clusters.pdf")
 
-pdf("../plots/qc_annotation/pre_2D_cells_groups.pdf") # not working
+pdf("../plots/qc_annotation/pre_2D_cells_groups.pdf") 
 Plot.coords(sce@colData, Col = Cell.colors[sce@colData$PsychENCODE.celltypes], add.text = T, add.legend = F, Trans = sce@colData$connectivity)
 dev.off()
 Openfile("../plots/qc_annotation/pre_2D_cells_groups.pdf")
 
-pdf("../plots/qc_annotation/pre_2D_cells_celltypes.pdf") # not working
+pdf("../plots/qc_annotation/pre_2D_cells_celltypes.pdf")
 Plot.coords(sce@colData, Col = Cell.colors[sce@colData$PsychENCODE.celltypes], add.text = T, add.legend = F, Trans = sce@colData$connectivity)
 dev.off()
 Openfile("../plots/qc_annotation/pre_2D_cells_celltypes.pdf")
 
-pdf("../plots/qc_annotation/pre_2D_cells_celltypes.PanglaoDB.pdf") # not working
+pdf("../plots/qc_annotation/pre_2D_cells_celltypes.PanglaoDB.pdf") 
 Plot.coords(sce@colData, Col = Vector.to.colors(sce@colData$PanglaoDB.celltypes), add.text = T, add.legend = F, Trans = sce@colData$connectivity)
 dev.off()
 Openfile("../plots/qc_annotation/pre_2D_cells_celltypes.PanglaoDB.pdf")
 ##############################################################################################################
 # visualize putative doublet and low quality cells in 2D plot
 toRemove <- c("Ast.C6", "Ast.C7", "Ast.C5", "Ex.C14", "Ex.C9", "In.C12", "Oli.C6", "Opc.C5", "Opc.C6", "Opc.C7", "Opc.C8", "Opc.C9", "Mic.C7", "Mic.C8", "Mic.C9", "Endo.C5", "Endo.C6")
-toKeep <- which(!sce@colData$sub.cluster%in%toRemove)  # not working
+toKeep <- which(!sce@colData$sub.cluster%in%toRemove)  
 Plot.coords(sce@colData) # not working
-Plot.coords(sce@colData, Col = ifelse(sce@colData$sub.cluster%in%toRemove, "red", "grey")) # not working
-Plot.coords(sce@colData[which(sce@colData$sub.cluster%in%toRemove),]) # not working
-Plot.coords(sce@colData[toKeep,]) # not working
+Plot.coords(sce@colData, Col = ifelse(sce@colData$sub.cluster%in%toRemove, "red", "grey")) 
+Plot.coords(sce@colData[which(sce@colData$sub.cluster%in%toRemove),]) 
+Plot.coords(sce@colData[toKeep,]) 
 
 # remove subclustering + outlier cells
 Oulier.cells <- Get.outlier.cells(sce@colData[toKeep,])
@@ -163,7 +163,7 @@ dim(sce)
 #dim: [1]  17915 164741
 gc()
 ##############################################################################################################
-xx <- Get.reLayout.corrdinates(sce) # not working
+xx <- Get.reLayout.corrdinates(sce)
 sce@colData <- DataFrame(sce@colData, xx)
 Plot.coords(xx, x = "re.x", y = "re.y", Col = Cell.colors[sce$PsychENCODE.celltypes], Trans = sce$connectivity)
 sce@metadata$subclustering.out <- NULL
@@ -172,7 +172,7 @@ gc()
 
 saveRDS(sce, file="../data/single_cell_data/sce2.rds")
 ##############################################################################################################
-Get.top.matching.PanglaoDB(sce@metadata$subclustering.out$Endo@metadata$cluster.signatures) # cant find this function
+Get.top.matching.PanglaoDB(sce@metadata$subclustering.out$Endo@metadata$cluster.signatures) 
 #Mic.C6 - T cells 
 #Endo.C1 - Endo
 #Endo.C2 - Per
@@ -180,7 +180,7 @@ Get.top.matching.PanglaoDB(sce@metadata$subclustering.out$Endo@metadata$cluster.
 #Endo.C4 - SMC
 ##############################################################################################################
 Mapping <- as.data.frame(unique(sce@colData[,c("PsychENCODE.celltypes", "sub.cluster")]))
-rownames(Mapping) <- Mapping$sub.cluster # not working (non-unique values)
+rownames(Mapping) <- Mapping$sub.cluster 
 Mapping$celltype.relable <- Mapping$PsychENCODE.celltypes
 Mapping$celltype.relable[Mapping$sub.cluster=="Mic.C6"] <- "Tcell"
 Mapping$celltype.relable[Mapping$sub.cluster=="Endo.C1"] <- "Endo"
@@ -197,7 +197,7 @@ mean(unique(sce$sub.cluster)%in%rownames(Mapping))
 sce$cell.type <- Mapping[sce$sub.cluster,"celltype.relable"]
 ##############################################################################################################
 sce@colData$celltype.relable <- Mapping[sce$sub.cluster,"celltype.relable"]
-Summary.data.celltype <- Get.pseudobulk.summary(xsce = sce, groupVect = sce$celltype.relable, doParallel=TRUE) # not working
+Summary.data.celltype <- Get.pseudobulk.summary(xsce = sce, groupVect = sce$celltype.relable, doParallel=TRUE) 
 saveRDS(Summary.data.celltype, file = "../data/single_cell_data/Summary.data.celltype.rds")
 saveRDS(sce, file="../data/single_cell_data/Results_Djuna/snRNA.data.sce.rds")
 ##############################################################################################################
