@@ -575,3 +575,171 @@ rescale.matrix = function (S, log_scale = FALSE){  # from ACTIONet V.2.0
     }
     return(B)
 }
+                               
+######################################################
+Extract.tops.by.column <- function(inMatrix, nTop=10, dec=T) {
+  out <- lapply(1:ncol(inMatrix), function(i) sort(inMatrix[,i], decreasing = dec)[1:nTop])
+  names(out) <- colnames(inMatrix)
+  return(out)
+}
+
+######################################################
+ACTIONet.pattern.analysis <- function(xsce, Renorm=FALSE, doCluster = TRUE, ClustLabel="cluster", ...) {
+  if(Renorm) {
+    assays(xsce)[[2]] <- NULL
+    reducedDim(xsce, type = "S_r") <- NULL
+    #reducedDim(xsce)[[1]] <- NULL
+    xsce <- reduce.sce(xsce)
+  }
+  out <- run.ACTIONet(xsce, ...)
+  if(doCluster) out <- cluster.ACTIONet(out, annotation.name = ClustLabel)
+  xsce@metadata$C <- as(out$unification.out$C.core, "sparseMatrix")
+  xsce@metadata$H <- as(out$unification.out$H.core, "sparseMatrix")
+  xsce@metadata$W <- out$unification.out$W.core
+
+  xsce@metadata$state.profiles <- out$unification.out$cellstates.core
+  colnames(xsce@metadata$state.profiles) <- paste0("P", 1:ncol(xsce@metadata$state.profiles))
+  xsce@metadata$state.signatures <- Aggregate.pairwise.FC.colPairwise(xM = xsce@metadata$state.profiles)
+  xsce@metadata$signature.top.genes <- Extract.tops.by.column(xsce@metadata$state.signatures)
+  xsce@metadata$network <- out$ACTIONet
+  V(xsce@metadata$network)$name <- colnames(xsce)
+  xsce@metadata$vis.out <- out$vis.out
+  xsce@metadata[[ClustLabel]] <- paste0("C", as.character(out$annotations[[ClustLabel]]$Labels))
+
+  xsce@metadata[[paste0(ClustLabel,".profiles")]] <- Get.column.group.average(x = assays(xsce)[["logcounts"]], group = xsce@metadata[[ClustLabel]])
+  xsce@metadata[[paste0(ClustLabel,".signatures")]] <- Aggregate.pairwise.FC.colPairwise(xsce@metadata[[paste0(ClustLabel,".profiles")]])
+  xsce@metadata[[paste0(ClustLabel,".top.genes")]] <- Extract.tops.by.column(xsce@metadata[[paste0(ClustLabel,".signatures")]])
+  xsce@metadata[[paste0(ClustLabel,".cor")]] <- cor(xsce@metadata[[paste0(ClustLabel,".signatures")]])
+
+  DF <- DataFrame(num=1:ncol(xsce), tag=colnames(xsce),
+                  x=xsce@metadata$vis.out$coordinates[,1], y=xsce@metadata$vis.out$coordinates[,2],
+                  X=xsce@metadata$vis.out$coordinates_3D[,1], Y=xsce@metadata$vis.out$coordinates_3D[,2], Z=xsce@metadata$vis.out$coordinates_3D[,3],
+                  color=rgb(xsce@metadata$vis.out$colors),
+                  connectivity=V(xsce@metadata$network)$connectivity/max(V(xsce@metadata$network)$connectivity),
+                  assignments.dominant=paste0("P",out$unification.out$assignments.core),
+                  assignments.dominant.confidence=out$unification.out$assignments.confidence.core,
+                  cluster=xsce@metadata$cluster
+  )
+  xsce@colData <- DataFrame(xsce@colData, DF)
+  rm(out)
+  gc()
+  return(xsce)
+}
+######################################################
+Extract.subcluster.global.signatures <- function(xsce) {
+  L <- lapply(names(xsce@metadata$subclustering.out), function(i) Extract.subcluster.sce(xsce, i)@metadata$cluster.profile)
+  names(L) <- names(xsce@metadata$subclustering.out)
+  CtLab <- rep(names(L), sapply(L, ncol))
+  M <- do.call(cbind, L)
+  colnames(M) <- paste(CtLab, colnames(M), sep=".")
+  M.sig <- Aggregate.pairwise.FC.colPairwise(M)
+  return(M.sig)
+}
+######################################################
+Get.top.matching.PanglaoDB <- function(xsignMat) {
+  temp <- lapply(PanglaoDB, function(i) Permutation.enrichment.analysis(t(xsignMat), marker.genes = i)$enrichment)
+  temp <- Extract.tops.by.column(t(do.call(cbind, temp)))
+  return(temp)
+}
+######################################################
+Permutation.enrichment.analysis <- function(x, marker.genes, rand.sample.no = 1000) {
+  #require(ACTIONet)
+  require(igraph)
+  require(Matrix)
+  require(stringr)
+
+  if(is.matrix(marker.genes) | is.sparseMatrix(marker.genes)) {
+    marker.genes = apply(marker.genes, 2, function(x) rownames(marker.genes)[x > 0])
+  }
+
+  archetype.panel <- x
+
+  GS.names = names(marker.genes)
+  if (is.null(GS.names)) {
+    GS.names = sapply(1:length(GS.names), function(i) sprintf("Celltype %s", i))
+  }
+
+  markers.table = do.call(rbind, lapply(names(marker.genes), function(celltype) {
+    genes = marker.genes[[celltype]]
+    if (length(genes) == 0)
+      return(data.frame())
+
+
+    signed.count = sum(sapply(genes, function(gene) grepl("\\+$|-$", gene)))
+    is.signed = signed.count > 0
+
+    if (!is.signed) {
+      df = data.frame(Gene = (genes), Direction = +1, Celltype = celltype)
+    } else {
+
+      pos.genes = (as.character(sapply(genes[grepl("+", genes, fixed = TRUE)], function(gene) stringr::str_replace(gene,
+                                                                                                                   stringr::fixed("+"), ""))))
+      neg.genes = (as.character(sapply(genes[grepl("-", genes, fixed = TRUE)], function(gene) stringr::str_replace(gene,
+                                                                                                                   stringr::fixed("-"), ""))))
+
+      df = data.frame(Gene = c(pos.genes, neg.genes), Direction = c(rep(+1, length(pos.genes)), rep(-1, length(neg.genes))),
+                      Celltype = celltype)
+    }
+  }))
+  markers.table = markers.table[markers.table$Gene %in% colnames(archetype.panel), ]
+
+  if (dim(markers.table)[1] == 0) {
+    print("No markers are left")
+    return()
+  }
+
+  IDX = split(1:dim(markers.table)[1], markers.table$Celltype)
+
+  print("Computing significance scores")
+  set.seed(0)
+  Z = sapply(IDX, function(idx) {
+    markers = (as.character(markers.table$Gene[idx]))
+    directions = markers.table$Direction[idx]
+    mask = markers %in% colnames(archetype.panel)
+
+    A = as.matrix(archetype.panel[, markers[mask]])
+    sgn = as.numeric(directions[mask])
+    stat = A %*% sgn
+
+    rand.stats = sapply(1:rand.sample.no, function(i) {
+      rand.samples = sample.int(dim(archetype.panel)[2], sum(mask))
+      rand.A = as.matrix(archetype.panel[, rand.samples])
+      rand.stat = rand.A %*% sgn
+    })
+
+    cell.zscores = as.numeric((stat - apply(rand.stats, 1, mean))/apply(rand.stats, 1, sd))
+
+    return(cell.zscores)
+  })
+
+  Z[is.na(Z)] = 0
+  Labels = colnames(Z)[apply(Z, 1, which.max)]
+
+  #L = names(marker.genes)
+  #L.levels = L[L %in% Labels]
+  #Labels = match(L, L.levels)
+  #names(Labels) = L.levels
+  #Labels = factor(Labels, levels = L)
+  Labels.conf = apply(Z, 1, max)
+
+  names(Labels) = rownames(archetype.panel)
+  names(Labels.conf) = rownames(archetype.panel)
+  rownames(Z) = rownames(archetype.panel)
+
+  out.list = list(annotation=data.frame(labels = Labels, labels.confidence = Labels.conf, stringsAsFactors = FALSE), enrichment = Z)
+
+  return(out.list)
+}
+######################################################
+
+Extract.subcluster.sce <- function(xsce, subLabel){
+    x = xsce@metadata$subclustering.out[[subLabel]]
+    return(x)
+}
+
+
+Str.extract = function(names){
+    x = strsplit(names, '[.]')
+    return(unlist(lapply(x, function(i) i[[1]][1])))
+}
+
