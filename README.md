@@ -125,9 +125,9 @@ apoe4myelin
 | differentially_expressed_genes/oli_wilcox_results_noAD.rds    | run ./scripts/get_wilcox_degs.r                                                                                                                                                                                         |
 | differentially_expressed_genes/OPC_deg_statistics.txt         | see methods section "Bulk RNA-sequencing from isogenic iPSC-derived oligodendroglia" in our paper                                                                                                                       |
 | single_cell_data/ensembl.GRCh38p12.genes.complete.annot.rds    | |
-| supplementary_tables/   `*`  | pathway renaming and selection for figure 1 (manual)|
+| supplementary_tables/   `*`  | pathway renaming and selection for figure 1 (manual) & other supplementary tables from the paper|
 
-6. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. The file ROSMAP_clinical.csv needs to be downloaded separately [from here](https://www.synapse.org/#!Synapse:syn3191087.11). Files marked with `*` must be downloaded from Synapse for this step. Some files can also be generated, as described in the `Description/Origin` column.
+6. Download the single-cell- and lipidomic-related data from [Synapse](https://www.synapse.org/#!Synapse:syn38120890/datasets/) and add these data to the ./data directory according to the directories given in the table below. . Files marked with `*` must be downloaded for subsequent steps. Some files can also be generated, as described in the `Description/Origin` column.
 
 | Data File                                                       | Description / Origin                                                                                                                            |       
 |-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
