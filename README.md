@@ -12,7 +12,7 @@
   <img src="data_overview-01.png" width="800" title="hover text">
 </p>
 
-- If you would like to process the `raw counts matrix and associated metadata`, the `fully-processed, annotated, and qc-ed data`, or the `annotated pre-qc lipidomic data`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890.2/datasets/). If you would like access to the FASTq files, please contact us: djuna@mit.edu; Subject: `apoe4myelin fastq request`. 
+- If you would like to process the `raw counts matrix and associated metadata`, the `fully-processed, annotated, and qc-ed data`, or the `annotated pre-qc lipidomic data`, these files can be downloaded from the AD Knowledge Portal under Synapse ID [syn38120890](https://www.synapse.org/#!Synapse:syn38120890.2/datasets/). *FASTQ files can also be found under the same Synapse ID.*
 
 ### other Data availability
 - All other datasets needed for this analysis are available through [the open science framework](https://osf.io/uyczk/).
