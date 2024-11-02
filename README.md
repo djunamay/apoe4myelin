@@ -1,4 +1,9 @@
-
+> 📌 **Please Note**
+>
+> A subset of the samples used in this paper overlap with samples used in [Mathys et al (Nature, 2019)](https://www.nature.com/articles/s41586-019-1195-2). These samples were sequenced using V2 chemistry. Updated cell-level files (post-quality control) and individual-level metadata with this additional information are available for download from the Open Science Framework: [cell-level data](https://osf.io/yhk5b) and [individual-level metadata](https://osf.io/a72c3).
+>
+> For supplemental analyses considering the chemistry differences, please refer to this Google Colab notebook: [Supplemental Analyses Notebook](https://colab.research.google.com/drive/1A5TnlLIirwfQnFR-YXcOPr5S-T0T2FQE?usp=sharing).
+> 
 ***This repository contains instructions for open data access and code to reproduce the analyses presented in***
 # APOE4 impairs myelination via cholesterol dysregulation in oligodendrocytes
 
